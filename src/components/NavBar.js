@@ -10,7 +10,10 @@ const NavBar = () => {
     <Navbar className={styles.NavBar} expand="md" fixed="top">
       <Container>
         <NavLink to='/'>
-          <Navbar.Brand className={styles.Brand}><i className="fa-solid fa-calendar-check"></i> TASK MANAGER</Navbar.Brand>
+          <Navbar.Brand className={styles.Brand}>
+            <i className="fa-solid fa-calendar-check"></i>
+            <em><strong>PRODUCTIVITY</strong> TOOL</em>
+          </Navbar.Brand>
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -21,7 +24,7 @@ const NavBar = () => {
               activeClassName={styles.Active}
               to='/'
             >
-              <i className='fas fa-home'></i>
+              <i className='fs-6 fas fa-home'></i>
               Home
             </NavLink>
             <NavLink
@@ -29,7 +32,7 @@ const NavBar = () => {
               activeClassName={styles.Active}
               to='/signin'
             >
-              <i className='fas fa-sign-in-alt'></i>
+              <i className='fs-6 fas fa-sign-in-alt'></i>
               Sign in
             </NavLink>
             <NavLink
@@ -37,7 +40,7 @@ const NavBar = () => {
               activeClassName={styles.Active}
               to='/register'
             >
-              <i className='fas fa-user-plus'></i>
+              <i className='fs-6 fas fa-user-plus'></i>
               Register
             </NavLink>
           </Nav>
