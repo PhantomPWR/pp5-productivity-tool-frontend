@@ -6,12 +6,12 @@ import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
 import {
+  Container,
+  Row,
+  Col,
+  Image,
   Form,
   Button,
-  Image,
-  Col,
-  Row,
-  Container,
   Alert,
 } from "react-bootstrap";
 import axios from "axios";

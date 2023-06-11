@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-import Form from "react-bootstrap/Form";
-import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -20,8 +20,8 @@ function SignInForm() {
   const setCurrentUser = useContext(SetCurrentUserContext);
 
   const [signInData, setSignInData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
   const { username, password } = signInData;
 
