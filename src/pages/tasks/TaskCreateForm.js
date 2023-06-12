@@ -22,8 +22,19 @@ function TaskCreateForm() {
 
   const [taskData, setTaskData] = useState({
     title: "",
+    category: "",
     notes: "",
     image: "",
+    status: "",
+    priority: "",
+    watched_id: "",
+    watcher_count: "",
+    attachments: "",
+    created_date: "",
+    due_date: "",
+    updated_date: "",
+    completed_date: "",
+    owner_comments: "",
   });
   const { title, notes, image } = taskData;
 
@@ -53,6 +64,7 @@ function TaskCreateForm() {
     const formData = new FormData();
 
     formData.append('title', title)
+    formData.append('category', taskData.category)
     formData.append('notes', notes)
     formData.append('image', imageInput.current.files[0])
 
@@ -70,6 +82,7 @@ function TaskCreateForm() {
 
   const textFields = (
     <div className="text-center">
+      {/* Title */}
       <Form.Group>
         <Form.Label>Task Title</Form.Label>
         <Form.Control
@@ -79,7 +92,19 @@ function TaskCreateForm() {
             onChange={handleChange}
     />
       </Form.Group>
-
+      
+      {/* Category */}
+      <Form.Group>
+        <Form.Label>Category</Form.Label>
+        <Form.Control
+            as="input"
+            name="category"
+            value={taskData.category}
+            onChange={handleChange}
+        /> 
+      </Form.Group>
+      
+      {/* Notes */}
       <Form.Group>
         <Form.Label>Task Notes</Form.Label>
         <Form.Control
@@ -90,6 +115,7 @@ function TaskCreateForm() {
             onChange={handleChange}
         /> 
       </Form.Group>
+
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}

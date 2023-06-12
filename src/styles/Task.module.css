@@ -1,0 +1,24 @@
+.Task {
+    background-color: #ffffff;
+    border: 1px solid #dadadf;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.Task figure,
+h5 {
+    margin: 0 0;
+}
+
+.Eye {
+    color: #f85032;
+}
+
+.Eye:hover {
+    color: #2142b2;
+}
+
+.EyeOutline:hover {
+    color: #f85032;
+}
