@@ -6,17 +6,39 @@ import './api/axiosDefaults';
 import SignUpForm from './pages/auth/SignUpForm'
 import SignInForm from './pages/auth/SignInForm';
 import TaskCreateForm from './pages/tasks/TaskCreateForm';
+import TaskList from './pages/tasks/TaskList';
 import TaskPage from './pages/tasks/TaskPage';
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 
 function App() {
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
 
   return (
     <div className={styles.App}>
       <NavBar />
         <Container className={styles.Main}>
           <Switch>
-            <Route exact path="/" render={() => <h1>Home Page</h1>} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <TaskList
+                  message="No results found. Adjust your search keyword."
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/feed"
+              render={() => (
+                <TaskList
+                  message="No results found. Adjust your search keyword."
+                  filter={`task_watched__owner__profile=${profile_id}&`}
+                />
+              )}
+            />
             <Route exact path="/signin" render={() => <SignInForm />} />
             <Route exact path="/register" render={() => <SignUpForm />} />
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />

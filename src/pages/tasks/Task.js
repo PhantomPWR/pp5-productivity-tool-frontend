@@ -30,8 +30,6 @@ const Task = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
-  // console.log(currentUser.username);
-  // console.log(is_owner);
 
   return (
     <Card className={styles.Task}>
@@ -85,7 +83,14 @@ const Task = (props) => {
             <i className="far fa-folder" />
             {category}
           </Link>
-
+          <Link to={`/`}>
+            <i className="fas fa-list-check"></i>
+            {status}
+          </Link>
+          <Link to={`/`}>
+            <i className="fa-solid fa-layer-group"></i>
+            {priority}
+          </Link>
           {owner_comments}
         </div>
       </Card.Body>

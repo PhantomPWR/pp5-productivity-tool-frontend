@@ -165,7 +165,14 @@ function TaskCreateForm() {
 
               <Form.File
                 id="image-upload"
-                accept="image/*"
+                // accept="image/*"
+                accept="
+                .jpg, .jpeg, .png, .gif, .svg,
+                .pdf, .doc, .docx,
+                .ppt, .pptx,
+                .xls, .xlsx,
+                .txt
+                "
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
