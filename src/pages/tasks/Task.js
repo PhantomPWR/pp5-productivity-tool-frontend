@@ -2,8 +2,10 @@ import React from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
+import { MoreDropdown } from "../../components/MoreDropdown";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Task = (props) => {
   const {
@@ -30,6 +32,20 @@ const Task = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const history = useHistory();
+
+  const handleEdit = () => {
+    history.push(`/tasks/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/tasks/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Card className={styles.Task}>
@@ -41,7 +57,12 @@ const Task = (props) => {
           </Link>
           <div className="d-flex align-items-center">
             <span>{updated_date}</span>
-            {is_owner && taskPage && "..."}
+            {is_owner && taskPage && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
