@@ -31,6 +31,7 @@ const Task = (props) => {
 
 
   const currentUser = useCurrentUser();
+  console.log(JSON.stringify(currentUser));
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 

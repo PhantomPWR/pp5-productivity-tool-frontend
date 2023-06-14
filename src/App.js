@@ -9,6 +9,7 @@ import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import TaskList from './pages/tasks/TaskList';
 import TaskPage from './pages/tasks/TaskPage';
 import { useCurrentUser } from './contexts/CurrentUserContext';
+import TaskEditForm from './pages/tasks/TaskEditForm';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/signin" render={() => <SignInForm />} />
             <Route exact path="/register" render={() => <SignUpForm />} />
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
+            <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
             <Route exact path="/tasks/:id" render={() => <TaskPage />} />
             <Route render={() => <p>Page not found!</p>} />
           </Switch>

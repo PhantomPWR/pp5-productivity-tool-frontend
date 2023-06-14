@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -16,7 +16,7 @@ import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 
-function TaskCreateForm() {
+function TaskEditForm() {
 
   const [errors, setErrors] = useState({});
 
@@ -25,7 +25,7 @@ function TaskCreateForm() {
     category: "",
     notes: "",
     image: "",
-    task_status: "",
+    status: "",
     priority: "",
     watched_id: "",
     watcher_count: "",
@@ -36,34 +36,11 @@ function TaskCreateForm() {
     completed_date: "",
     owner_comments: "",
   });
-  const { title, category, notes, image, task_status } = taskData;
+  const { title, notes, image } = taskData;
 
   const imageInput = useRef(null);
 
   const history = useHistory();
-
-  const [statusChoices, setStatusChoices] = useState([])
-
-useEffect(() => {
-// Make an API call to fetch the status choices
-// Update the statusChoices state variable
-async function fetchStatusChoices() {
-  try {
-    const response = await axiosReq.get("/status-choices/");
-    console.log(response.data);
-    setStatusChoices(response.data);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-    fetchStatusChoices();
-    console.log(statusChoices);
-  }, []);
-
-  useEffect(() => {
-  console.log(statusChoices); // Log statusChoices whenever it changes
-}, [statusChoices]);
 
   const handleChange = (event) => {
     setTaskData({
@@ -90,8 +67,6 @@ async function fetchStatusChoices() {
     formData.append('category', taskData.category)
     formData.append('notes', notes)
     formData.append('image', imageInput.current.files[0])
-    formData.append('task_status', taskData.task_status)
-  
 
     try {
         const {data} = await axiosReq.post('/tasks/', formData);
@@ -104,7 +79,6 @@ async function fetchStatusChoices() {
     }
 
   }
-
 
   const textFields = (
     <div className="text-center">
@@ -142,24 +116,6 @@ async function fetchStatusChoices() {
         /> 
       </Form.Group>
 
-      {/* Status */}
-      <Form.Group>
-        <Form.Label>Status</Form.Label>
-        <Form.Control
-          as="select"
-          name="task_status"
-          value={task_status}
-          onChange={handleChange}
-        >
-          <option value="">Select status</option>
-          {Array.isArray(statusChoices) && statusChoices.map((choice) => (
-            <option key={choice.id} value={choice.id}>
-              {choice.name}
-            </option>
-          ))}
-        </Form.Control>
-      </Form.Group>
-
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -174,13 +130,9 @@ async function fetchStatusChoices() {
   );
 
   return (
-
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col md={7} lg={7} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-        <Col className="py-2 p-0 p-md-2" md={5} lg={5}>
+        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
@@ -228,9 +180,12 @@ async function fetchStatusChoices() {
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>
+        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
       </Row>
     </Form>
   );
 }
 
-export default TaskCreateForm;
+export default TaskEditForm;
