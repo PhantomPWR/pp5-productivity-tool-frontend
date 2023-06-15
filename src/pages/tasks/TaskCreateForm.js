@@ -9,7 +9,6 @@ import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
-// import { response } from "msw";
 
 function TaskCreateForm() {
 
@@ -22,28 +21,7 @@ function TaskCreateForm() {
       .get("/profile-list/")
       .then((response) => setUsers(response.data))
       .catch((error) => console.log(error));
-      console.log(users);
   }, []);
-
-
-// useEffect(() => {
-// // Make an API call to fetch users
-// // Update the users state variable
-// async function fetchUsers() {
-//   try {
-//     const response = await axios.get("/profiles/");
-//     console.log(response.data);
-//     setUsers(response.data);
-//     console.log(users);
-
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-  //   fetchUsers();
-  //   console.log(users);
-  // }, []);
 
 
   const [taskData, setTaskData] = useState({
@@ -66,42 +44,7 @@ function TaskCreateForm() {
   const { title, category, notes, image, task_status, owner } = taskData;
 
   const imageInput = useRef(null);
-
   const history = useHistory();
-
-  const [statusChoices, setStatusChoices] = useState([])
-
-  useEffect(() => {
-    axios
-      .get("/status-choices/")
-      .then((response) => setStatusChoices(response.data))
-      .catch((error) => console.log(error));
-      console.log(statusChoices);
-  }, []);
-  useEffect(() => {
-  console.log(statusChoices); // Log statusChoices whenever it changes
-}, [statusChoices]);
-
-// useEffect(() => {
-// // Make an API call to fetch the status choices
-// // Update the statusChoices state variable
-// async function fetchStatusChoices() {
-//   try {
-//     const response = await axiosReq.get("/status-choices/");
-//     setStatusChoices(response.data);
-
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-//     fetchStatusChoices();
-//     console.log(statusChoices);
-//   }, []);
-
-//   useEffect(() => {
-//   console.log(statusChoices); // Log statusChoices whenever it changes
-// }, [statusChoices]);
 
   const handleChange = (event) => {
     setTaskData({
@@ -119,13 +62,6 @@ function TaskCreateForm() {
       });
     }
   };
-
-  const handleSelectChange = (event) => {
-  setTaskData({
-    ...taskData,
-    task_status: event.target.value,
-  });
-};
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -210,15 +146,15 @@ function TaskCreateForm() {
           as="select"
           name="task_status"
           value={task_status}
-          onChange={handleSelectChange}
+          onChange={handleChange}
           aria-label="task status"
         >
           <option value="">Select status</option>
-          {Array.isArray(statusChoices) && statusChoices.map((choice) => (
-            <option key={choice.id} value={choice.id}>
-              {choice.name}
-            </option>
-          ))}
+          <option value="BACKLOG">Backlog</option>
+          <option value="TODO">To Do</option>
+          <option value="INPROGRESS">In Progress</option>
+          <option value="COMPLETED">Completed</option>
+
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -240,7 +176,7 @@ function TaskCreateForm() {
           aria-label="owner"
         >
           <option>Select a user</option>
-          {Array.isArray(users) && users.map((user) => (
+          {users.map((user) => (
             
             <option key={user.id} value={user.id}>
               {user.username}
