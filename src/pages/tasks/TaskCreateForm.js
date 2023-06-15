@@ -8,6 +8,8 @@ import Asset from "../../components/Asset";
 import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import axios from "axios";
+// import { response } from "msw";
 
 function TaskCreateForm() {
 
@@ -16,11 +18,33 @@ function TaskCreateForm() {
 
   // Fetch profiles from the API
   useEffect(() => {
-    axiosReq
-      .get("/profiles/")
+    axios
+      .get("/profile-list/")
       .then((response) => setUsers(response.data))
       .catch((error) => console.log(error));
+      console.log(users);
   }, []);
+
+
+// useEffect(() => {
+// // Make an API call to fetch users
+// // Update the users state variable
+// async function fetchUsers() {
+//   try {
+//     const response = await axios.get("/profiles/");
+//     console.log(response.data);
+//     setUsers(response.data);
+//     console.log(users);
+
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+  //   fetchUsers();
+  //   console.log(users);
+  // }, []);
+
 
   const [taskData, setTaskData] = useState({
     title: "",
@@ -33,10 +57,10 @@ function TaskCreateForm() {
     watched_id: "",
     watcher_count: "",
     attachments: "",
-    created_date: "",
-    due_date: "",
+    // created_date: "",
+    // due_date: "",
     updated_date: "",
-    completed_date: "",
+    // completed_date: "",
     owner_comments: "",
   });
   const { title, category, notes, image, task_status, owner } = taskData;
@@ -47,28 +71,37 @@ function TaskCreateForm() {
 
   const [statusChoices, setStatusChoices] = useState([])
 
-useEffect(() => {
-// Make an API call to fetch the status choices
-// Update the statusChoices state variable
-async function fetchStatusChoices() {
-  try {
-    const response = await axiosReq.get("/status-choices/");
-    console.log(response.data);
-    setStatusChoices(response.data);
-    console.log(statusChoices);
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-    fetchStatusChoices();
-    console.log(statusChoices);
+  useEffect(() => {
+    axios
+      .get("/status-choices/")
+      .then((response) => setStatusChoices(response.data))
+      .catch((error) => console.log(error));
+      console.log(statusChoices);
   }, []);
-
   useEffect(() => {
   console.log(statusChoices); // Log statusChoices whenever it changes
 }, [statusChoices]);
+
+// useEffect(() => {
+// // Make an API call to fetch the status choices
+// // Update the statusChoices state variable
+// async function fetchStatusChoices() {
+//   try {
+//     const response = await axiosReq.get("/status-choices/");
+//     setStatusChoices(response.data);
+
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+//     fetchStatusChoices();
+//     console.log(statusChoices);
+//   }, []);
+
+//   useEffect(() => {
+//   console.log(statusChoices); // Log statusChoices whenever it changes
+// }, [statusChoices]);
 
   const handleChange = (event) => {
     setTaskData({
@@ -207,7 +240,8 @@ async function fetchStatusChoices() {
           aria-label="owner"
         >
           <option>Select a user</option>
-          {users.map((user) => (
+          {Array.isArray(users) && users.map((user) => (
+            
             <option key={user.id} value={user.id}>
               {user.username}
             </option>

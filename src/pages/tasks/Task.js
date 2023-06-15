@@ -21,17 +21,17 @@ const Task = (props) => {
     title,
     notes,
     attachments,
-    created_date,
-    due_date,
+    // created_date,
+    // due_date,
     updated_date,
-    completed_date,
+    // completed_date,
     owner_comments,
     taskPage,
   } = props;
 
 
   const currentUser = useCurrentUser();
-  console.log(JSON.stringify(currentUser));
+  // console.log(JSON.stringify(currentUser));
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 

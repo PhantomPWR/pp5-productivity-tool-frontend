@@ -86,6 +86,11 @@ function TaskEditForm() {
             onChange={handleChange}
     />
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       
       {/* Category */}
       <Form.Group>
@@ -97,6 +102,11 @@ function TaskEditForm() {
             onChange={handleChange}
         /> 
       </Form.Group>
+      {errors?.category?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       
       {/* Notes */}
       <Form.Group>
@@ -109,6 +119,11 @@ function TaskEditForm() {
             onChange={handleChange}
         /> 
       </Form.Group>
+      {errors?.notes?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
     
       <Button
