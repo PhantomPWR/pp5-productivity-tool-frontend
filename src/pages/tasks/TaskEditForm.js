@@ -1,13 +1,6 @@
 import React, { useRef, useState } from "react";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-
+import { Row, Col, Container, Form, Button, Alert } from "react-bootstrap"
 import Upload from "../../assets/upload.png";
-
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -27,6 +20,7 @@ function TaskEditForm() {
     image: "",
     status: "",
     priority: "",
+    owner: "",
     watched_id: "",
     watcher_count: "",
     attachments: "",

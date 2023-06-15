@@ -1,13 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-
 import Upload from "../../assets/upload.png";
-
+import { Row, Col, Container, Form, Button, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -19,14 +12,24 @@ import { axiosReq } from "../../api/axiosDefaults";
 function TaskCreateForm() {
 
   const [errors, setErrors] = useState({});
+  const [users, setUsers] = useState([]);
+
+  // Fetch profiles from the API
+  useEffect(() => {
+    axiosReq
+      .get("/profiles/")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.log(error));
+  }, []);
 
   const [taskData, setTaskData] = useState({
     title: "",
     category: "",
     notes: "",
     image: "",
-    task_status: "",
+    task_status: "BACKLOG",
     priority: "",
+    owner: "",
     watched_id: "",
     watcher_count: "",
     attachments: "",
@@ -36,7 +39,7 @@ function TaskCreateForm() {
     completed_date: "",
     owner_comments: "",
   });
-  const { title, category, notes, image, task_status } = taskData;
+  const { title, category, notes, image, task_status, owner } = taskData;
 
   const imageInput = useRef(null);
 
@@ -52,6 +55,8 @@ async function fetchStatusChoices() {
     const response = await axiosReq.get("/status-choices/");
     console.log(response.data);
     setStatusChoices(response.data);
+    console.log(statusChoices);
+
   } catch (error) {
     console.log(error);
   }
@@ -82,6 +87,13 @@ async function fetchStatusChoices() {
     }
   };
 
+  const handleSelectChange = (event) => {
+  setTaskData({
+    ...taskData,
+    task_status: event.target.value,
+  });
+};
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -91,6 +103,7 @@ async function fetchStatusChoices() {
     formData.append('notes', notes)
     formData.append('image', imageInput.current.files[0])
     formData.append('task_status', taskData.task_status)
+    formData.append('owner', owner)
   
 
     try {
@@ -118,6 +131,11 @@ async function fetchStatusChoices() {
             onChange={handleChange}
     />
       </Form.Group>
+      {errors?.title?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       
       {/* Category */}
       <Form.Group>
@@ -125,10 +143,15 @@ async function fetchStatusChoices() {
         <Form.Control
             as="input"
             name="category"
-            value={taskData.category}
+            value={category}
             onChange={handleChange}
         /> 
       </Form.Group>
+      {errors?.category?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
       
       {/* Notes */}
       <Form.Group>
@@ -141,6 +164,11 @@ async function fetchStatusChoices() {
             onChange={handleChange}
         /> 
       </Form.Group>
+      {errors?.notes?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       {/* Status */}
       <Form.Group>
@@ -149,7 +177,8 @@ async function fetchStatusChoices() {
           as="select"
           name="task_status"
           value={task_status}
-          onChange={handleChange}
+          onChange={handleSelectChange}
+          aria-label="task status"
         >
           <option value="">Select status</option>
           {Array.isArray(statusChoices) && statusChoices.map((choice) => (
@@ -159,7 +188,39 @@ async function fetchStatusChoices() {
           ))}
         </Form.Control>
       </Form.Group>
+      {errors?.task_status?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
+      {/* Owner */}
+      <Form.Group>
+        <Form.Label>Assigned to</Form.Label>
+
+        <Form.Control
+          as="select"
+          name="owner"
+          className={appStyles.Input}
+          value={owner}
+          onChange={handleChange}
+          aria-label="owner"
+        >
+          <option>Select a user</option>
+          {users.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.username}
+            </option>
+          ))}
+          ;
+        </Form.Control>
+      </Form.Group>
+
+      {errors?.owner?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -172,6 +233,8 @@ async function fetchStatusChoices() {
       </Button>
     </div>
   );
+
+  
 
   return (
 
