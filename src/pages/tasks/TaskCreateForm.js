@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import Upload from "../../assets/upload.png";
-import { Row, Col, Container, Form, Button, Alert } from "react-bootstrap"
+import { Row, Col, Container, Form, Button, Image, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
@@ -25,23 +24,40 @@ function TaskCreateForm() {
 
 
   const [taskData, setTaskData] = useState({
-    title: "",
-    category: "",
-    notes: "",
-    image: "",
-    task_status: "BACKLOG",
-    priority: "",
-    owner: "",
-    watched_id: "",
-    watcher_count: "",
-    attachments: "",
-    // created_date: "",
-    // due_date: "",
-    updated_date: "",
-    // completed_date: "",
-    owner_comments: "",
+    title: '',
+    category: '',
+    notes: '',
+    image: '',
+    task_status: '',
+    priority: '',
+    owner: '',
+    watched_id: '',
+    watcher_count: '',
+    // attachments: '',
+    // created_date: '',
+    // due_date: '',
+    updated_date: '',
+    // completed_date: '',
+    owner_comments: '',
   });
-  const { title, category, notes, image, task_status, owner } = taskData;
+    const {
+    title,
+    notes,
+    image,
+    category,
+    task_status,
+    owner,
+    priority,
+    // watched_id,
+    // watcher_count,
+    // attachments,
+    // created_date,
+    // due_date,
+    updated_date,
+    // completed_date,
+    owner_comments, 
+    is_owner
+  } = taskData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -246,14 +262,15 @@ function TaskCreateForm() {
 
               <Form.File
                 id="image-upload"
-                // accept="image/*"
-                accept="
-                .jpg, .jpeg, .png, .gif, .svg,
-                .pdf, .doc, .docx,
-                .ppt, .pptx,
-                .xls, .xlsx,
-                .txt
-                "
+                accept="image/*"
+                // accept="
+                // image/*,
+                // .jpg, .jpeg, .png, .gif, .svg,
+                // .pdf, .doc, .docx,
+                // .ppt, .pptx,
+                // .xls, .xlsx,
+                // .txt
+                // "
                 onChange={handleChangeImage}
                 ref={imageInput}
               />

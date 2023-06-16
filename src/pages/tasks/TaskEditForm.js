@@ -1,40 +1,114 @@
-import React, { useRef, useState } from "react";
-import { Row, Col, Container, Form, Button, Alert } from "react-bootstrap"
+import React, { useRef, useState, useEffect } from "react";
 import Upload from "../../assets/upload.png";
+import { Row, Col, Container, Form, Button, Image, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
+import axios from "axios";
 
 function TaskEditForm() {
 
   const [errors, setErrors] = useState({});
+  const [users, setUsers] = useState([]);
+
+  // Fetch profiles from the API
+  useEffect(() => {
+    axios
+      .get("/profile-list/")
+      .then((response) => setUsers(response.data))
+      .catch((error) => console.log(error));
+  }, []);
+
 
   const [taskData, setTaskData] = useState({
-    title: "",
-    category: "",
-    notes: "",
-    image: "",
-    status: "",
-    priority: "",
-    owner: "",
-    watched_id: "",
-    watcher_count: "",
-    attachments: "",
-    created_date: "",
-    due_date: "",
-    updated_date: "",
-    completed_date: "",
-    owner_comments: "",
+    title: '',
+    category: '',
+    notes: '',
+    image: '',
+    task_status: '',
+    priority: '',
+    owner: '',
+    watched_id: '',
+    watcher_count: '',
+    attachments: '',
+    // created_date: '',
+    // due_date: '',
+    updated_date: '',
+    // completed_date: '',
+    owner_comments: '',
   });
-  const { title, notes, image } = taskData;
+  const {
+    title,
+    notes,
+    image,
+    category,
+    task_status,
+    priority,
+    owner,
+    watched_id,
+    watcher_count,
+    attachments,
+    // created_date,
+    // due_date,
+    updated_date,
+    // completed_date,
+    owner_comments, 
+    is_owner
+  } = taskData;
 
   const imageInput = useRef(null);
-
   const history = useHistory();
+  const {id} = useParams();
+
+  useEffect(() => {
+    const handleMount = async () => {
+      try {
+        const { data } = await axiosReq.get(`/tasks/${id}/`);
+        const {
+          title,
+          category,
+          notes,
+          image,
+          task_status,
+          priority,
+          owner,
+          watched_id,
+          watcher_count,
+          attachments,
+          // created_date,
+          // due_date,
+          updated_date,
+          // completed_date,
+          owner_comments, 
+          is_owner } = data;
+
+        is_owner ? setTaskData({
+          title,
+          category,
+          notes,
+          image,
+          task_status,
+          priority,
+          owner,
+          watched_id,
+          watcher_count,
+          attachments,
+          // created_date,
+          // due_date,
+          updated_date,
+          // completed_date,
+          owner_comments,
+        }) : history.push('/');
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    handleMount();
+  }, [history, id]);
 
   const handleChange = (event) => {
     setTaskData({
@@ -60,19 +134,24 @@ function TaskEditForm() {
     formData.append('title', title)
     formData.append('category', taskData.category)
     formData.append('notes', notes)
-    formData.append('image', imageInput.current.files[0])
+    formData.append('task_status', taskData.task_status)
+    formData.append('owner', owner)
 
-    try {
-        const {data} = await axiosReq.post('/tasks/', formData);
-        history.push(`/tasks/${data.id}`)
-    } catch(err){
-        console.log(err);
-        if (err.response?.status !== 401){
-            setErrors(err.response?.data)
-        }
+    if (imageInput?.current?.files[0]) {
+      formData.append('image', imageInput.current.files[0]);
     }
 
-  }
+    try {
+      await axiosReq.put(`/tasks/${id}/`, formData);
+      history.push(`/tasks/${id}`);
+    } catch (err) {
+      console.log(err);
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+
 
   const textFields = (
     <div className="text-center">
@@ -98,7 +177,7 @@ function TaskEditForm() {
         <Form.Control
             as="input"
             name="category"
-            value={taskData.category}
+            value={category}
             onChange={handleChange}
         /> 
       </Form.Group>
@@ -125,6 +204,58 @@ function TaskEditForm() {
         </Alert>
       ))}
 
+      {/* Status */}
+      <Form.Group>
+        <Form.Label>Status</Form.Label>
+        <Form.Control
+          as="select"
+          name="task_status"
+          value={task_status}
+          onChange={handleChange}
+          aria-label="task status"
+        >
+          <option value="">Select status</option>
+          <option value="BACKLOG">Backlog</option>
+          <option value="TODO">To Do</option>
+          <option value="INPROGRESS">In Progress</option>
+          <option value="COMPLETED">Completed</option>
+
+        </Form.Control>
+      </Form.Group>
+      {errors?.task_status?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      {/* Owner */}
+      <Form.Group>
+        <Form.Label>Assigned to</Form.Label>
+
+        <Form.Control
+          as="select"
+          name="owner"
+          className={appStyles.Input}
+          value={owner}
+          onChange={handleChange}
+          aria-label="owner"
+        >
+          <option>Select a user</option>
+          {users.map((user) => (
+            
+            <option key={user.id} value={user.id}>
+              {user.username}
+            </option>
+          ))}
+          ;
+        </Form.Control>
+      </Form.Group>
+
+      {errors?.owner?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
@@ -138,10 +269,16 @@ function TaskEditForm() {
     </div>
   );
 
+  
+
   return (
+
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col className="py-2 p-0 p-md-2" md={7} lg={8}>
+        <Col md={7} lg={7} className="d-none d-md-block p-0 p-md-2">
+          <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+        <Col className="py-2 p-0 p-md-2" md={5} lg={5}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
@@ -174,23 +311,21 @@ function TaskEditForm() {
 
               <Form.File
                 id="image-upload"
-                // accept="image/*"
-                accept="
-                .jpg, .jpeg, .png, .gif, .svg,
-                .pdf, .doc, .docx,
-                .ppt, .pptx,
-                .xls, .xlsx,
-                .txt
-                "
+                accept="image/*"
+                // accept="
+                // image/*,
+                // .jpg, .jpeg, .png, .gif, .svg,
+                // .pdf, .doc, .docx,
+                // .ppt, .pptx,
+                // .xls, .xlsx,
+                // .txt
+                // "
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
             </Form.Group>
             <div className="d-md-none">{textFields}</div>
           </Container>
-        </Col>
-        <Col md={5} lg={4} className="d-none d-md-block p-0 p-md-2">
-          <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
     </Form>

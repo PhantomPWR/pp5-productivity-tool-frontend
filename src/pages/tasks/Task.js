@@ -13,13 +13,14 @@ const Task = (props) => {
     owner,
     profile_id,
     profile_image,
-    status,
+    task_status,
     priority,
     category,
     watched_id,
     watcher_count,
     title,
     notes,
+    image,
     attachments,
     // created_date,
     // due_date,
@@ -31,7 +32,6 @@ const Task = (props) => {
 
 
   const currentUser = useCurrentUser();
-  // console.log(JSON.stringify(currentUser));
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
@@ -68,8 +68,13 @@ const Task = (props) => {
         </Media>
       </Card.Body>
       <Link to={`/tasks/${id}`}>
-        <Card.Img src={attachments} alt={title} />
+        <Card.Img src={image} alt={title} />
       </Link>
+      {attachments ? (
+        <Link to={`/tasks/${id}`}>
+          <Card.Img src={attachments} alt={title} />
+        </Link>
+      ) : null}
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {notes && <Card.Text>{notes}</Card.Text>}
@@ -107,7 +112,7 @@ const Task = (props) => {
           </Link>
           <Link to={`/`}>
             <i className="fas fa-list-check"></i>
-            {status}
+            {task_status}
           </Link>
           <Link to={`/`}>
             <i className="fa-solid fa-layer-group"></i>
