@@ -289,7 +289,7 @@ function TaskEditForm() {
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
-                      Update image
+                      Replace image
                     </Form.Label>
                   </div>
                 </>
