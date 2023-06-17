@@ -21,7 +21,6 @@ const Task = (props) => {
     title,
     notes,
     image,
-    attachments,
     // created_date,
     // due_date,
     updated_date,
@@ -70,11 +69,6 @@ const Task = (props) => {
       <Link to={`/tasks/${id}`}>
         <Card.Img src={image} alt={title} />
       </Link>
-      {attachments ? (
-        <Link to={`/tasks/${id}`}>
-          <Card.Img src={attachments} alt={title} />
-        </Link>
-      ) : null}
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {notes && <Card.Text>{notes}</Card.Text>}

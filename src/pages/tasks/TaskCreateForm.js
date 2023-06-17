@@ -33,7 +33,6 @@ function TaskCreateForm() {
     owner: '',
     watched_id: '',
     watcher_count: '',
-    // attachments: '',
     // created_date: '',
     // due_date: '',
     updated_date: '',
@@ -50,7 +49,6 @@ function TaskCreateForm() {
     priority,
     // watched_id,
     // watcher_count,
-    // attachments,
     // created_date,
     // due_date,
     updated_date,
@@ -263,14 +261,6 @@ function TaskCreateForm() {
               <Form.File
                 id="image-upload"
                 accept="image/*"
-                // accept="
-                // image/*,
-                // .jpg, .jpeg, .png, .gif, .svg,
-                // .pdf, .doc, .docx,
-                // .ppt, .pptx,
-                // .xls, .xlsx,
-                // .txt
-                // "
                 onChange={handleChangeImage}
                 ref={imageInput}
               />

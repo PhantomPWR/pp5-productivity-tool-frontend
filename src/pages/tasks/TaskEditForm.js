@@ -33,7 +33,6 @@ function TaskEditForm() {
     owner: '',
     watched_id: '',
     watcher_count: '',
-    attachments: '',
     // created_date: '',
     // due_date: '',
     updated_date: '',
@@ -50,7 +49,6 @@ function TaskEditForm() {
     owner,
     watched_id,
     watcher_count,
-    attachments,
     // created_date,
     // due_date,
     updated_date,
@@ -77,7 +75,6 @@ function TaskEditForm() {
           owner,
           watched_id,
           watcher_count,
-          attachments,
           // created_date,
           // due_date,
           updated_date,
@@ -95,7 +92,6 @@ function TaskEditForm() {
           owner,
           watched_id,
           watcher_count,
-          attachments,
           // created_date,
           // due_date,
           updated_date,
@@ -312,14 +308,6 @@ function TaskEditForm() {
               <Form.File
                 id="image-upload"
                 accept="image/*"
-                // accept="
-                // image/*,
-                // .jpg, .jpeg, .png, .gif, .svg,
-                // .pdf, .doc, .docx,
-                // .ppt, .pptx,
-                // .xls, .xlsx,
-                // .txt
-                // "
                 onChange={handleChangeImage}
                 ref={imageInput}
               />
