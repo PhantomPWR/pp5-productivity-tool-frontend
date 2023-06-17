@@ -208,7 +208,7 @@ function TaskCreateForm() {
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
@@ -242,7 +242,7 @@ function TaskCreateForm() {
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
-                      Change the image
+                      Update image
                     </Form.Label>
                   </div>
                 </>

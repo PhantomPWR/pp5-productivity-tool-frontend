@@ -255,12 +255,12 @@ function TaskEditForm() {
     
       <Button
         className={`${btnStyles.Button} ${btnStyles.Blue}`}
-        onClick={() => {}}
+        onClick={() => history.goBack()}
       >
         cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        create
+        update
       </Button>
     </div>
   );
@@ -289,7 +289,7 @@ function TaskEditForm() {
                       className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
                       htmlFor="image-upload"
                     >
-                      Change the image
+                      Update image
                     </Form.Label>
                   </div>
                 </>
