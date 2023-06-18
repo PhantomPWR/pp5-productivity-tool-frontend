@@ -21,7 +21,8 @@ function TaskCreateForm() {
     axios
       .get("/profile-list/")
       .then((response) => setUsers(response.data))
-      .catch((error) => console.log(error));
+      .catch(
+        (error) => {/*console.log(error)*/});
   }, []);
 
 
@@ -95,7 +96,7 @@ function TaskCreateForm() {
         const {data} = await axiosReq.post('/tasks/', formData);
         history.push(`/tasks/${data.id}`)
     } catch(err){
-        console.log(err);
+        // console.log(err);
         if (err.response?.status !== 401){
             setErrors(err.response?.data)
         }

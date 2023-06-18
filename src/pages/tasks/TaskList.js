@@ -19,11 +19,13 @@ import { fetchMoreData } from "../../utils/utils";
 // import PopularProfiles from "../profiles/PopularProfiles";
 import PopularProfiles from "../profiles/ProfileList";
 import ProfileList from "../profiles/ProfileList";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function TaskList({ message, filter = "" }) {
   const [tasks, setTasks] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
+  const currentUser = useCurrentUser();
 
   const [query, setQuery] = useState('');
 
@@ -34,7 +36,7 @@ function TaskList({ message, filter = "" }) {
         setTasks(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -47,7 +49,7 @@ function TaskList({ message, filter = "" }) {
       clearTimeout(timer);
     }
 
-  }, [filter, query, pathname]);
+  }, [filter, query, pathname, currentUser]);
 
   return (
     <Row className="h-100">
