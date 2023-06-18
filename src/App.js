@@ -10,6 +10,11 @@ import TaskList from './pages/tasks/TaskList';
 import TaskPage from './pages/tasks/TaskPage';
 import { useCurrentUser } from './contexts/CurrentUserContext';
 import TaskEditForm from './pages/tasks/TaskEditForm';
+import ProfilePage from './pages/profiles/ProfilePage';
+import ProfileList from './pages/profiles/ProfileList';
+import UsernameForm from "./pages/profiles/UsernameForm";
+import UserPasswordForm from "./pages/profiles/UserPasswordForm";
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 
 function App() {
@@ -45,6 +50,23 @@ function App() {
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
             <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
             <Route exact path="/tasks/:id" render={() => <TaskPage />} />
+            <Route exact path="/profiles/" render={() => <ProfileList />} />
+            <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+            <Route
+              exact
+              path="/profiles/:id/edit/username"
+              render={() => <UsernameForm />}
+            />
+            <Route
+              exact
+              path="/profiles/:id/edit/password"
+              render={() => <UserPasswordForm />}
+            />
+            <Route
+              exact
+              path="/profiles/:id/edit"
+              render={() => <ProfileEditForm />}
+            />
             <Route render={() => <p>Page not found!</p>} />
           </Switch>
         </Container>

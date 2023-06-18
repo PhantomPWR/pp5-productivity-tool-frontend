@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 import { useCurrentUser } from "../contexts/CurrentUserContext";
-
 const ProfileDataContext = createContext();
 const SetProfileDataContext = createContext();
 export const useProfileData = () => useContext(ProfileDataContext);
@@ -24,7 +23,7 @@ export const ProfileDataProvider = ({ children }) => {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
-          "/profiles/?ordering=tasks_count"
+          "/profiles/?ordering=-task_count"
         );
         setProfileData((prevState) => ({
           ...prevState,

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Upload from "../../assets/upload.png";
-import { Row, Col, Container, Form, Button, Image, Alert } from "react-bootstrap"
+import { Container, Row, Col, Form, Button, Image, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
@@ -8,8 +8,10 @@ import Asset from "../../components/Asset";
 import { useHistory } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
+import { useRedirect } from '../../hooks/useRedirect';
 
 function TaskCreateForm() {
+  useRedirect('loggedOut');
 
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
