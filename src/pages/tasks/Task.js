@@ -66,12 +66,11 @@ const Task = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/tasks/${id}`}>
-        <Card.Img src={image} alt={title} />
-      </Link>
       <Card.Body>
-        {title && <Card.Title className="text-center">{title}</Card.Title>}
-        {notes && <Card.Text>{notes}</Card.Text>}
+        <Link to={`/tasks/${id}`}>
+            {title && <Card.Title className="text-center">{title}</Card.Title>}
+            {notes && <Card.Text>{notes}</Card.Text>}
+        </Link>
         <div className={styles.TaskBar}>
           {is_owner ? (
             <OverlayTrigger
@@ -115,6 +114,9 @@ const Task = (props) => {
           {owner_comments}
         </div>
       </Card.Body>
+      {taskPage && (
+        <Card.Img src={image} alt={title} />
+      )}
     </Card>
   );
 };

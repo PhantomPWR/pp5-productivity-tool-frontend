@@ -47,7 +47,7 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
 export const ProfileEditDropdown = ({ id }) => {
   const history = useHistory();
   return (
-    <Dropdown className={`ml-auto px-3 ${styles.Absolute}`} drop="left">
+    <Dropdown className={`ms-auto px-3 ${styles.Absolute}`} drop="left">
       <Dropdown.Toggle as={ThreeDots} />
       <Dropdown.Menu>
         <Dropdown.Item

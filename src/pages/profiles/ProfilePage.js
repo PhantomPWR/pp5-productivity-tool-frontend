@@ -20,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Task from "../tasks/Task";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from '../../assets/no-results.png';
+import { ProfileEditDropdown } from "../../components/MoreDropdown";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -34,7 +35,6 @@ function ProfilePage() {
     const fetchData = async () => {
       try {
         const [{ data: pageProfile }, { data: profileTasks }] =
-        // const [{ data: pageProfile }] =
           await Promise.all([
             axiosReq.get(`/profiles/${id}/`),
             axiosReq.get(`/tasks/?owner__profile=${id}`),
@@ -54,6 +54,7 @@ function ProfilePage() {
 
   const mainProfile = (
     <>
+    {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
       <Row noGutters className="px-3 text-center">
         <Col lg={3} className="text-lg-left">
           <Image
@@ -86,7 +87,7 @@ function ProfilePage() {
   const mainProfileTasks = (
     <>
       <hr />
-      <p className="text-center">Profile owner's posts</p>
+      <p className="text-center">{profile?.name}'s tasks</p>
       <hr />
       {profileTasks.results.length ? (
         <InfiniteScroll
