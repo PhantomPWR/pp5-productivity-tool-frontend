@@ -87,7 +87,10 @@ function TaskCreateForm() {
     formData.append('title', title)
     formData.append('category', taskData.category)
     formData.append('notes', notes)
-    formData.append('image', imageInput.current.files[0])
+    // formData.append('image', imageInput.current.files[0])
+    if (imageInput?.current?.files.length > 0) { // Check if an image file is selected
+      formData.append('image', imageInput.current.files[0]);
+    }
     formData.append('task_status', taskData.task_status)
     formData.append('owner', owner)
   
