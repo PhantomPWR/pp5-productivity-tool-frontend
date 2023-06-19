@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 import Task from "./Task";
 import Asset from "../../components/Asset";
@@ -32,7 +29,7 @@ function TaskList({ message, filter = "" }) {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const { data } = await axiosReq.get(`/tasks/?${filter}search=${query}`);
+        const { data } = await axiosReq.get(`/tasks/?${filter}&search=${query}`);
         setTasks(data);
         setHasLoaded(true);
       } catch (err) {
@@ -44,10 +41,10 @@ function TaskList({ message, filter = "" }) {
     // stop results flashing - fetch after 1s delay
     const timer = setTimeout(() => {
       fetchTasks();
-    }, 1000)
+    }, 1000);
     return () => {
       clearTimeout(timer);
-    }
+    };
 
   }, [filter, query, pathname, currentUser]);
 
@@ -64,8 +61,9 @@ function TaskList({ message, filter = "" }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             type="text"
-            className="mr-sm-2"
+            className="me-sm-2"
             placeholder="Search tasks"
+            aria-label="Search Bar"
           />
         </Form>
         {hasLoaded ? (

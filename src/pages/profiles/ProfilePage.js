@@ -9,7 +9,6 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 
 import ProfileList from "./ProfileList";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import {
@@ -25,7 +24,6 @@ import { ProfileEditDropdown } from "../../components/MoreDropdown";
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileTasks, setProfileTasks] = useState({ results: [] });
-  const currentUser = useCurrentUser();
   const {id} = useParams();
   const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
@@ -87,7 +85,7 @@ function ProfilePage() {
   const mainProfileTasks = (
     <>
       <hr />
-      <p className="text-center">{profile?.name}'s tasks</p>
+      <p className="text-center">{profile?.owner}'s tasks</p>
       <hr />
       {profileTasks.results.length ? (
         <InfiniteScroll
