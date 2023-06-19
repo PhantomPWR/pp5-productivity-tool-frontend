@@ -11,6 +11,14 @@ h5 {
     margin: 0 0;
 }
 
+.Task a {
+    text-decoration: none;
+}
+
+.TaskBody {
+    background-color: #f4f4f4;
+}
+
 .Eye {
     color: #f85032;
 }
@@ -21,4 +29,9 @@ h5 {
 
 .EyeOutline:hover {
     color: #f85032;
+}
+
+.TaskBar {
+    background-color: #fff;
+    margin-top: 1em;
 }

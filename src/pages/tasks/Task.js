@@ -66,7 +66,7 @@ const Task = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Card.Body>
+      <Card.Body  className={styles.TaskBody}>
         <Link to={`/tasks/${id}`}>
             {title && <Card.Title className="text-center">{title}</Card.Title>}
             {notes && <Card.Text>{notes}</Card.Text>}
