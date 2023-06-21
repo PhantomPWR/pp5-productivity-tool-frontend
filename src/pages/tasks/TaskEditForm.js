@@ -196,7 +196,7 @@ function TaskEditForm() {
         <Form.Label>Due Date</Form.Label>
         <Form.Control
             type="date"
-            name="due-date"
+            name="due_date"
             value={selectedDate}
             onChange={handleChangeDate}
         /> 
