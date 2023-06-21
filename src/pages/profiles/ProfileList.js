@@ -41,7 +41,7 @@ const ProfileList = ({ mobile }) => {
     >
       {listProfiles.results.length ? (
         <>
-          <p>Most followed profiles.</p>
+          <p>User list</p>
           {mobile ? (
             <div className="d-flex justify-content-around">
               {listProfiles.results.slice(0, 4).map((profile) => (
