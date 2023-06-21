@@ -13,6 +13,7 @@ function TaskEditForm() {
 
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
+  const [selectedDate, setSelectedDate] = useState('');
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -34,7 +35,7 @@ function TaskEditForm() {
     watched_id: '',
     watcher_count: '',
     // created_date: '',
-    // due_date: '',
+    due_date: '',
     updated_date: '',
     // completed_date: '',
     owner_comments: '',
@@ -50,7 +51,7 @@ function TaskEditForm() {
     watched_id,
     watcher_count,
     // created_date,
-    // due_date,
+    due_date,
     updated_date,
     // completed_date,
     owner_comments, 
@@ -76,7 +77,7 @@ function TaskEditForm() {
           watched_id,
           watcher_count,
           // created_date,
-          // due_date,
+          due_date,
           updated_date,
           // completed_date,
           owner_comments, 
@@ -93,7 +94,7 @@ function TaskEditForm() {
           watched_id,
           watcher_count,
           // created_date,
-          // due_date,
+          due_date,
           updated_date,
           // completed_date,
           owner_comments,
@@ -123,6 +124,11 @@ function TaskEditForm() {
     }
   };
 
+  const handleChangeDate = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -131,7 +137,9 @@ function TaskEditForm() {
     formData.append('category', taskData.category)
     formData.append('notes', notes)
     formData.append('task_status', taskData.task_status)
+    formData.append('priority', taskData.priority)
     formData.append('owner', owner)
+    formData.append('due_date', due_date)
 
     if (imageInput?.current?.files[0]) {
       formData.append('image', imageInput.current.files[0]);
@@ -159,7 +167,7 @@ function TaskEditForm() {
             name="title"
             value={title}
             onChange={handleChange}
-    />
+        />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -178,6 +186,22 @@ function TaskEditForm() {
         /> 
       </Form.Group>
       {errors?.category?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      {/* Due Date */}
+      <Form.Group>
+        <Form.Label>Due Date</Form.Label>
+        <Form.Control
+            type="date"
+            name="due-date"
+            value={selectedDate}
+            onChange={handleChangeDate}
+        /> 
+      </Form.Group>
+      {errors?.notes?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -211,10 +235,32 @@ function TaskEditForm() {
           aria-label="task status"
         >
           <option value="">Select status</option>
-          <option value="BACKLOG">Backlog</option>
-          <option value="TODO">To Do</option>
-          <option value="INPROGRESS">In Progress</option>
-          <option value="COMPLETED">Completed</option>
+          <option value="Backlog">Backlog</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </Form.Control>
+      </Form.Group>
+      {errors?.task_status?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
+
+      {/* Task Priority */}
+      <Form.Group>
+        <Form.Label>Priority</Form.Label>
+        <Form.Control
+          as="select"
+          name="priority"
+          value={priority}
+          onChange={handleChange}
+          aria-label="task status"
+        >
+          <option value="">Select priority</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
 
         </Form.Control>
       </Form.Group>

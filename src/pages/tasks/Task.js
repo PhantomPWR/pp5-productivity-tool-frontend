@@ -22,7 +22,7 @@ const Task = (props) => {
     notes,
     image,
     // created_date,
-    // due_date,
+    due_date,
     updated_date,
     // completed_date,
     owner_comments,
@@ -58,14 +58,17 @@ const Task = (props) => {
             <Avatar src={profile_image} height={55} />
             {owner}
           </Link>
-          <div className="d-flex align-items-center">
-            <span>{updated_date}</span>
-            {is_owner && taskPage && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
-            )}
+          <div className="d-flex row-cols-3 align-items-center">
+            <span className="col">Updated {updated_date}</span>
+            <span className="col">Due on {due_date}</span>
+            <span className="col d-flex justify-content-end">
+              {is_owner && taskPage && (
+                <MoreDropdown
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                />
+              )}
+            </span>
           </div>
         </Media>
       </Card.Body>
@@ -111,7 +114,7 @@ const Task = (props) => {
               {task_status}
             </Link>
             <Link to={`/`}>
-              <i className="fa-solid fa-layer-group"></i>
+              <i className="fas fa-triangle-exclamation"></i>
               {priority}
             </Link>
             {owner_comments}
