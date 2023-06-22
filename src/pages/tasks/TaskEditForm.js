@@ -236,10 +236,10 @@ function TaskEditForm() {
           aria-label="task status"
         >
           <option value="">Select status</option>
-          <option value="Backlog">Backlog</option>
-          <option value="To Do">To Do</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
+          <option value="BACKLOG">Backlog</option>
+          <option value="TODO">To Do</option>
+          <option value="INPROGRESS">In Progress</option>
+          <option value="COMPLETED">Completed</option>
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -259,9 +259,9 @@ function TaskEditForm() {
           aria-label="task status"
         >
           <option value="">Select priority</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="PRIORITY1">1</option>
+          <option value="PRIORITY2">2</option>
+          <option value="PRIORITY3">3</option>
 
         </Form.Control>
       </Form.Group>

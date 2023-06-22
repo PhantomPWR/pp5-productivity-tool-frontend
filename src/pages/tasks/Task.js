@@ -7,6 +7,20 @@ import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import { axiosRes } from "../../api/axiosDefaults";
 
+
+const status_choices = {
+      BACKLOG: 'Backlog',
+      TODO: 'To Do',
+      INPROGRESS: 'In Progress',
+      COMPLETED: 'Completed'
+    }
+
+const priority_choices = {
+      PRIORITY1: '1',
+      PRIORITY2: '2',
+      PRIORITY3: '3',
+    }
+
 const Task = (props) => {
   const {
     id,
@@ -33,8 +47,6 @@ const Task = (props) => {
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const history = useHistory();
-
-  
 
 
   const handleEdit = () => {
@@ -102,22 +114,21 @@ const Task = (props) => {
               </OverlayTrigger>
             )}
             {watcher_count}
-            <Link to={`/watchers/${id}`}>
+            {/* <Link to={`/watchers/${id}`}>
               <i className="far fa-comments" />
-            </Link>
+            </Link> */}
             <Link to={`/categories/${id}`}>
               <i className="far fa-folder" />
               {category}
             </Link>
-            <Link to={`/`}>
+            <Link to={`/tasks/?task_status=${task_status}`}>
               <i className="fas fa-list-check"></i>
-              {task_status}
+              {status_choices[task_status]}
             </Link>
             <Link to={`/`}>
               <i className="fas fa-triangle-exclamation"></i>
-              {priority}
+              {priority_choices[priority]}
             </Link>
-            {owner_comments}
           </div>
         </Card.Body>
       </Link>
