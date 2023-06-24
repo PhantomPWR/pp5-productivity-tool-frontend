@@ -115,9 +115,6 @@ const Task = (props) => {
             </OverlayTrigger>
           )}
           {watcher_count}
-          {/* <Link to={`/watchers/${id}`}>
-            <i className="far fa-comments" />
-          </Link> */}
           <Link to={`/categories/${id}`}>
             <i className="far fa-folder" />
             {category}

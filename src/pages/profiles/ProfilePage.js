@@ -73,9 +73,6 @@ function ProfilePage() {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="text-lg-right">
-        <p>Follow button</p>
-        </Col>
         { profile?.content && (<Col className="p-3">{profile.content}</Col>) }
       </Row>
     </>
@@ -84,7 +81,7 @@ function ProfilePage() {
   const mainProfileTasks = (
     <>
       <hr />
-      <p className="text-center">{profile?.owner}'s tasks</p>
+      <h2 className="text-center">My tasks</h2>
       <hr />
       {profileTasks.results.length ? (
         <InfiniteScroll
