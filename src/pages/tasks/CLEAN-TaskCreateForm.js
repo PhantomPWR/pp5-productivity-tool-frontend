@@ -6,8 +6,8 @@ import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { axiosReq } from "../../api/axiosDefaults";
+import axios from "axios";
 import { useRedirect } from '../../hooks/useRedirect';
 
 function TaskCreateForm() {
@@ -16,65 +16,36 @@ function TaskCreateForm() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
-  const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
 
   // Fetch profiles from the API
   useEffect(() => {
-      axios
-        .get("/profile-list/")
-        .then((response) => setUsers(response.data))
-        .catch(
-          (error) => {/*console.log(error)*/});
-    }, []);
-
-  // Fetch task status choices from the API
-  useEffect(() => {
-    const fetchTaskStatusChoices = async () => {
-      try {
-        const response = await axiosReq.get('/status-choices/');
-          setTaskStatusChoices(response.data);
-      } catch (error) {
-          console.error('Error fetching task_status options:', error);
-        }
-    };
-    fetchTaskStatusChoices();
+    axios
+      .get("/profile-list/")
+      .then((response) => setUsers(response.data))
+      .catch(
+        (error) => {/*console.log(error)*/});
   }, []);
-  console.log(taskStatusChoices);
-
-  // Fetch task priority choices from the API
-  useEffect(() => {
-    const fetchTaskPriorityChoices = async () => {
-      try {
-        const response = await axiosReq.get('/priority-choices/');
-          setTaskPriorityChoices(response.data);
-      } catch (error) {
-          console.error('Error fetching priority options:', error);
-        }
-    };
-    fetchTaskPriorityChoices();
-  }, []);
-  console.log(taskPriorityChoices);
-
 
 
   const [taskData, setTaskData] = useState({
     title: '',
     category: '',
-    description: '',
+    notes: '',
     image: '',
     task_status: '',
     priority: '',
     owner: '',
-    created_date: '',
+    watched_id: '',
+    watcher_count: '',
+    // created_date: '',
     due_date: '',
-    updated_date: '',
-    completed_date: '',
+    // updated_date: '',
+    // completed_date: '',
+    // owner_comments: '',
   });
-
-  const {
+    const {
     title,
-    description,
+    notes,
     image,
     category,
     task_status,
@@ -85,6 +56,9 @@ function TaskCreateForm() {
     // created_date,
     due_date,
     // updated_date,
+    // completed_date,
+    // owner_comments, 
+    // is_owner
   } = taskData;
 
   const imageInput = useRef(null);
@@ -95,7 +69,7 @@ function TaskCreateForm() {
       ...taskData,
       [event.target.name]: event.target.value,
     });
-    console.log("handleChange fired");
+    console.log("handleChange fired...")
   };
 
   const handleChangeImage = (event) => {
@@ -118,7 +92,8 @@ function TaskCreateForm() {
 
     formData.append('title', title);
     formData.append('category', taskData.category);
-    formData.append('description', description);
+    formData.append('notes', notes);
+    // formData.append('image', imageInput.current.files[0])
     if (imageInput?.current?.files.length > 0) { // Check if an image file is selected
       formData.append('image', imageInput.current.files[0]);
     }
@@ -143,7 +118,6 @@ function TaskCreateForm() {
 
   const textFields = (
     <div className="text-center">
-      
       {/* Title */}
       <Form.Group>
         <Form.Label>Task Title</Form.Label>
@@ -186,24 +160,24 @@ function TaskCreateForm() {
             onChange={handleChangeDate}
         /> 
       </Form.Group>
-      {errors?.description?.map((message, idx) => (
+      {errors?.notes?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
       
-      {/* Description */}
+      {/* Notes */}
       <Form.Group>
-        <Form.Label>Task Description</Form.Label>
+        <Form.Label>Task Notes</Form.Label>
         <Form.Control
             as="textarea"
             rows={6}
-            name="description"
-            value={description}
+            name="notes"
+            value={notes}
             onChange={handleChange}
         /> 
       </Form.Group>
-      {errors?.description?.map((message, idx) => (
+      {errors?.notes?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -211,7 +185,7 @@ function TaskCreateForm() {
 
       {/* Task Status */}
       <Form.Group>
-        <Form.Label>Task Status</Form.Label>
+        <Form.Label>Status</Form.Label>
         <Form.Control
           as="select"
           name="task_status"
@@ -219,10 +193,12 @@ function TaskCreateForm() {
           onChange={handleChange}
           aria-label="task status"
         >
-          <option value="">Select task status</option>
-          {taskStatusChoices.map((statusChoice) => (
-            <option key={statusChoice.value} value={statusChoice.value}>{statusChoice.label}</option>
-          ))}
+          <option value="">Select status</option>
+          <option value="Backlog">Backlog</option>
+          <option value="To Do">To Do</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -233,21 +209,22 @@ function TaskCreateForm() {
 
       {/* Task Priority */}
       <Form.Group>
-        <Form.Label>Task Priority</Form.Label>
+        <Form.Label>Priority</Form.Label>
         <Form.Control
           as="select"
           name="priority"
           value={priority}
           onChange={handleChange}
-          aria-label="task priority"
+          aria-label="task status"
         >
-          <option value="">Select task priority</option>
-          {taskPriorityChoices.map((priorityChoice) => (
-            <option key={priorityChoice.value} value={priorityChoice.value}>{priorityChoice.label}</option>
-          ))}
+          <option value="">Select priority</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+
         </Form.Control>
       </Form.Group>
-      {errors?.priority?.map((message, idx) => (
+      {errors?.task_status?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 
 import Asset from "../../components/Asset";
 
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
-import btnStyles from "../../styles/Button.module.css";
 
 import ProfileList from "./ProfileList";
 import { useParams } from "react-router-dom";

@@ -33,13 +33,13 @@ const Task = (props) => {
     watched_id,
     watcher_count,
     title,
-    notes,
+    description,
     image,
     // created_date,
     due_date,
     updated_date,
     // completed_date,
-    owner_comments,
+    // owner_comments,
     taskPage,
   } = props;
 
@@ -87,7 +87,7 @@ const Task = (props) => {
       <Link to={`/tasks/${id}`}>
         <Card.Body  className={styles.TaskBody}>
               {title && <Card.Title className="text-center">{title}</Card.Title>}
-              {notes && <Card.Text>{notes}</Card.Text>}
+              {description && <Card.Text>{description}</Card.Text>}
 
           <div className={styles.TaskBar}>
             {is_owner ? (

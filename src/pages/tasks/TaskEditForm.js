@@ -14,6 +14,8 @@ function TaskEditForm() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
+  const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
+  const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -23,39 +25,61 @@ function TaskEditForm() {
       .catch((error) => console.log(error));
   }, []);
 
+  // Fetch task status choices from the API
+  useEffect(() => {
+    const fetchTaskStatusChoices = async () => {
+      try {
+        const response = await axiosReq.get('/status-choices/');
+          setTaskStatusChoices(response.data);
+      } catch (error) {
+          console.error('Error fetching task_status options:', error);
+        }
+    };
+    fetchTaskStatusChoices();
+  }, []);
+  console.log(taskStatusChoices);
+
+  // Fetch task priority choices from the API
+  useEffect(() => {
+    const fetchTaskPriorityChoices = async () => {
+      try {
+        const response = await axiosReq.get('/priority-choices/');
+          setTaskPriorityChoices(response.data);
+      } catch (error) {
+          console.error('Error fetching priority options:', error);
+        }
+    };
+    fetchTaskPriorityChoices();
+  }, []);
+  console.log(taskPriorityChoices);
+
 
   const [taskData, setTaskData] = useState({
     title: '',
     category: '',
-    notes: '',
+    description: '',
     image: '',
     task_status: '',
     priority: '',
     owner: '',
-    watched_id: '',
-    watcher_count: '',
-    // created_date: '',
+    created_date: '',
     due_date: '',
     updated_date: '',
-    // completed_date: '',
-    owner_comments: '',
+    completed_date: '',
   });
   const {
     title,
-    notes,
+    description,
     image,
     category,
     task_status,
-    priority,
     owner,
-    watched_id,
-    watcher_count,
+    priority,
+    // watched_id,
+    // watcher_count,
     // created_date,
     due_date,
-    updated_date,
-    // completed_date,
-    owner_comments, 
-    is_owner
+    // updated_date,
   } = taskData;
 
   const imageInput = useRef(null);
@@ -69,7 +93,7 @@ function TaskEditForm() {
         const {
           title,
           category,
-          notes,
+          description,
           image,
           task_status,
           priority,
@@ -86,7 +110,7 @@ function TaskEditForm() {
         is_owner ? setTaskData({
           title,
           category,
-          notes,
+          description,
           image,
           task_status,
           priority,
@@ -135,7 +159,7 @@ function TaskEditForm() {
 
     formData.append('title', title)
     formData.append('category', taskData.category)
-    formData.append('notes', notes)
+    formData.append('description', description)
     formData.append('task_status', taskData.task_status)
     formData.append('priority', taskData.priority)
     formData.append('owner', owner)
@@ -157,8 +181,164 @@ function TaskEditForm() {
   };
 
 
+  // const textFields = (
+  //   <div className="text-center">
+  //     {/* Title */}
+  //     <Form.Group>
+  //       <Form.Label>Task Title</Form.Label>
+  //       <Form.Control
+  //           type="text"
+  //           name="title"
+  //           value={title}
+  //           onChange={handleChange}
+  //       />
+  //     </Form.Group>
+  //     {errors?.title?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+      
+  //     {/* Category */}
+  //     <Form.Group>
+  //       <Form.Label>Category</Form.Label>
+  //       <Form.Control
+  //           as="input"
+  //           name="category"
+  //           value={category}
+  //           onChange={handleChange}
+  //       /> 
+  //     </Form.Group>
+  //     {errors?.category?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+
+  //     {/* Due Date */}
+  //     <Form.Group>
+  //       <Form.Label>Due Date</Form.Label>
+  //       <Form.Control
+  //           type="date"
+  //           name="due_date"
+  //           value={selectedDate}
+  //           onChange={handleChangeDate}
+  //       /> 
+  //     </Form.Group>
+  //     {errors?.description?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+      
+  //     {/* Description */}
+  //     <Form.Group>
+  //       <Form.Label>Task Description</Form.Label>
+  //       <Form.Control
+  //           as="textarea"
+  //           rows={6}
+  //           name="description"
+  //           value={description}
+  //           onChange={handleChange}
+  //       /> 
+  //     </Form.Group>
+  //     {errors?.description?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+
+
+  //     {/* Status */}
+  //     <Form.Group>
+  //       <Form.Label>Status</Form.Label>
+  //       <Form.Control
+  //         as="select"
+  //         name="task_status"
+  //         value={task_status}
+  //         onChange={handleChange}
+  //         aria-label="task status"
+  //       >
+  //         <option value="">Select status</option>
+  //         <option value="BACKLOG">Backlog</option>
+  //         <option value="TODO">To Do</option>
+  //         <option value="INPROGRESS">In Progress</option>
+  //         <option value="COMPLETED">Completed</option>
+  //       </Form.Control>
+  //     </Form.Group>
+  //     {errors?.task_status?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+
+  //     {/* Task Priority */}
+  //     <Form.Group>
+  //       <Form.Label>Priority</Form.Label>
+  //       <Form.Control
+  //         as="select"
+  //         name="priority"
+  //         value={priority}
+  //         onChange={handleChange}
+  //         aria-label="task status"
+  //       >
+  //         <option value="">Select priority</option>
+  //         <option value="PRIORITY1">1</option>
+  //         <option value="PRIORITY2">2</option>
+  //         <option value="PRIORITY3">3</option>
+
+  //       </Form.Control>
+  //     </Form.Group>
+  //     {errors?.task_status?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+
+  //     {/* Owner */}
+  //     <Form.Group>
+  //       <Form.Label>Assigned to</Form.Label>
+
+  //       <Form.Control
+  //         as="select"
+  //         name="owner"
+  //         className={appStyles.Input}
+  //         value={owner}
+  //         onChange={handleChange}
+  //         aria-label="owner"
+  //       >
+  //         <option>Select a user</option>
+  //         {users.map((user) => (
+            
+  //           <option key={user.id} value={user.id}>
+  //             {user.username}
+  //           </option>
+  //         ))}
+  //         ;
+  //       </Form.Control>
+  //     </Form.Group>
+
+  //     {errors?.owner?.map((message, idx) => (
+  //       <Alert variant="warning" key={idx}>
+  //         {message}
+  //       </Alert>
+  //     ))}
+    
+  //     <Button
+  //       className={`${btnStyles.Button} ${btnStyles.Blue}`}
+  //       onClick={() => history.goBack()}
+  //     >
+  //       cancel
+  //     </Button>
+  //     <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+  //       update
+  //     </Button>
+  //   </div>
+  // );
+
   const textFields = (
     <div className="text-center">
+      
       {/* Title */}
       <Form.Group>
         <Form.Label>Task Title</Form.Label>
@@ -167,7 +347,7 @@ function TaskEditForm() {
             name="title"
             value={title}
             onChange={handleChange}
-        />
+    />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -201,33 +381,32 @@ function TaskEditForm() {
             onChange={handleChangeDate}
         /> 
       </Form.Group>
-      {errors?.notes?.map((message, idx) => (
+      {errors?.description?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
       
-      {/* Notes */}
+      {/* Description */}
       <Form.Group>
-        <Form.Label>Task Notes</Form.Label>
+        <Form.Label>Task Description</Form.Label>
         <Form.Control
             as="textarea"
             rows={6}
-            name="notes"
-            value={notes}
+            name="description"
+            value={description}
             onChange={handleChange}
         /> 
       </Form.Group>
-      {errors?.notes?.map((message, idx) => (
+      {errors?.description?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
       ))}
 
-
-      {/* Status */}
+      {/* Task Status */}
       <Form.Group>
-        <Form.Label>Status</Form.Label>
+        <Form.Label>Task Status</Form.Label>
         <Form.Control
           as="select"
           name="task_status"
@@ -235,11 +414,10 @@ function TaskEditForm() {
           onChange={handleChange}
           aria-label="task status"
         >
-          <option value="">Select status</option>
-          <option value="BACKLOG">Backlog</option>
-          <option value="TODO">To Do</option>
-          <option value="INPROGRESS">In Progress</option>
-          <option value="COMPLETED">Completed</option>
+          <option value="">Select task status</option>
+          {taskStatusChoices.map((statusChoice) => (
+            <option key={statusChoice.value} value={statusChoice.value}>{statusChoice.label}</option>
+          ))}
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -250,22 +428,21 @@ function TaskEditForm() {
 
       {/* Task Priority */}
       <Form.Group>
-        <Form.Label>Priority</Form.Label>
+        <Form.Label>Task Priority</Form.Label>
         <Form.Control
           as="select"
           name="priority"
           value={priority}
           onChange={handleChange}
-          aria-label="task status"
+          aria-label="task priority"
         >
-          <option value="">Select priority</option>
-          <option value="PRIORITY1">1</option>
-          <option value="PRIORITY2">2</option>
-          <option value="PRIORITY3">3</option>
-
+          <option value="">Select task priority</option>
+          {taskPriorityChoices.map((priorityChoice) => (
+            <option key={priorityChoice.value} value={priorityChoice.value}>{priorityChoice.label}</option>
+          ))}
         </Form.Control>
       </Form.Group>
-      {errors?.task_status?.map((message, idx) => (
+      {errors?.priority?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>
@@ -307,7 +484,7 @@ function TaskEditForm() {
         cancel
       </Button>
       <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
-        update
+        Update
       </Button>
     </div>
   );
