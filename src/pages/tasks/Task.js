@@ -84,54 +84,54 @@ const Task = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/tasks/${id}`}>
-        <Card.Body  className={styles.TaskBody}>
-              {title && <Card.Title className="text-center">{title}</Card.Title>}
-              {description && <Card.Text>{description}</Card.Text>}
 
-          <div className={styles.TaskBar}>
-            {is_owner ? (
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>You own this task; hopefully you're watching it</Tooltip>}
-              >
-                <i className="far fa-eye" />
-              </OverlayTrigger>
-            ) : watched_id ? (
-              <span onClick={() => {}}>
-                <i className={`fas fa-eye ${styles.Eye}`} />
-              </span>
-            ) : currentUser ? (
-              <span onClick={() => {}}>
-                <i className={`far fa-eye ${styles.EyeOutline}`} />
-              </span>
-            ) : (
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>Log in to watch tasks!</Tooltip>}
-              >
-                <i className="far fa-eye" />
-              </OverlayTrigger>
-            )}
-            {watcher_count}
-            {/* <Link to={`/watchers/${id}`}>
-              <i className="far fa-comments" />
-            </Link> */}
-            <Link to={`/categories/${id}`}>
-              <i className="far fa-folder" />
-              {category}
-            </Link>
-            <Link to={`/tasks/?task_status=${task_status}`}>
-              <i className="fas fa-list-check"></i>
-              {status_choices[task_status]}
-            </Link>
-            <Link to={`/`}>
-              <i className="fas fa-triangle-exclamation"></i>
-              {priority_choices[priority]}
-            </Link>
-          </div>
-        </Card.Body>
-      </Link>
+      <Card.Body  className={styles.TaskBody}>
+        <Link to={`/tasks/${id}`}>
+            {title && <Card.Title className="text-center">{title}</Card.Title>}
+            {description && <Card.Text>{description}</Card.Text>}
+        </Link>
+        <div className={styles.TaskBar}>
+          {is_owner ? (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>You own this task; hopefully you're watching it</Tooltip>}
+            >
+              <i className="far fa-eye" />
+            </OverlayTrigger>
+          ) : watched_id ? (
+            <span onClick={() => {}}>
+              <i className={`fas fa-eye ${styles.Eye}`} />
+            </span>
+          ) : currentUser ? (
+            <span onClick={() => {}}>
+              <i className={`far fa-eye ${styles.EyeOutline}`} />
+            </span>
+          ) : (
+            <OverlayTrigger
+              placement="top"
+              overlay={<Tooltip>Log in to watch tasks!</Tooltip>}
+            >
+              <i className="far fa-eye" />
+            </OverlayTrigger>
+          )}
+          {watcher_count}
+          {/* <Link to={`/watchers/${id}`}>
+            <i className="far fa-comments" />
+          </Link> */}
+          <Link to={`/categories/${id}`}>
+            <i className="far fa-folder" />
+            {category}
+          </Link>
+          <Link to={`/tasks/?task_status=${task_status}`}>
+            <i className="fas fa-list-check"></i>
+            {status_choices[task_status]}
+          </Link>
+          <Link to={`/`}>
+            <i className="fas fa-triangle-exclamation"></i>
+            {priority_choices[priority]}
+          </Link>
+        </div>
+      </Card.Body>
       {taskPage && (
         <Card.Img src={image} alt={title} />
       )}
