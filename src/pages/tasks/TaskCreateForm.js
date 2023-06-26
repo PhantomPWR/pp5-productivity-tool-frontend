@@ -18,6 +18,7 @@ function TaskCreateForm() {
   const [selectedDate, setSelectedDate] = useState('');
   const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
   const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
+  const [taskCategories, setTaskCategories] = useState([]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -25,7 +26,9 @@ function TaskCreateForm() {
         .get("/profile-list/")
         .then((response) => setUsers(response.data))
         .catch(
-          (error) => {/*console.log(error)*/});
+          (error) => {
+            console.error('Error fetching profiles:', error)
+          });
     }, []);
 
   // Fetch task status choices from the API
@@ -35,12 +38,11 @@ function TaskCreateForm() {
         const response = await axiosReq.get('/status-choices/');
           setTaskStatusChoices(response.data);
       } catch (error) {
-          console.error('Error fetching task_status options:', error);
+          console.error('Error fetching task status options:', error);
         }
     };
     fetchTaskStatusChoices();
   }, []);
-  console.log(taskStatusChoices);
 
   // Fetch task priority choices from the API
   useEffect(() => {
@@ -49,12 +51,25 @@ function TaskCreateForm() {
         const response = await axiosReq.get('/priority-choices/');
           setTaskPriorityChoices(response.data);
       } catch (error) {
-          console.error('Error fetching priority options:', error);
+          console.error('Error fetching task priority options:', error);
         }
     };
     fetchTaskPriorityChoices();
   }, []);
-  console.log(taskPriorityChoices);
+
+  // Fetch categories from the API
+  useEffect(() => {
+    const fetchTaskCategories = async () => {
+      try {
+        const response = await axiosReq.get('/categories/');
+          setTaskCategories(response.data);
+      } catch (error) {
+          console.error('Error fetching categories:', error);
+        }
+    };
+    fetchTaskCategories();
+  }, []);
+  console.log(taskCategories);
 
 
 
@@ -70,6 +85,7 @@ function TaskCreateForm() {
     due_date: '',
     updated_date: '',
     completed_date: '',
+    assigned_to: '',
   });
 
   const {
@@ -80,11 +96,11 @@ function TaskCreateForm() {
     task_status,
     owner,
     priority,
-    // watched_id,
-    // watcher_count,
     // created_date,
     due_date,
     // updated_date,
+    // completed_date,
+    assigned_to,
   } = taskData;
 
   const imageInput = useRef(null);
@@ -95,7 +111,6 @@ function TaskCreateForm() {
       ...taskData,
       [event.target.name]: event.target.value,
     });
-    console.log("handleChange fired");
   };
 
   const handleChangeImage = (event) => {
@@ -126,6 +141,7 @@ function TaskCreateForm() {
     formData.append('priority', taskData.priority);
     formData.append('owner', owner);
     formData.append('due_date', due_date);
+    formData.append('assigned_to', assigned_to);
   
 
     try {
@@ -162,13 +178,19 @@ function TaskCreateForm() {
       
       {/* Category */}
       <Form.Group>
-        <Form.Label>Category</Form.Label>
+        <Form.Label>Task Category</Form.Label>
         <Form.Control
-            as="input"
-            name="category"
-            value={category}
-            onChange={handleChange}
-        /> 
+          as="select"
+          name="category"
+          value={category}
+          onChange={handleChange}
+          aria-label="task category"
+        >
+          <option value="">Select task category</option>
+          {taskCategories.map((category) => (
+            <option key={category.id} value={category.id}>{category.name}</option>
+          ))}
+        </Form.Control>
       </Form.Group>
       {errors?.category?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -259,11 +281,11 @@ function TaskCreateForm() {
 
         <Form.Control
           as="select"
-          name="owner"
+          name="assigned_to"
           className={appStyles.Input}
-          value={owner}
+          value={assigned_to}
           onChange={handleChange}
-          aria-label="owner"
+          aria-label="assigned to"
         >
           <option>Select a user</option>
           {users.map((user) => (
