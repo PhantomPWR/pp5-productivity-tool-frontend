@@ -62,16 +62,24 @@ function TaskCreateForm() {
     const fetchTaskCategories = async () => {
       try {
         const response = await axiosReq.get('/categories/');
-          setTaskCategories(response.data);
+          setTaskCategories(response.data.results);
       } catch (error) {
           console.error('Error fetching categories:', error);
         }
     };
     fetchTaskCategories();
   }, []);
-  console.log(taskCategories);
-
-
+  // console.log(taskCategories);
+  
+  const getCategoryOptions = () => {
+    return taskCategories.map((category) => ({
+      value: category.id,
+      label: category.title
+    }));
+  };
+  
+  
+  
 
   const [taskData, setTaskData] = useState({
     title: '',
@@ -148,7 +156,6 @@ function TaskCreateForm() {
         const {data} = await axiosReq.post('/tasks/', formData);
         history.push(`/tasks/${data.id}`)
     } catch(err){
-        // console.log(err);
         if (err.response?.status !== 401){
             setErrors(err.response?.data)
         }
@@ -187,8 +194,8 @@ function TaskCreateForm() {
           aria-label="task category"
         >
           <option value="">Select task category</option>
-          {taskCategories.map((category) => (
-            <option key={category.id} value={category.id}>{category.name}</option>
+          {getCategoryOptions().map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
           ))}
         </Form.Control>
       </Form.Group>
