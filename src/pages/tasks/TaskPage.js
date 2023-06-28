@@ -14,18 +14,26 @@ function TaskPage() {
   const [task, setTask] = useState({ results: [] });
 
   useEffect(() => {
+    let isMounted = true;
     const handleMount = async () => {
       try {
         const [{ data: task }] = await Promise.all([
           axiosReq.get(`/tasks/${id}`),
         ]);
-        setTask({ results: [task] });
+
+        if (isMounted) {
+          setTask({ results: [task] });
+        }
       } catch (err) {
         // console.log(err);
       }
     };
 
     handleMount();
+
+    return () => {
+      isMounted = false;
+    }
   }, [id]);
 
   return (
