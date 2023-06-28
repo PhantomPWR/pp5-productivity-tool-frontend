@@ -16,21 +16,28 @@ const ProfileList = ({ mobile }) => {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    let isMounted = true;
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
           "/profiles/"
         );
-        setProfileData((prevState) => ({
-          ...prevState,
-          listProfiles: data,
-        }));
+        if (isMounted) {
+          setProfileData((prevState) => ({
+            ...prevState,
+            listProfiles: data,
+          }));
+        }
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
 
     handleMount();
+
+    return () => {
+      isMounted = false;
+    }
   }, [currentUser]);
 
   return (

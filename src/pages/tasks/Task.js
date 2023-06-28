@@ -33,7 +33,7 @@ const Task = (props) => {
     title,
     description,
     image,
-    created_date,
+    // created_date,
     due_date,
     updated_date,
     // completed_date,

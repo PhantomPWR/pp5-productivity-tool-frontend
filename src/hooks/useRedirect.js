@@ -13,9 +13,10 @@ export const useRedirect = (userAuthStatus) => {
         await axios.post('/dj-rest-auth/token/refresh/');
         // user IS logged in
         if (userAuthStatus === 'loggedIn') {
-          const profileId = currentUser.profile_id;
-          console.log(profileId);
-          history.push(`/profiles/${profileId}`);
+          // const profileId = currentUser.profile_id;
+          // console.log(`profileId: ${profileId}`);
+          // history.push(`/profiles/${profileId}`);
+          history.push('/');
         }
       } catch (err) {
         // user is NOT logged in

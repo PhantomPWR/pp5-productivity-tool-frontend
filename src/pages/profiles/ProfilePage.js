@@ -7,7 +7,7 @@ import Asset from "../../components/Asset";
 import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 
-import ProfileList from "./ProfileList";
+// import ProfileList from "./ProfileList";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import {
@@ -19,39 +19,42 @@ import Task from "../tasks/Task";
 import { fetchMoreData } from "../../utils/utils";
 import NoResults from '../../assets/no-results.png';
 import { ProfileEditDropdown } from "../../components/MoreDropdown";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+// import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileTasks, setProfileTasks] = useState({ results: [] });
-  const currentUser = useCurrentUser;
+  // const currentUser = useCurrentUser;
   const {id} = useParams();
+  console.log(id);
   const setProfileData = useSetProfileData();
   const { pageProfile } = useProfileData();
 
   const [profile] = pageProfile.results;
-  const is_owner = currentUser?.username === profile?.owner;
+  // const is_owner = currentUser?.username === profile?.owner;
+  console.log(pageProfile, profileTasks);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [{ data: pageProfile }, { data: profileTasks }] =
-          await Promise.all([
-            axiosReq.get(`/profiles/${id}/`),
-            // axiosReq.get(`/tasks/?owner__profile=${id}`),
-          ]);
-        setProfileData((prevState) => ({
-          ...prevState,
-          pageProfile: { results: [pageProfile] },
-        }));
-        setProfileTasks(profileTasks);
-        setHasLoaded(true);
-      } catch (err) {
-        // console.log(err);
-      }
-    };
-    fetchData();
-  }, [id, setProfileData]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [{ data: pageProfile }, { data: profileTasks }] =
+  //         await Promise.all([
+  //           axiosReq.get(`/profiles/${id}/`),
+  //           axiosReq.get(`/tasks/?owner__profile=${id}`),
+  //         ]);
+  //         console.log(id);
+  //       setProfileData((prevState) => ({
+  //         ...prevState,
+  //         pageProfile: { results: [pageProfile] },
+  //       }));
+  //       setProfileTasks(profileTasks);
+  //       setHasLoaded(true);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id, setProfileData]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,7 +71,7 @@ function ProfilePage() {
         setProfileTasks(profileTasks);
         setHasLoaded(true);
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
     fetchData();
@@ -88,7 +91,7 @@ function ProfilePage() {
         <Col lg={6}>
           <h3 className="m-2">{profile?.owner}</h3>
           <Row className='justify-content-center no-gutters'>
-            <Col xs={6} className="my-2">
+            <Col sm={6} className="my-2">
                 <div>{profile?.task_count}</div>
                 <div>tasks total</div>
             </Col>
@@ -126,7 +129,7 @@ function ProfilePage() {
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <ProfileList mobile />
+        {/* <ProfileList mobile /> */}
         <Container className={appStyles.Content}>
           {hasLoaded ? (
             <>
@@ -139,7 +142,7 @@ function ProfilePage() {
         </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <ProfileList />
+        {/* <ProfileList /> */}
       </Col>
     </Row>
   );

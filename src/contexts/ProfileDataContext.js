@@ -30,7 +30,7 @@ export const ProfileDataProvider = ({ children }) => {
           listProfiles: data,
         }));
       } catch (err) {
-        // console.log(err);
+        console.log(err);
       }
     };
 
