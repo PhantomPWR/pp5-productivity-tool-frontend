@@ -16,9 +16,9 @@ function TaskCreateForm() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
-  const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
-  const [taskCategories, setTaskCategories] = useState([]);
+  // const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
+  // const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
+  const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -27,35 +27,35 @@ function TaskCreateForm() {
         .then((response) => setUsers(response.data))
         .catch(
           (error) => {
-            console.error('Error fetching profiles:', error)
+            // console.error('Error fetching profiles:', error)
           });
     }, []);
 
   // Fetch task status choices from the API
-  useEffect(() => {
-    const fetchTaskStatusChoices = async () => {
-      try {
-        const response = await axiosReq.get('/status-choices/');
-          setTaskStatusChoices(response.data);
-      } catch (error) {
-          console.error('Error fetching task status options:', error);
-        }
-    };
-    fetchTaskStatusChoices();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTaskStatusChoices = async () => {
+  //     try {
+  //       const response = await axiosReq.get('/status-choices/');
+  //         setTaskStatusChoices(response.data);
+  //     } catch (error) {
+  //         console.error('Error fetching task status options:', error);
+  //       }
+  //   };
+  //   fetchTaskStatusChoices();
+  // }, []);
 
   // Fetch task priority choices from the API
-  useEffect(() => {
-    const fetchTaskPriorityChoices = async () => {
-      try {
-        const response = await axiosReq.get('/priority-choices/');
-          setTaskPriorityChoices(response.data);
-      } catch (error) {
-          console.error('Error fetching task priority options:', error);
-        }
-    };
-    fetchTaskPriorityChoices();
-  }, []);
+  // useEffect(() => {
+  //   const fetchTaskPriorityChoices = async () => {
+  //     try {
+  //       const response = await axiosReq.get('/priority-choices/');
+  //         setTaskPriorityChoices(response.data);
+  //     } catch (error) {
+  //         console.error('Error fetching task priority choices:', error);
+  //       }
+  //   };
+  //   fetchTaskPriorityChoices();
+  // }, []);
 
   // Fetch categories from the API
   useEffect(() => {
@@ -69,7 +69,7 @@ function TaskCreateForm() {
     };
     fetchTaskCategories();
   }, []);
-  // console.log(taskCategories);
+  console.log(taskCategories);
   
   const getCategoryOptions = () => {
     return taskCategories.map((category) => ({
@@ -249,9 +249,14 @@ function TaskCreateForm() {
           aria-label="task status"
         >
           <option value="">Select task status</option>
-          {taskStatusChoices.map((statusChoice) => (
+          <option key="BACKLOG" value="BACKLOG">Backlog</option>
+          <option key="TODO" value="TODO">To Do</option>
+          <option key="INPROGRESS" value="INPROGRESS">In Progress</option>
+          <option key="COMPLETED" value="COMPLETED">Completed</option>
+
+          {/* {taskStatusChoices.map((statusChoice) => (
             <option key={statusChoice.value} value={statusChoice.value}>{statusChoice.label}</option>
-          ))}
+          ))} */}
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -271,9 +276,12 @@ function TaskCreateForm() {
           aria-label="task priority"
         >
           <option value="">Select task priority</option>
-          {taskPriorityChoices.map((priorityChoice) => (
+          <option key="PRIORITY1" value="PRIORITY1">1</option>
+          <option key="PRIORITY2" value="PRIORITY2">2</option>
+          <option key="PRIORITY3" value="PRIORITY3">3</option>
+          {/* {taskPriorityChoices.map((priorityChoice) => (
             <option key={priorityChoice.value} value={priorityChoice.value}>{priorityChoice.label}</option>
-          ))}
+          ))} */}
         </Form.Control>
       </Form.Group>
       {errors?.priority?.map((message, idx) => (

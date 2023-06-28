@@ -30,12 +30,10 @@ const Task = (props) => {
     task_status,
     priority,
     category,
-    watched_id,
-    watcher_count,
     title,
     description,
     image,
-    // created_date,
+    created_date,
     due_date,
     updated_date,
     // completed_date,
@@ -98,10 +96,6 @@ const Task = (props) => {
             >
               <i className="far fa-eye" />
             </OverlayTrigger>
-          ) : watched_id ? (
-            <span onClick={() => {}}>
-              <i className={`fas fa-eye ${styles.Eye}`} />
-            </span>
           ) : currentUser ? (
             <span onClick={() => {}}>
               <i className={`far fa-eye ${styles.EyeOutline}`} />
@@ -114,7 +108,7 @@ const Task = (props) => {
               <i className="far fa-eye" />
             </OverlayTrigger>
           )}
-          {watcher_count}
+          {/* {watcher_count} */}
           <Link to={`/categories/${id}`}>
             <i className="far fa-folder" />
             {category}

@@ -14,6 +14,7 @@ export const useRedirect = (userAuthStatus) => {
         // user IS logged in
         if (userAuthStatus === 'loggedIn') {
           const profileId = currentUser.profile_id;
+          console.log(profileId);
           history.push(`/profiles/${profileId}`);
         }
       } catch (err) {
