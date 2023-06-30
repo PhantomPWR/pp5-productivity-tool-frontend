@@ -12,11 +12,10 @@ const Comment = (props) => {
       <hr />
       <Media>
         <Link to={`/profiles/${profile_id}`}>
-          <Avatar 
-          src={profile_image}/>
+          <Avatar src={profile_image}/>
           <span className={styles.Owner}>{owner}</span>
         </Link>
-        <Media.Body className="align-self-center ms-2 mt-2">
+        <Media.Body className="align-self-center ms-2 mt">
           <span className={styles.Date}>{updated_at}</span>
           <p>{content}</p>
         </Media.Body>

@@ -20,34 +20,28 @@ export const ProfileDataProvider = ({ children }) => {
     Updates profile page and listProfiles data
   */
   useEffect(() => {
-    let isMounted = true;
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(
-          // "/profiles/?ordering=-task_count"
-          "/profiles/"
+          "/profiles/?ordering=-task_count"
+          // "/profiles/"
         );
-        if (isMounted) {
-          setProfileData((prevState) => ({
-            ...prevState,
-            listProfiles: data,
-          }));
-        }
+        setProfileData((prevState) => ({
+          ...prevState,
+          listProfiles: data,
+        }));
       } catch (err) {
         console.log(err);
       }
     };
 
     handleMount();
-    return () => {
-      isMounted = false;
-    }
 
   }, [currentUser]);
 
   return (
     <ProfileDataContext.Provider value={profileData}>
-      <SetProfileDataContext.Provider value={setProfileData}>
+      <SetProfileDataContext.Provider value={{setProfileData}}>
         {children}
       </SetProfileDataContext.Provider>
     </ProfileDataContext.Provider>
