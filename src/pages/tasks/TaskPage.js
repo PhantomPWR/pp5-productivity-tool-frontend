@@ -1,28 +1,38 @@
 import React, { useState, useEffect } from "react";
 
-import { Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
-
-// import appStyles from "../../App.module.css";
+import appStyles from "../../App.module.css";
 import { useParams } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Task from "./Task";
-
+import Comment from "../comments/Comment"
+import CommentCreateForm from "../comments/CommentCreateForm";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
+import { fetchMoreData } from "../../utils/utils";
+import ProfileList from "../profiles/ProfileList";
 
 function TaskPage() {
   const { id } = useParams();
   const [task, setTask] = useState({ results: [] });
+  const currentUser = useCurrentUser();
+  const profile_image = currentUser?.profile_image;
+  const [ comments, setComments ] = useState({ results: [] });
 
   useEffect(() => {
     let isMounted = true;
     const handleMount = async () => {
       try {
-        const [{ data: task }] = await Promise.all([
+        const [{ data: task }, {data: comments}] = await Promise.all([
           axiosReq.get(`/tasks/${id}`),
+          axiosReq.get(`/comments/?task=${id}`),
         ]);
 
         if (isMounted) {
           setTask({ results: [task] });
+          setComments(comments);
         }
       } catch (err) {
         // console.log(err);
@@ -41,6 +51,39 @@ function TaskPage() {
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <p>Popular profiles for mobile</p>
         <Task {...task.results[0]} setTasks={setTask} taskPage />
+        <Container className={appStyles.Content}>
+          {currentUser ? (
+            <CommentCreateForm
+              profile_id={currentUser.profile_id}
+              profileImage={profile_image}
+              task={id}
+              setTask={setTask}
+              setComments={setComments}
+            />
+          ) : comments.results.length ? (
+            "Comments"
+          ) : null}
+          {comments.results.length ? (
+            <InfiniteScroll
+              children={comments.results.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  {...comment}
+                  setTask={setTask}
+                  setComments={setComments}
+                />
+              ))}
+              dataLength={comments.results.length}
+              loader={<Asset spinner />}
+              hasMore={!!comments.next}
+              next={() => fetchMoreData(comments, setComments)}
+            />
+          ) : currentUser ? (
+            <span>No comments yet.</span>
+          ) : (
+            <span>No comments yet.</span>
+          )}
+        </Container>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
         Popular profiles for desktop

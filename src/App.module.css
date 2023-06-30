@@ -35,10 +35,11 @@
 a {
   color: #555555;
   transition: color ease-in-out 0.3s;
+  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:hover i {

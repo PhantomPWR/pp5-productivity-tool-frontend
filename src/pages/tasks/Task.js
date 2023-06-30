@@ -37,7 +37,7 @@ const Task = (props) => {
     due_date,
     updated_date,
     // completed_date,
-    // owner_comments,
+    comment_count,
     taskPage,
   } = props;
 
@@ -96,10 +96,6 @@ const Task = (props) => {
             >
               <i className="far fa-eye" />
             </OverlayTrigger>
-          ) : currentUser ? (
-            <span onClick={() => {}}>
-              <i className={`far fa-eye ${styles.EyeOutline}`} />
-            </span>
           ) : (
             <OverlayTrigger
               placement="top"
@@ -121,6 +117,10 @@ const Task = (props) => {
             <i className="fas fa-triangle-exclamation"></i>
             {priority_choices[priority]}
           </Link>
+          <Link to={`/posts/${id}`}>
+            <i className="far fa-comments" />
+          </Link>
+          {comment_count}
         </div>
       </Card.Body>
       {taskPage && (
