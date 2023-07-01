@@ -22,7 +22,6 @@ function TaskPage() {
   const [ comments, setComments ] = useState({ results: [] });
 
   useEffect(() => {
-    let isMounted = true;
     const handleMount = async () => {
       try {
         const [{ data: task }, {data: comments}] = await Promise.all([
@@ -30,10 +29,8 @@ function TaskPage() {
           axiosReq.get(`/comments/?task=${id}`),
         ]);
 
-        if (isMounted) {
-          setTask({ results: [task] });
-          setComments(comments);
-        }
+        setTask({ results: [task] });
+        setComments(comments);
       } catch (err) {
         // console.log(err);
       }
@@ -41,15 +38,11 @@ function TaskPage() {
 
     handleMount();
 
-    return () => {
-      isMounted = false;
-    }
   }, [id]);
 
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <p>Popular profiles for mobile</p>
         <Task {...task.results[0]} setTasks={setTask} taskPage />
         <Container className={appStyles.Content}>
           {currentUser ? (
@@ -61,7 +54,7 @@ function TaskPage() {
               setComments={setComments}
             />
           ) : comments.results.length ? (
-            "Task Discussion"
+            "Task Comments"
           ) : null}
           {comments.results.length ? (
             <InfiniteScroll

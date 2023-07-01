@@ -45,32 +45,44 @@ const Comment = (props) => {
   return (
     <>
       <hr />
-      <Media>
-        <Link to={`/profiles/${profile_id}`}>
-          <Avatar src={profile_image} />
-        </Link>
-        <Media.Body className="align-self-center ml-2">
-          <span className={styles.Owner}>{owner}</span>
-          <span className={styles.Date}>{updated_date}</span>
-          {showEditForm ? (
-            <CommentEditForm
-              id={id}
-              profile_id={profile_id}
-              content={content}
-              profileImage={profile_image}
-              setComments={setComments}
-              setShowEditForm={setShowEditForm}
-            />
-          ) : (
-            <p>{content}</p>
-          )}
-        </Media.Body>
-        {is_owner && !showEditForm && (
-          <MoreDropdown
-            handleEdit={() => setShowEditForm(true)}
-            handleDelete={handleDelete}
-          />
-        )}
+      <Media className="row">
+        <div className="row align-items-center">
+            <div className="col-2 p-0">
+              <span className={styles.Date}>{updated_date}</span>
+            </div>
+            <div className="col d-flex justify-content-start">
+              <Link to={`/profiles/${profile_id}`}>
+                <Avatar src={profile_image} />
+                <span className={styles.Owner}>{owner}</span>
+              </Link>
+            </div>
+            <div className="col d-flex justify-content-end">
+              {is_owner && !showEditForm && (
+                <MoreDropdown
+                  handleEdit={() => setShowEditForm(true)}
+                  handleDelete={handleDelete}
+                />
+              )}
+            </div>
+        </div>
+        <div className="row">
+            <div className="col offset-3">
+              <Media.Body className="align-self-center ms-2">
+                {showEditForm ? (
+                  <CommentEditForm
+                    id={id}
+                    profile_id={profile_id}
+                    content={content}
+                    profileImage={profile_image}
+                    setComments={setComments}
+                    setShowEditForm={setShowEditForm}
+                  />
+                ) : (
+                  <p>{content}</p>
+                )}
+              </Media.Body>
+            </div>
+        </div>
       </Media>
     </>
   );
