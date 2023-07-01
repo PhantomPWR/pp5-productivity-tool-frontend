@@ -1,37 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
-import { axiosReq } from "../../api/axiosDefaults";
 import appStyles from "../../App.module.css";
 import Asset from "../../components/Asset";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { useProfileData } from "../../contexts/ProfileDataContext";
 import Profile from "./Profile";
 
-const ProfileList = ({ mobile }) => {
-  const [profileData, setProfileData] = useState({
-    pageProfile: { results: [] },
-    listProfiles: { results: [] },
-  });
-  const { listProfiles } = profileData;
-  const currentUser = useCurrentUser();
 
-  useEffect(() => {
-    const handleMount = async () => {
-      try {
-        const { data } = await axiosReq.get(
-          '/profiles/?ordering=-task_count'
-        );
-        setProfileData((prevState) => ({
-          ...prevState,
-          listProfiles: data,
-        }));
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    handleMount();
-
-  }, [currentUser]);
+const ListProfiles = ({ mobile }) => {
+  const { listProfiles } = useProfileData();
 
   return (
     <Container
@@ -61,4 +37,4 @@ const ProfileList = ({ mobile }) => {
   );
 };
 
-export default ProfileList;
+export default ListProfiles;
