@@ -8,7 +8,6 @@ import Profile from "./Profile";
 
 const ProfileList = ({ mobile }) => {
   const [profileData, setProfileData] = useState({
-    // we will use the pageProfile later!
     pageProfile: { results: [] },
     listProfiles: { results: [] },
   });
@@ -51,7 +50,7 @@ const ProfileList = ({ mobile }) => {
             </div>
           ) : (
             listProfiles.results.map((profile) => (
-              < Profile key={profile.id} profile={profile.owner} />
+              < Profile key={profile.id} profile={profile} />
             ))
           )}
         </>
