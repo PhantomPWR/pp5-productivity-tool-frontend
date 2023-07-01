@@ -51,7 +51,7 @@ const ProfileList = ({ mobile }) => {
             </div>
           ) : (
             listProfiles.results.map((profile) => (
-              < Profile key={profile.id} profile={profile} />
+              < Profile key={profile.id} profile={profile.owner} />
             ))
           )}
         </>

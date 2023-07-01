@@ -15,7 +15,7 @@ ReactDOM.render(
           <App />
         </ProfileDataProvider>
       </CurrentUserProvider>
-    </Router>,  // Remove comma when turning StrictMode back on
+    </Router>, // Remove comma when turning StrictMode back on
   // </React.StrictMode>,
   document.getElementById("root")
 );
