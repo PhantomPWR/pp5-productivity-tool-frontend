@@ -47,41 +47,44 @@ const Comment = (props) => {
       <hr />
       <Media className="row">
         <div className="row align-items-center">
-            <div className="col-2 p-0">
-              <span className={styles.Date}>{updated_date}</span>
-            </div>
-            <div className="col d-flex justify-content-start">
-              <Link to={`/profiles/${profile_id}`}>
-                <Avatar src={profile_image} />
-                <span className={styles.Owner}>{owner}</span>
-              </Link>
-            </div>
-            <div className="col d-flex justify-content-end">
-              {is_owner && !showEditForm && (
-                <MoreDropdown
-                  handleEdit={() => setShowEditForm(true)}
-                  handleDelete={handleDelete}
-                />
-              )}
-            </div>
-        </div>
-        <div className="row">
-            <div className="col offset-3">
-              <Media.Body className="align-self-center ms-2">
+          {/* Date */}
+          <div className="col-2">
+            <span className={styles.Date}>{updated_date}</span>
+          </div>
+          <div className="col d-flex justify-content-start">
+            {/* Profile Image */}
+            <Link to={`/profiles/${profile_id}`}>
+              <Avatar src={profile_image}  height={70}/>
+            </Link>
+            <div className="col mt-2">
+              {/* Username */}
+              <span className={styles.Owner}>{owner}</span>
+              {/* Comment Content */}
+              <Media.Body className="align-self-center">
                 {showEditForm ? (
                   <CommentEditForm
-                    id={id}
-                    profile_id={profile_id}
-                    content={content}
-                    profileImage={profile_image}
-                    setComments={setComments}
-                    setShowEditForm={setShowEditForm}
+                  id={id}
+                  profile_id={profile_id}
+                  content={content}
+                  profileImage={profile_image}
+                  setComments={setComments}
+                  setShowEditForm={setShowEditForm}
                   />
-                ) : (
+                  ) : (
                   <p>{content}</p>
                 )}
               </Media.Body>
             </div>
+          </div>
+          {/* MoreDropdown */}
+          <div className="col d-flex justify-content-end">
+            {is_owner && !showEditForm && (
+              <MoreDropdown
+                handleEdit={() => setShowEditForm(true)}
+                handleDelete={handleDelete}
+              />
+            )}
+          </div>
         </div>
       </Media>
     </>

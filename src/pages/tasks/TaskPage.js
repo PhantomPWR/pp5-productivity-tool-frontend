@@ -12,7 +12,6 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Asset from "../../components/Asset";
 import { fetchMoreData } from "../../utils/utils";
-import ProfileList from "../profiles/ProfileList";
 
 function TaskPage() {
   const { id } = useParams();
@@ -42,7 +41,7 @@ function TaskPage() {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
+      <Col className="py-2 p-0 p-lg-2">
         <Task {...task.results[0]} setTasks={setTask} taskPage />
         <Container className={appStyles.Content}>
           {currentUser ? (
@@ -77,9 +76,6 @@ function TaskPage() {
             <span>No comments yet.</span>
           )}
         </Container>
-      </Col>
-      <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
-        <ProfileList/>
       </Col>
     </Row>
   );

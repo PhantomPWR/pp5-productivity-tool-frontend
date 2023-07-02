@@ -1,5 +1,5 @@
 .App {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: #f8f8f8;
   min-height: 100vh;
 }
@@ -34,16 +34,19 @@
 
 a {
   color: #555555;
+  font-weight: 500;
   transition: color ease-in-out 0.3s;
+  border-bottom: 2px solid transparent;
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  border-color: #663399;
 }
 
+a:hover,
 a:hover i {
-  color: #2142b2;
+  color: #663399;
   transition: color ease-in-out 0.3s;
 }
 
@@ -61,7 +64,8 @@ i {
 i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
-  color: #2142b2;
+  color: #663399;
+  text-decoration: none;
 }
 
 figure {

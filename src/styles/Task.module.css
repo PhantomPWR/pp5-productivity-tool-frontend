@@ -39,3 +39,8 @@ h5 {
     background-color: #fff;
     margin-top: 1em;
 }
+
+.TaskBar a:hover {
+    border-color: transparent;
+    text-decoration: none;
+}
