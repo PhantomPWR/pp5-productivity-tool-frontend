@@ -19,7 +19,7 @@ function TaskCreateForm() {
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
-  const [profileChoices, setProfileChoices] = useState([{'id': '', 'owner': ''}]);
+  // const [profileChoices, setProfileChoices] = useState([{'id': '', 'owner': ''}]);
 
 
   // Fetch profiles from the API
