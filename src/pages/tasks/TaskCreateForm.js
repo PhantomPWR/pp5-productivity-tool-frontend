@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { MultiSelect } from "react-multi-select-component";
 import Upload from "../../assets/upload.png";
 import { Container, Row, Col, Form, Button, Image, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
@@ -9,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from '../../hooks/useRedirect';
+import ProfileList from '../profiles/ProfileList';
 
 function TaskCreateForm() {
   useRedirect('loggedOut');
@@ -16,9 +18,9 @@ function TaskCreateForm() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  // const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
-  // const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
   const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
+  const [profileChoices, setProfileChoices] = useState([{'id': '', 'owner': ''}]);
+
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -27,35 +29,30 @@ function TaskCreateForm() {
         .then((response) => setUsers(response.data))
         .catch(
           (error) => {
-            // console.error('Error fetching profiles:', error)
+            console.error('Error fetching profiles:', error)
           });
     }, []);
 
-  // Fetch task status choices from the API
   // useEffect(() => {
-  //   const fetchTaskStatusChoices = async () => {
+  //   const fetchProfileChoices = async () => {
   //     try {
-  //       const response = await axiosReq.get('/status-choices/');
-  //         setTaskStatusChoices(response.data);
+  //       const response = await axiosReq.get('/profiles/');
+  //         setProfileChoices(response.data.results);
   //     } catch (error) {
-  //         console.error('Error fetching task status options:', error);
-  //       }
+  //       console.error('Error fetching profiles:', error);
+  //     }
   //   };
-  //   fetchTaskStatusChoices();
+  //   fetchProfileChoices();
   // }, []);
+  // console.log(`profileChoices: ${profileChoices}`);
 
-  // Fetch task priority choices from the API
-  // useEffect(() => {
-  //   const fetchTaskPriorityChoices = async () => {
-  //     try {
-  //       const response = await axiosReq.get('/priority-choices/');
-  //         setTaskPriorityChoices(response.data);
-  //     } catch (error) {
-  //         console.error('Error fetching task priority choices:', error);
-  //       }
-  //   };
-  //   fetchTaskPriorityChoices();
-  // }, []);
+  // const getProfileOptions = () => {
+  //   return profileChoices.map((profile) => ({
+  //     key: profile.id,
+  //     value: profile.id,
+  //     label: profile.owner
+  //   }));
+  // };
 
   // Fetch categories from the API
   useEffect(() => {
@@ -73,11 +70,11 @@ function TaskCreateForm() {
   
   const getCategoryOptions = () => {
     return taskCategories.map((category) => ({
+      key: category.id,
       value: category.id,
-      label: category.title
+      label: category.title,
     }));
   };
-  
   
   
 
@@ -93,7 +90,7 @@ function TaskCreateForm() {
     due_date: '',
     updated_date: '',
     completed_date: '',
-    assigned_to: '',
+    assigned_to: [],
   });
 
   const {
@@ -120,6 +117,44 @@ function TaskCreateForm() {
       [event.target.name]: event.target.value,
     });
   };
+
+  // const handleChange = (event) => {
+  //   const { name, type, value, options } = event.target;
+  //   if (type === "select-multiple") {
+  //     const selectedValues = Array.from(options)
+  //       .filter((option) => option.selected)
+  //       .map((option) => parseInt(option.value));
+  //     setTaskData({
+  //       ...taskData,
+  //       [name]: selectedValues,
+  //     });
+  //     console.log(selectedValues);
+  //   } else {
+  //     setTaskData({
+  //       ...taskData,
+  //       [name]: value,
+  //     });
+  //   }
+  // };
+
+  // const handleChange = (event) => {
+  // const { name, type, value, options } = event.target;
+  // if (type === "select-multiple") {
+  //   const selectedValues = Array.from(options)
+  //       .filter((option) => option.selected)
+  //       .map((option) => option.value);
+  //     setTaskData({
+  //       ...taskData,
+  //       [name]: selectedValues,
+  //     });
+  //     console.log(`selectedValues: ${selectedValues}`);
+  //   } else {
+  //     setTaskData({
+  //       ...taskData,
+  //       [name]: value,
+  //     });
+  //   }
+  // };
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
@@ -150,14 +185,34 @@ function TaskCreateForm() {
     formData.append('owner', owner);
     formData.append('due_date', due_date);
     formData.append('assigned_to', assigned_to);
+    // Convert assigned_to array to comma-separated string
+    // formData.append('assigned_to', assigned_to.join(','));
   
 
+    // try {
+    //     const {data} = await axiosReq.post('/tasks/', formData, {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //       },
+    //     });
+    //     history.push(`/tasks/${data.id}`)
+    // } catch(err){
+    //     if (err.response?.status !== 401){
+    //       console.log(err.response?.data);
+    //       setErrors(err.response?.data);
+    //     }
+    // }
     try {
-        const {data} = await axiosReq.post('/tasks/', formData);
+        const {data} = await axiosReq.post('/tasks/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
         history.push(`/tasks/${data.id}`)
     } catch(err){
         if (err.response?.status !== 401){
-            setErrors(err.response?.data)
+          console.log(err.response?.data);
+          setErrors(err.response?.data);
         }
     }
 
@@ -195,7 +250,9 @@ function TaskCreateForm() {
         >
           <option value="">Select task category</option>
           {getCategoryOptions().map((option) => (
-            <option key={option.value} value={option.value}>{option.label}</option>
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </Form.Control>
       </Form.Group>
@@ -253,10 +310,6 @@ function TaskCreateForm() {
           <option key="TODO" value="TODO">To Do</option>
           <option key="INPROGRESS" value="INPROGRESS">In Progress</option>
           <option key="COMPLETED" value="COMPLETED">Completed</option>
-
-          {/* {taskStatusChoices.map((statusChoice) => (
-            <option key={statusChoice.value} value={statusChoice.value}>{statusChoice.label}</option>
-          ))} */}
         </Form.Control>
       </Form.Group>
       {errors?.task_status?.map((message, idx) => (
@@ -279,9 +332,6 @@ function TaskCreateForm() {
           <option key="PRIORITY1" value="PRIORITY1">1</option>
           <option key="PRIORITY2" value="PRIORITY2">2</option>
           <option key="PRIORITY3" value="PRIORITY3">3</option>
-          {/* {taskPriorityChoices.map((priorityChoice) => (
-            <option key={priorityChoice.value} value={priorityChoice.value}>{priorityChoice.label}</option>
-          ))} */}
         </Form.Control>
       </Form.Group>
       {errors?.priority?.map((message, idx) => (
@@ -290,27 +340,26 @@ function TaskCreateForm() {
         </Alert>
       ))}
 
-      {/* Owner */}
+      {/* Assigned to */}
       <Form.Group>
         <Form.Label>Assigned to</Form.Label>
-
         <Form.Control
           as="select"
+          // multiple
           name="assigned_to"
           className={appStyles.Input}
           value={assigned_to}
           onChange={handleChange}
           aria-label="assigned to"
         >
-          <option>Select a user</option>
+          <option>Select user</option>
           {users.map((user) => (
-            
             <option key={user.id} value={user.id}>
               {user.username}
             </option>
           ))}
-          ;
         </Form.Control>
+
       </Form.Group>
 
       {errors?.owner?.map((message, idx) => (

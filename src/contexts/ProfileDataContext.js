@@ -28,7 +28,6 @@ export const ProfileDataProvider = ({ children }) => {
       try {
         const { data } = await axiosReq.get(
           "/profiles/?ordering=-task_count"
-          // "/profiles/"
         );
         setProfileData((prevState) => ({
           ...prevState,

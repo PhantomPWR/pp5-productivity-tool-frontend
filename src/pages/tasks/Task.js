@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
+import axios from "axios";
 import { axiosRes } from "../../api/axiosDefaults";
 
 
@@ -25,6 +26,7 @@ const Task = (props) => {
   const {
     id,
     owner,
+    assigned_to,
     profile_id,
     profile_image,
     task_status,
@@ -44,6 +46,7 @@ const Task = (props) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
+  const [assignedUser, setAssignedUser] = useState(null);
   const history = useHistory();
 
 
@@ -59,6 +62,16 @@ const Task = (props) => {
       // console.log(err);
     }
   };
+
+  useEffect(() => {
+    if (assigned_to) {
+      axios.get(`/profiles/${assigned_to}/`).then((response) => {
+        setAssignedUser(response.data.owner);
+      });
+    } else {
+      setAssignedUser("No users assigned yet.");
+    }
+  }, [assigned_to]);
 
   return (
     <Card className={styles.Task}>
@@ -84,48 +97,58 @@ const Task = (props) => {
       </Card.Body>
 
       <Card.Body  className={styles.TaskBody}>
+        
         <Link to={`/tasks/${id}`}>
-            {title && <Card.Title className="text-center">{title}</Card.Title>}
-            {description && <Card.Text>{description}</Card.Text>}
+            {title && <Card.Title className="fs-2 text-center">{title}</Card.Title>}
         </Link>
         <div className={styles.TaskBar}>
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You own this task; hopefully you're watching it</Tooltip>}
-            >
-              <i className="far fa-eye" />
-            </OverlayTrigger>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to watch tasks!</Tooltip>}
-            >
-              <i className="far fa-eye" />
-            </OverlayTrigger>
-          )}
-          {/* {watcher_count} */}
+          {/* Owner */}
+          <i className="fas fa-crown"></i>
+          <span>Task Owner: </span>
+          {owner}
+          
+          {/* Assigned Users */}
+          <i className="fas fa-user-check" />
+          <span>Assigned to: </span>
+          {assignedUser}
+
+          {/* Category */}
           <Link to={`/categories/${id}`}>
             <i className="far fa-folder" />
             {category}
           </Link>
+
+          {/* Task Status */}
           <Link to={`/tasks/?task_status=${task_status}`}>
             <i className="fas fa-list-check"></i>
             {status_choices[task_status]}
           </Link>
+
+          {/* Priority */}
           <Link to={`/`}>
             <i className="fas fa-triangle-exclamation"></i>
             {priority_choices[priority]}
           </Link>
-          <Link to={`/posts/${id}`}>
+
+          {/* Comment Count */}
+          <Link to={`/tasks/${id}`}>
             <i className="far fa-comments" />
           </Link>
           {comment_count}
         </div>
       </Card.Body>
-      {taskPage && (
-        <Card.Img src={image} alt={title} />
-      )}
+      <Card.Body>
+        <div className="row row-cols-1 row-cols-lg-2">
+          <div className="col">
+            {description && <Card.Text align={'left'}>{description}</Card.Text>}
+          </div>
+          <div className="col">
+            {taskPage && (
+              <Card.Img src={image} alt={title} className="w-50" />
+            )}
+          </div>
+        </div>
+      </Card.Body>
     </Card>
   );
 };
