@@ -17,7 +17,6 @@ function TaskCreateForm() {
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
-  const [assignedTo, setAssignedTo] = useState([]);
 
 
 
@@ -44,7 +43,6 @@ function TaskCreateForm() {
     };
     fetchTaskCategories();
   }, []);
-  console.log(taskCategories);
   
   const getCategoryOptions = () => {
     return taskCategories.map((category) => ({
@@ -68,7 +66,7 @@ function TaskCreateForm() {
     due_date: '',
     updated_date: '',
     completed_date: '',
-    assigned_to: [],
+    assigned_to: '',
   });
 
   const {
@@ -110,12 +108,6 @@ function TaskCreateForm() {
     setSelectedDate(event.target.value);
   };
 
-  const handleChangeAssignedTo = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, (option) => parseInt(option.value, 10));
-    setAssignedTo(selectedOptions);
-    console.log('assignedTo: ', assignedTo);
-  };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -131,9 +123,9 @@ function TaskCreateForm() {
     formData.append('priority', taskData.priority);
     formData.append('owner', owner);
     formData.append('due_date', due_date);
-    // formData.append('assigned_to', assigned_to);
+    formData.append('assigned_to', assigned_to);
     // Convert assigned_to array to comma-separated string
-    formData.append('assigned_to', assigned_to.join(','));
+    // formData.append('assigned_to', assigned_to.join(','));
   
     try {
         const {data} = await axiosReq.post('/tasks/', formData, {
@@ -281,12 +273,11 @@ function TaskCreateForm() {
           as="select"
           name="assigned_to"
           className={appStyles.Input}
-          value={assignedTo}
-          onChange={handleChangeAssignedTo}
+          value={assigned_to}
+          onChange={handleChange}
           aria-label="assigned to"
-          multiple
         >
-          {/* <option>Select a user</option> */}
+          <option>Select a user</option>
           {users.map((user) => (
             
             <option key={user.id} value={user.id}>
