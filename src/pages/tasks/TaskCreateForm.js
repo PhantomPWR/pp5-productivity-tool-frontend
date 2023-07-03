@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { MultiSelect } from "react-multi-select-component";
 import Upload from "../../assets/upload.png";
 import { Container, Row, Col, Form, Button, Image, Alert } from "react-bootstrap"
 import styles from "../../styles/TaskCreateEditForm.module.css";
@@ -10,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from '../../hooks/useRedirect';
-import ProfileList from '../profiles/ProfileList';
 
 function TaskCreateForm() {
   useRedirect('loggedOut');
@@ -19,7 +17,8 @@ function TaskCreateForm() {
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
-  // const [profileChoices, setProfileChoices] = useState([{'id': '', 'owner': ''}]);
+  const [assignedTo, setAssignedTo] = useState([]);
+
 
 
   // Fetch profiles from the API
@@ -32,27 +31,6 @@ function TaskCreateForm() {
             console.error('Error fetching profiles:', error)
           });
     }, []);
-
-  // useEffect(() => {
-  //   const fetchProfileChoices = async () => {
-  //     try {
-  //       const response = await axiosReq.get('/profiles/');
-  //         setProfileChoices(response.data.results);
-  //     } catch (error) {
-  //       console.error('Error fetching profiles:', error);
-  //     }
-  //   };
-  //   fetchProfileChoices();
-  // }, []);
-  // console.log(`profileChoices: ${profileChoices}`);
-
-  // const getProfileOptions = () => {
-  //   return profileChoices.map((profile) => ({
-  //     key: profile.id,
-  //     value: profile.id,
-  //     label: profile.owner
-  //   }));
-  // };
 
   // Fetch categories from the API
   useEffect(() => {
@@ -76,7 +54,7 @@ function TaskCreateForm() {
     }));
   };
   
-  
+ 
 
   const [taskData, setTaskData] = useState({
     title: '',
@@ -118,44 +96,6 @@ function TaskCreateForm() {
     });
   };
 
-  // const handleChange = (event) => {
-  //   const { name, type, value, options } = event.target;
-  //   if (type === "select-multiple") {
-  //     const selectedValues = Array.from(options)
-  //       .filter((option) => option.selected)
-  //       .map((option) => parseInt(option.value));
-  //     setTaskData({
-  //       ...taskData,
-  //       [name]: selectedValues,
-  //     });
-  //     console.log(selectedValues);
-  //   } else {
-  //     setTaskData({
-  //       ...taskData,
-  //       [name]: value,
-  //     });
-  //   }
-  // };
-
-  // const handleChange = (event) => {
-  // const { name, type, value, options } = event.target;
-  // if (type === "select-multiple") {
-  //   const selectedValues = Array.from(options)
-  //       .filter((option) => option.selected)
-  //       .map((option) => option.value);
-  //     setTaskData({
-  //       ...taskData,
-  //       [name]: selectedValues,
-  //     });
-  //     console.log(`selectedValues: ${selectedValues}`);
-  //   } else {
-  //     setTaskData({
-  //       ...taskData,
-  //       [name]: value,
-  //     });
-  //   }
-  // };
-
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -166,9 +106,16 @@ function TaskCreateForm() {
     }
   };
 
-    const handleChangeDate = (event) => {
+  const handleChangeDate = (event) => {
     setSelectedDate(event.target.value);
   };
+
+  const handleChangeAssignedTo = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, (option) => parseInt(option.value, 10));
+    setAssignedTo(selectedOptions);
+    console.log('assignedTo: ', assignedTo);
+  };
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -184,24 +131,10 @@ function TaskCreateForm() {
     formData.append('priority', taskData.priority);
     formData.append('owner', owner);
     formData.append('due_date', due_date);
-    formData.append('assigned_to', assigned_to);
+    // formData.append('assigned_to', assigned_to);
     // Convert assigned_to array to comma-separated string
-    // formData.append('assigned_to', assigned_to.join(','));
+    formData.append('assigned_to', assigned_to.join(','));
   
-
-    // try {
-    //     const {data} = await axiosReq.post('/tasks/', formData, {
-    //       headers: {
-    //         'Content-Type': 'multipart/form-data',
-    //       },
-    //     });
-    //     history.push(`/tasks/${data.id}`)
-    // } catch(err){
-    //     if (err.response?.status !== 401){
-    //       console.log(err.response?.data);
-    //       setErrors(err.response?.data);
-    //     }
-    // }
     try {
         const {data} = await axiosReq.post('/tasks/', formData, {
           headers: {
@@ -230,7 +163,7 @@ function TaskCreateForm() {
             name="title"
             value={title}
             onChange={handleChange}
-    />
+        />
       </Form.Group>
       {errors?.title?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -343,23 +276,25 @@ function TaskCreateForm() {
       {/* Assigned to */}
       <Form.Group>
         <Form.Label>Assigned to</Form.Label>
+
         <Form.Control
           as="select"
-          // multiple
           name="assigned_to"
           className={appStyles.Input}
-          value={assigned_to}
-          onChange={handleChange}
+          value={assignedTo}
+          onChange={handleChangeAssignedTo}
           aria-label="assigned to"
+          multiple
         >
-          <option>Select user</option>
+          {/* <option>Select a user</option> */}
           {users.map((user) => (
+            
             <option key={user.id} value={user.id}>
               {user.username}
             </option>
           ))}
+          ;
         </Form.Control>
-
       </Form.Group>
 
       {errors?.owner?.map((message, idx) => (

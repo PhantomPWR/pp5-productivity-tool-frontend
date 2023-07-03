@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Card, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
@@ -63,6 +63,14 @@ const Task = (props) => {
     }
   };
 
+
+  const currentDate = new Date();
+  console.log(currentDate);
+  const dueDate = due_date;
+  console.log(dueDate);
+  const differenceMs = Math.abs(dueDate - currentDate);
+  console.log(differenceMs);
+
   useEffect(() => {
     if (assigned_to) {
       axios.get(`/profiles/${assigned_to}/`).then((response) => {
@@ -102,6 +110,7 @@ const Task = (props) => {
             {title && <Card.Title className="fs-2 text-center">{title}</Card.Title>}
         </Link>
         <div className={styles.TaskBar}>
+          
           {/* Owner */}
           <i className="fas fa-crown"></i>
           <span>Task Owner: </span>
