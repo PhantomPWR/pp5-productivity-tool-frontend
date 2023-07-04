@@ -19,7 +19,6 @@ function TaskCreateForm() {
   const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
 
 
-
   // Fetch profiles from the API
   useEffect(() => {
       axios
@@ -77,10 +76,7 @@ function TaskCreateForm() {
     task_status,
     owner,
     priority,
-    // created_date,
     due_date,
-    // updated_date,
-    // completed_date,
     assigned_to,
   } = taskData;
 
@@ -93,6 +89,7 @@ function TaskCreateForm() {
       [event.target.name]: event.target.value,
     });
   };
+
 
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
@@ -107,7 +104,6 @@ function TaskCreateForm() {
   const handleChangeDate = (event) => {
     setSelectedDate(event.target.value);
   };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -124,8 +120,6 @@ function TaskCreateForm() {
     formData.append('owner', owner);
     formData.append('due_date', due_date);
     formData.append('assigned_to', assigned_to);
-    // Convert assigned_to array to comma-separated string
-    // formData.append('assigned_to', assigned_to.join(','));
   
     try {
         const {data} = await axiosReq.post('/tasks/', formData, {
@@ -136,7 +130,7 @@ function TaskCreateForm() {
         history.push(`/tasks/${data.id}`)
     } catch(err){
         if (err.response?.status !== 401){
-          console.log(err.response?.data);
+          // console.log(err.response?.data);
           setErrors(err.response?.data);
         }
     }
@@ -268,7 +262,6 @@ function TaskCreateForm() {
       {/* Assigned to */}
       <Form.Group>
         <Form.Label>Assigned to</Form.Label>
-
         <Form.Control
           as="select"
           name="assigned_to"
@@ -284,7 +277,6 @@ function TaskCreateForm() {
               {user.username}
             </option>
           ))}
-          ;
         </Form.Control>
       </Form.Group>
 

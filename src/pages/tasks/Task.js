@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { Card, Media } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import axios from "axios";
 import { axiosRes } from "../../api/axiosDefaults";
+import {
+  Card,
+  Media,
+  Modal,
+  Button,
+} from "react-bootstrap";
 
 
 const status_choices = {
@@ -35,14 +40,18 @@ const Task = (props) => {
     title,
     description,
     image,
-    // created_date,
+    created_date,
     due_date,
     updated_date,
-    // completed_date,
+    completed_date,
     comment_count,
     taskPage,
   } = props;
 
+  console.log('created_date: ', created_date);
+  console.log('updated_date: ', updated_date);
+  console.log('due_date: ', due_date);
+  console.log('completed_date: ', completed_date);
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
@@ -73,7 +82,7 @@ const Task = (props) => {
 
   useEffect(() => {
     if (assigned_to) {
-      axios.get(`/profiles/${assigned_to}/`).then((response) => {
+      axios.get(`/profiles/${assigned_to}`).then((response) => {
         setAssignedUser(response.data.owner);
       });
     } else {
