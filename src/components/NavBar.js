@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styles from '../styles/NavBar.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { 
   useCurrentUser,
   useSetCurrentUser
@@ -14,6 +14,7 @@ import { removeTokenTimestamp } from '../utils/utils';
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const history = useHistory();
 
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
@@ -22,6 +23,7 @@ const NavBar = () => {
       await axios.post("dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
+      history.push("/");
     } catch (err) {
       // console.log(err);
     }
@@ -39,6 +41,15 @@ const NavBar = () => {
   );
   const loggedInIcons = (
     <>
+      <NavLink
+        exact
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to='/'
+      >
+        <i className='fs-6 fas fa-home'></i>
+        Home
+      </NavLink>
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
@@ -100,15 +111,6 @@ const NavBar = () => {
         />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto text-start">
-            <NavLink
-              exact
-              className={styles.NavLink}
-              activeClassName={styles.Active}
-              to='/'
-            >
-              <i className='fs-6 fas fa-home'></i>
-              Home
-            </NavLink>
 
             {currentUser ? loggedInIcons : loggedOutIcons}
             

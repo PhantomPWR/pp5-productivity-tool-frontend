@@ -7,7 +7,6 @@ import Asset from "../../components/Asset";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/TaskList.module.css";
-// import { useLocation } from "react-router";
 import { useLocation, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 
@@ -86,19 +85,6 @@ function TaskList({ message, filter = "" }) {
         <ProfileList mobile />
         <i className={`fas fa-search ${styles.SearchIcon}`} />
         <SearchBar query={query} setQuery={setQuery} />
-        {/* <Form
-          className={styles.SearchBar}
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <Form.Control
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            type="text"
-            className="me-sm-2"
-            placeholder="Search tasks"
-            aria-label="Search Bar"
-          />
-        </Form> */}
         {hasLoaded ? (
           <>
             {tasks.results.length ? (

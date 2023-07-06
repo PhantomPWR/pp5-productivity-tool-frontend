@@ -32,11 +32,7 @@ function App() {
             <Route
               exact
               path="/"
-              render={() => (
-                <TaskList
-                  message="No results found. Adjust your search keyword."
-                />
-              )}
+              render={() => <SignInForm />}
             />
             <Route
               exact

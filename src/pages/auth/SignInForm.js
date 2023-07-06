@@ -47,9 +47,11 @@ function SignInForm() {
 
   return (
     <Row className={styles.Row}>
-      <Col className='my-auto p-0 p-md-2' md={6}>
+      <Col className='m-auto p-0 p-md-2' md={6}>
         <Container className={`${appStyles.Content} p-4`}>
           <h1 className={styles.Header}>sign in</h1>
+          <p className='text-center'>Welcome to Ticked Off</p>
+          <p className='text-center'>Sign in or register to start ticking off your tasks.</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='username'>
               <Form.Label className='d-none'>Username</Form.Label>
@@ -102,15 +104,6 @@ function SignInForm() {
             Don't have an account? <span>Sign up now!</span>
           </Link>
         </Container>
-      </Col>
-      <Col
-        md={6}
-        className={`my-auto d-none d-md-block p-2 ${styles.SignInCol}`}
-      >
-        <Image
-          className={`${appStyles.FillerImage}`}
-          src={'https://codeinstitute.s3.amazonaws.com/AdvancedReact/hero.jpg'}
-        />
       </Col>
     </Row>
   );

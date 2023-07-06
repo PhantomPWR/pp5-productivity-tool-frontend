@@ -7,7 +7,6 @@ import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
 
 import ProfileList from "./ProfileList";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 import { 
@@ -23,11 +22,9 @@ import { ProfileEditDropdown } from "../../components/MoreDropdown";
 function ProfilePage() {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [profileTasks, setProfileTasks] = useState({ results: [] });
-  // const currentUser = useCurrentUser();
   const { id } = useParams();
   const { setProfileData } = useSetProfileData();
   const { pageProfile } = useProfileData();
-
   const [profile] = pageProfile.results;
 
   useEffect(() => {
