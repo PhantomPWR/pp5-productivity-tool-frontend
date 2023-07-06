@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 import Task from "./Task";
 import Asset from "../../components/Asset";
 
 import appStyles from "../../App.module.css";
 import styles from "../../styles/TaskList.module.css";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router-dom";
 import { axiosReq } from "../../api/axiosDefaults";
 
 import NoResults from "../../assets/no-results.png";
@@ -15,26 +16,56 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import ProfileList from "../profiles/ProfileList";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import SearchBar from "../../components/SearchBar";
 
 function TaskList({ message, filter = "" }) {
+  
   const [tasks, setTasks] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const currentUser = useCurrentUser();
+  const { taskStatus, taskPriority } = useParams();
 
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    // const fetchTasks = async () => {
+    //   try {
+    //     let url = `/tasks/?${filter}&search=${query}`;
+    //     if (taskStatus) {
+    //       url += `&task_status=${taskStatus}`;
+    //     }
+    //     if (taskPriority) {
+    //       url += `&priority=${taskPriority}`;
+    //     }
+    //     const { data } = await axiosReq.get(url);
+    //     setTasks(data);
+    //     setHasLoaded(true);
+    //   } catch (err) {
+    //     // console.log(err);
+    //   }
+    // };
 
     const fetchTasks = async () => {
       try {
-        const { data } = await axiosReq.get(`/tasks/?${filter}&search=${query}`);
-          setTasks(data);
-          setHasLoaded(true);
+        let url = `/tasks/?${filter}`;
+        if (query) {
+          url += `&search=${query}`;
+        }
+        if (taskStatus) {
+          url += `&task_status=${taskStatus}`;
+        }
+        if (taskPriority) {
+          url += `&priority=${taskPriority}`;
+        }
+        const { data } = await axiosReq.get(url);
+        setTasks(data);
+        setHasLoaded(true);
       } catch (err) {
         // console.log(err);
       }
     };
+
 
     setHasLoaded(false);
     // stop results flashing - fetch after 1s delay
@@ -47,14 +78,15 @@ function TaskList({ message, filter = "" }) {
       clearTimeout(timer);
     };
 
-  }, [filter, query, pathname, currentUser]);
+  }, [filter, query, pathname, currentUser, taskStatus, taskPriority]);
 
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <ProfileList mobile />
         <i className={`fas fa-search ${styles.SearchIcon}`} />
-        <Form
+        <SearchBar query={query} setQuery={setQuery} />
+        {/* <Form
           className={styles.SearchBar}
           onSubmit={(event) => event.preventDefault()}
         >
@@ -66,7 +98,7 @@ function TaskList({ message, filter = "" }) {
             placeholder="Search tasks"
             aria-label="Search Bar"
           />
-        </Form>
+        </Form> */}
         {hasLoaded ? (
           <>
             {tasks.results.length ? (

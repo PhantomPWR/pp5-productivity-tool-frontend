@@ -21,8 +21,13 @@ function TaskEditForm() {
 
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
+  const [selectedDate, setSelectedDate] = useState('');
   const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
   const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
+    const [
+    taskCategoryChoices,
+    setTaskCategoryChoices
+    ] = useState([{'value': '', 'label': ''}]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -31,6 +36,25 @@ function TaskEditForm() {
       .then((response) => setUsers(response.data))
       .catch((error) => console.log(error));
   }, []);
+
+    // Fetch task category choices from the API
+    useEffect(() => {
+      const fetchTaskCategoryChoices = async () => {
+        try {
+          const response = await axiosReq.get('/category-choices/');
+          const categoryChoices = response.data.map(category => ({
+            key: category.id,
+            value: category.value,
+            label: category.label
+          }));
+          setTaskCategoryChoices(categoryChoices);
+        } catch (error) {
+          console.error('Error fetching category options:', error);
+        }
+      };
+      
+      fetchTaskCategoryChoices();
+    }, []);
 
   // Fetch task status choices from the API
   useEffect(() => {
@@ -68,7 +92,7 @@ function TaskEditForm() {
     priority: '',
     owner: '',
     created_date: '',
-    due_date: '',
+    due_date: null,
     updated_date: '',
     completed_date: '',
     assigned_to: '',
@@ -81,7 +105,7 @@ function TaskEditForm() {
     task_status,
     owner,
     priority,
-    due_date,
+    // due_date,
     assigned_to,
   } = taskData;
 
@@ -145,6 +169,14 @@ function TaskEditForm() {
     }
   };
 
+  const handleChangeDate = (event) => {
+    setSelectedDate(event.target.value);
+    setTaskData({
+      ...taskData,
+      due_date: event.target.value,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -155,7 +187,7 @@ function TaskEditForm() {
     formData.append('task_status', taskData.task_status);
     formData.append('priority', taskData.priority);
     formData.append('owner', owner);
-    formData.append('due_date', due_date);
+    formData.append('due_date', selectedDate);
     formData.append('assigned_to', assigned_to);
 
     if (imageInput?.current?.files[0]) {
@@ -195,13 +227,23 @@ function TaskEditForm() {
       
       {/* Category */}
       <Form.Group>
-        <Form.Label>Category</Form.Label>
+        <Form.Label>Task Category</Form.Label>
         <Form.Control
-            as="input"
-            name="category"
-            value={category}
-            onChange={handleChange}
-        /> 
+          as="select"
+          name="category"
+          value={category.id}
+          onChange={handleChange}
+          aria-label="task category"
+        >
+          <option value="">Select task category</option>
+          {taskCategoryChoices.map((categoryChoice) => (
+            <option 
+            key={categoryChoice.value} 
+            value={categoryChoice.value}>
+              {categoryChoice.label}
+            </option>
+          ))}
+        </Form.Control>
       </Form.Group>
       {errors?.category?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -213,11 +255,13 @@ function TaskEditForm() {
       <Form.Group>
         <Form.Label>Due Date</Form.Label>
         <Form.Control
-            type="text"
-            name="due_date"
-            value={due_date}
-            readOnly
-        /> 
+          type="date"
+          name="due_date"
+          value={selectedDate}
+          onChange={handleChangeDate}
+        />
+
+
       </Form.Group>
       {errors?.description?.map((message, idx) => (
         <Alert variant="warning" key={idx}>

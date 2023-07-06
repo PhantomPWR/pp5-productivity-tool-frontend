@@ -20,7 +20,7 @@ h5 {
 }
 
 .TaskBody {
-    background-color: #f4f4f4;
+    background-color: #fff;
 }
 
 .Eye {
@@ -36,11 +36,21 @@ h5 {
 }
 
 .TaskBar {
-    background-color: #fff;
+    background-color: #f4f4f4;
     margin-top: 1em;
 }
 
 .TaskBar a:hover {
     border-color: transparent;
     text-decoration: none;
+}
+
+.OverDue {
+    border: 2px solid red;
+    color: red;
+}
+
+.DueToday {
+    border: 2px solid darkorange;
+    color: darkorange;
 }

@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from '../../hooks/useRedirect';
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function TaskCreateForm() {
   useRedirect('loggedOut');
@@ -16,7 +18,10 @@ function TaskCreateForm() {
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [taskCategories, setTaskCategories] = useState([{'id': '', 'title': ''}]);
+  const [
+    taskCategoryChoices,
+    setTaskCategoryChoices
+    ] = useState([{'value': '', 'label': ''}]);
 
 
   // Fetch profiles from the API
@@ -30,27 +35,24 @@ function TaskCreateForm() {
           });
     }, []);
 
-  // Fetch categories from the API
-  useEffect(() => {
-    const fetchTaskCategories = async () => {
-      try {
-        const response = await axiosReq.get('/categories/');
-          setTaskCategories(response.data.results);
-      } catch (error) {
-          console.error('Error fetching categories:', error);
+    // Fetch task category choices from the API
+    useEffect(() => {
+      const fetchTaskCategoryChoices = async () => {
+        try {
+          const response = await axiosReq.get('/category-choices/');
+          const categoryChoices = response.data.map(category => ({
+            key: category.id,
+            value: category.value,
+            label: category.label
+          }));
+          setTaskCategoryChoices(categoryChoices);
+        } catch (error) {
+          console.error('Error fetching category options:', error);
         }
-    };
-    fetchTaskCategories();
-  }, []);
-  
-  const getCategoryOptions = () => {
-    return taskCategories.map((category) => ({
-      key: category.id,
-      value: category.id,
-      label: category.title,
-    }));
-  };
-  
+      };
+
+      fetchTaskCategoryChoices();
+    }, []);
  
 
   const [taskData, setTaskData] = useState({
@@ -90,7 +92,6 @@ function TaskCreateForm() {
     });
   };
 
-
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -103,10 +104,21 @@ function TaskCreateForm() {
 
   const handleChangeDate = (event) => {
     setSelectedDate(event.target.value);
+    setTaskData({
+      ...taskData,
+      due_date: event.target.value,
+    });
   };
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Check if assigned_to is empty
+    if (!assigned_to) {
+      setErrors({ assigned_to: ['Please select a user'] });
+      return;
+    }
     const formData = new FormData();
 
     formData.append('title', title);
@@ -163,14 +175,16 @@ function TaskCreateForm() {
         <Form.Control
           as="select"
           name="category"
-          value={category}
+          value={category.id}
           onChange={handleChange}
           aria-label="task category"
         >
           <option value="">Select task category</option>
-          {getCategoryOptions().map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+          {taskCategoryChoices.map((categoryChoice) => (
+            <option 
+            key={categoryChoice.value} 
+            value={categoryChoice.value}>
+              {categoryChoice.label}
             </option>
           ))}
         </Form.Control>
@@ -280,7 +294,7 @@ function TaskCreateForm() {
         </Form.Control>
       </Form.Group>
 
-      {errors?.owner?.map((message, idx) => (
+      {errors?.assigned_to?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
           {message}
         </Alert>

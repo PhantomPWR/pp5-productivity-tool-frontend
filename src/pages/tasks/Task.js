@@ -7,6 +7,9 @@ import { MoreDropdown } from "../../components/MoreDropdown";
 import axios from "axios";
 import { axiosRes } from "../../api/axiosDefaults";
 import {
+  Container,
+  Row,
+  Col,
   Card,
   Media,
   Modal,
@@ -48,16 +51,18 @@ const Task = (props) => {
     taskPage,
   } = props;
 
-  console.log('created_date: ', created_date);
-  console.log('updated_date: ', updated_date);
-  console.log('due_date: ', due_date);
-  console.log('completed_date: ', completed_date);
-
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === owner;
   const [assignedUser, setAssignedUser] = useState(null);
   const history = useHistory();
+  const [showModal, setShowModal] = useState(false);
+  const currentDate = new Date().setHours(0, 0, 0, 0);
+  const isDueDateInPast = new Date(due_date) < currentDate;
+  const isDueDateToday = new Date(due_date).setHours(0, 0, 0, 0) === currentDate;
 
+  const openModal = () => {
+    setShowModal(true);
+  };
 
   const handleEdit = () => {
     history.push(`/tasks/${id}/edit`);
@@ -72,14 +77,6 @@ const Task = (props) => {
     }
   };
 
-
-  const currentDate = new Date();
-  console.log(currentDate);
-  const dueDate = due_date;
-  console.log(dueDate);
-  const differenceMs = Math.abs(dueDate - currentDate);
-  console.log(differenceMs);
-
   useEffect(() => {
     if (assigned_to) {
       axios.get(`/profiles/${assigned_to}`).then((response) => {
@@ -92,16 +89,23 @@ const Task = (props) => {
 
   return (
     <Card className={styles.Task}>
-      <Card.Body>
+      <Card.Body className={styles.TaskBody}>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profile_image} height={55} />
-            {owner}
+          <Link to={`/tasks/${id}`}>
+            {title && <Card.Title className="fs-2 text-center">{title}</Card.Title>}
           </Link>
-          <div className="d-flex row-cols-3 align-items-center">
-            <span className="col">Updated {updated_date}</span>
-            <span className="col">Due on {due_date}</span>
-            <span className="col d-flex justify-content-end">
+          <div className="d-flex row-cols-4 justify-content-between align-items-center">
+            <span className="col-md-3">Created<br/>{created_date}</span>
+            {isDueDateInPast && task_status !== "COMPLETED" ? (
+                <span className={`col-md-3 ms-auto ${styles.OverDue}`}>Overdue<br />{due_date}</span>
+              ) : isDueDateToday && task_status !== "COMPLETED" ? (
+                <span className={`col-md-3 ms-auto ${styles.DueToday}`}>Due Today<br />{due_date}</span>
+              ) : (
+                <span className="col-md-3 ms-auto">Due on<br />{due_date}</span>
+              )}
+            {/* <span className="col-md-3 ms-auto">{`${task_status === "COMPLETED" ? `Completed on<br/>${completed_date.substr(0, 10)}` : ""}`}</span> */}
+            <span className="col-md-3 ms-auto" dangerouslySetInnerHTML={{ __html: `${task_status === "COMPLETED" ? `Completed on<br/>${completed_date.substr(0, 10)}` : ""}` }}></span>
+            <span className="col-1 d-flex justify-content-end">
               {is_owner && taskPage && (
                 <MoreDropdown
                   handleEdit={handleEdit}
@@ -114,57 +118,66 @@ const Task = (props) => {
       </Card.Body>
 
       <Card.Body  className={styles.TaskBody}>
-        
-        <Link to={`/tasks/${id}`}>
-            {title && <Card.Title className="fs-2 text-center">{title}</Card.Title>}
-        </Link>
-        <div className={styles.TaskBar}>
-          
-          {/* Owner */}
-          <i className="fas fa-crown"></i>
-          <span>Task Owner: </span>
-          {owner}
-          
-          {/* Assigned Users */}
-          <i className="fas fa-user-check" />
-          <span>Assigned to: </span>
-          {assignedUser}
+        <div className={styles.TaskBar}>            
+            {/* Assigned Users */}
+            <div align='center'>
+              <strong className="fw-bold">Assigned to: </strong>
+              <div className="row">
+                <p className="col-6"><i className="fas fa-crown"></i>{owner}</p>
+                <p className="col-6"><i className="fas fa-user-check" />{assignedUser}</p>
+              </div>
+            </div>
+            <div className="row">
+              {/* Category */}
+              <span className="col-md-3">
+                <i className="far fa-folder" />
+                Category: {category}
+              </span>
 
-          {/* Category */}
-          <Link to={`/categories/${id}`}>
-            <i className="far fa-folder" />
-            {category}
-          </Link>
+              {/* Task Status */}
+              <span className="col-md-3">
+                <i className="fas fa-list-check"></i>
+                Status: {status_choices[task_status]}
+              </span>
 
-          {/* Task Status */}
-          <Link to={`/tasks/?task_status=${task_status}`}>
-            <i className="fas fa-list-check"></i>
-            {status_choices[task_status]}
-          </Link>
+              {/* Priority */}
+              <span className="col-md-3">
+                <i className="fas fa-triangle-exclamation"></i>
+                Priority: {priority_choices[priority]}
+              </span>
 
-          {/* Priority */}
-          <Link to={`/`}>
-            <i className="fas fa-triangle-exclamation"></i>
-            {priority_choices[priority]}
-          </Link>
-
-          {/* Comment Count */}
-          <Link to={`/tasks/${id}`}>
-            <i className="far fa-comments" />
-          </Link>
-          {comment_count}
+              {/* Comment Count */}
+              <span className="col-md-3">
+                <i className="far fa-comments" />
+                Comments: {comment_count}
+              </span>
+            </div>
         </div>
       </Card.Body>
       <Card.Body>
-        <div className="row row-cols-1 row-cols-lg-2">
-          <div className="col">
+        <div className="row row-cols-1 row-cols-lg-4 justify-content-between">
+          <div className="col col-lg-8">
             {description && <Card.Text align={'left'}>{description}</Card.Text>}
           </div>
-          <div className="col">
-            {taskPage && (
-              <Card.Img src={image} alt={title} className="w-50" />
-            )}
-          </div>
+          {taskPage && (
+            <div className="col col-lg-2 text-center">
+              <Card.Text className="d-flex align-items-center"><i className="fas fa-paperclip"></i> Attachment</Card.Text>
+                <Card.Img src={image} alt={title} onClick={openModal} className="w-50
+                 mx-auto" />
+              <Modal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                size="lg"
+                closeVariant="black"
+                >
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                  <Card.Img src={image} alt={title} />
+                </Modal.Body>
+              </Modal>
+            </div>
+          )}
         </div>
       </Card.Body>
     </Card>

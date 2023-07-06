@@ -12,10 +12,12 @@ import { useCurrentUser } from './contexts/CurrentUserContext';
 import TaskEditForm from './pages/tasks/TaskEditForm';
 import ProfilePage from './pages/profiles/ProfilePage';
 import ProfileList from './pages/profiles/ProfileList';
+import CategoryList from './pages/categories/CategoryList';
 import UsernameForm from "./pages/profiles/UsernameForm";
-import UserPasswordForm from "./pages/profiles/UserPasswordForm";
-import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import UserPasswordForm from './pages/profiles/UserPasswordForm';
+import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import NotFound from './components/NotFound';
+import CategoryPage from './pages/categories/CategoryPage';
 
 
 function App() {
@@ -38,11 +40,11 @@ function App() {
             />
             <Route
               exact
-              path="/feed"
+              path="/mytasks"
               render={() => (
                 <TaskList
                   message="No results found. Adjust your search keyword."
-                  filter={`task_watched__owner__profile=${profile_id}&`}
+                  filter={`tasks__owner__profile=${profile_id}&assigned_to=${profile_id}`}
                 />
               )}
             />
@@ -54,6 +56,8 @@ function App() {
             <Route exact path="/tasks/" render={() => <TaskList />} />
             <Route exact path="/profiles/" render={() => <ProfileList />} />
             <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
+            <Route exact path="/categories/" render={() => <CategoryList />} />
+            <Route exact path="/categories/:id" render={() => <CategoryPage />} />
             <Route
               exact
               path="/profiles/:id/edit/username"

@@ -32,6 +32,10 @@
   box-sizing: border-box;
 }
 
+strong {
+  color: #555555;
+}
+
 a {
   color: #555555;
   font-weight: 500;
@@ -61,7 +65,7 @@ i {
   vertical-align: middle;
 }
 
-i:hover {
+.Link i:hover {
   cursor: pointer;
   transition: color ease-in-out 0.3s;
   color: #663399;

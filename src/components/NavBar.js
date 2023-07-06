@@ -42,18 +42,10 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/feed"
+        to={`/profiles/${currentUser?.profile_id}`}
       >
-        <i className="fas fa-stream"></i>
-        Feed
-      </NavLink>
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/liked"
-      >
-        <i className="fas fa-heart"></i>
-        Liked
+        <i className="fas fa-list-check"></i>
+        My Tasks
       </NavLink>
       <NavLink className={styles.NavLink}
         to="/"
@@ -97,7 +89,7 @@ const NavBar = () => {
         <NavLink to='/'>
           <Navbar.Brand className={styles.Brand}>
             <i className="fa-solid fa-calendar-check"></i>
-            <em><strong>TICK</strong> OFF</em>
+            <em><strong>TICKED</strong> OFF</em>
           </Navbar.Brand>
         </NavLink>
         {currentUser && addTaskIcon}
