@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import { Container, Row, Col, Form, Button, Image, Alert } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap'
 
 import { Link, useHistory } from 'react-router-dom';
 
@@ -100,7 +100,7 @@ function SignInForm() {
           </Form>
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
-          <Link className={styles.Link} to='/signup'>
+          <Link className={styles.Link} to='/register'>
             Don't have an account? <span>Sign up now!</span>
           </Link>
         </Container>

@@ -28,7 +28,7 @@ const NavBar = () => {
       // console.log(err);
     }
   };
-
+console.log(currentUser);
   const addTaskIcon = (
     <NavLink
       className={styles.NavLink}
@@ -53,7 +53,7 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to={`/profiles/${currentUser?.profile_id}`}
+        to={`/tasks/?search=${currentUser?.username}`}
       >
         <i className="fas fa-list-check"></i>
         My Tasks

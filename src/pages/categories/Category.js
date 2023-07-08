@@ -1,10 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Media } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import styles from "../../styles/Category.module.css";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import { axiosRes } from "../../api/axiosDefaults";
-// import CategoryEditForm from "./CategoryEditForm";
 
 const Category = (props) => {
   const {
@@ -32,14 +29,6 @@ const Category = (props) => {
         <div className="row align-items-center">
             {/* Category Description */}
             <Media.Body className="align-self-center">
-            {/* {showEditForm ? (
-                <CategoryEditForm
-                id={id}
-                title={title}
-                description={description}
-                setShowEditForm={setShowEditForm}
-                />
-                ) : ( */}
                 <span>{id}</span>
                 <h3>{title}</h3>
                 <p>{description}</p>
@@ -48,12 +37,9 @@ const Category = (props) => {
         </div>
         {/* MoreDropdown */}
         <div className="col d-flex justify-content-end">
-        {/* {!!showEditForm && ( */}
             <MoreDropdown
-            // handleEdit={() => setShowEditForm(true)}
             handleDelete={handleDelete}
             />
-        {/* )} */}
         </div>
       </Media>
     </>

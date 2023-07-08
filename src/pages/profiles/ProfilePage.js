@@ -34,6 +34,7 @@ function ProfilePage() {
         await Promise.all([
           axiosReq.get(`/profiles/${id}/`),
           axiosReq.get(`/tasks/?owner__profile=${id}`),
+          // axiosReq.get(`/tasks/?assigned_to=${id}`),
         ]);
         setProfileData((prevState) => ({
           ...prevState,

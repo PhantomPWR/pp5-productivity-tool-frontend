@@ -28,22 +28,6 @@ function TaskList({ message, filter = "" }) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    // const fetchTasks = async () => {
-    //   try {
-    //     let url = `/tasks/?${filter}&search=${query}`;
-    //     if (taskStatus) {
-    //       url += `&task_status=${taskStatus}`;
-    //     }
-    //     if (taskPriority) {
-    //       url += `&priority=${taskPriority}`;
-    //     }
-    //     const { data } = await axiosReq.get(url);
-    //     setTasks(data);
-    //     setHasLoaded(true);
-    //   } catch (err) {
-    //     // console.log(err);
-    //   }
-    // };
 
     const fetchTasks = async () => {
       try {

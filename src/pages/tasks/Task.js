@@ -2,18 +2,13 @@ import React, {useState, useEffect} from "react";
 import styles from "../../styles/Task.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Link, useHistory } from "react-router-dom";
-import Avatar from "../../components/Avatar";
 import { MoreDropdown } from "../../components/MoreDropdown";
 import axios from "axios";
 import { axiosRes } from "../../api/axiosDefaults";
 import {
-  Container,
-  Row,
-  Col,
   Card,
   Media,
   Modal,
-  Button,
 } from "react-bootstrap";
 
 
@@ -35,8 +30,6 @@ const Task = (props) => {
     id,
     owner,
     assigned_to,
-    profile_id,
-    profile_image,
     task_status,
     priority,
     category,
@@ -45,7 +38,6 @@ const Task = (props) => {
     image,
     created_date,
     due_date,
-    updated_date,
     completed_date,
     comment_count,
     taskPage,
