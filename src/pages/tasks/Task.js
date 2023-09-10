@@ -1,15 +1,28 @@
+// React library & hooks
 import React, {useState, useEffect} from "react";
-import styles from "../../styles/Task.module.css";
+
+// Context hooks 
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
+// react-router-dom components for page navigation
 import { Link, useHistory } from "react-router-dom";
-import { MoreDropdown } from "../../components/MoreDropdown";
+
+// Axios library for HTTP requests
 import axios from "axios";
 import { axiosRes } from "../../api/axiosDefaults";
-import {
-  Card,
-  Media,
-  Modal,
-} from "react-bootstrap";
+
+// Reusable components
+import { MoreDropdown } from "../../components/MoreDropdown";
+
+// Bootstrap components
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
+import Media from "react-bootstrap/Media";
+import Modal from "react-bootstrap/Modal";
+
+// Styles
+import styles from "../../styles/Task.module.css";
 
 
 const status_choices = {
@@ -19,13 +32,15 @@ const status_choices = {
       COMPLETED: 'Completed'
     }
 
+// Define priority choices
 const priority_choices = {
-      PRIORITY1: '1',
-      PRIORITY2: '2',
-      PRIORITY3: '3',
+      PRIORITY1: "High",
+      PRIORITY2: "Medium",
+      PRIORITY3: "Low",
     }
 
 const Task = (props) => {
+  // Destructure task props
   const {
     id,
     owner,
@@ -43,8 +58,13 @@ const Task = (props) => {
     taskPage,
   } = props;
 
+  // Get current user from context
   const currentUser = useCurrentUser();
+
+  // Check if current user is task owner
   const is_owner = currentUser?.username === owner;
+
+  // Set up state variables
   const [assignedUser, setAssignedUser] = useState(null);
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
