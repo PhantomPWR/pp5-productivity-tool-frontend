@@ -1,31 +1,51 @@
+// React library & hooks
 import React, { useEffect, useState } from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
+// Context hooks
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-import Task from "./Task";
-import Asset from "../../components/Asset";
-
-import appStyles from "../../App.module.css";
-import styles from "../../styles/TaskList.module.css";
+// react-router-dom components for page navigation
 import { useLocation, useParams } from "react-router-dom";
+
+// Axios library for HTTP requests
 import { axiosReq } from "../../api/axiosDefaults";
 
-import NoResults from "../../assets/no-results.png";
-import InfiniteScroll from "react-infinite-scroll-component";
+// Utils
 import { fetchMoreData } from "../../utils/utils";
+
+// Reusable components
+import APIConnectionCheck from "../../components/APIConnectionCheck";
+import Asset from "../../components/Asset";
 import ProfileList from "../profiles/ProfileList";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import SearchBar from "../../components/SearchBar";
+import Task from "./Task";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+
+// Bootstrap components
+import Container from "react-bootstrap/Container";
+
+// Styles
+import appStyles from "../../App.module.css";  // ???
+import styles from "../../styles/TaskList.module.css";
+
+// Assets
+import NoResults from "../../assets/no-results.png";
+
 
 function TaskList({ message, filter = "" }) {
   
+  // Set up state variables
   const [tasks, setTasks] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const currentUser = useCurrentUser();
   const { taskStatus, taskPriority } = useParams();
-
   const [query, setQuery] = useState('');
+  
+  // Check API connection to tasks
+  APIConnectionCheck('tasks');
+
 
   useEffect(() => {
 
@@ -63,16 +83,18 @@ function TaskList({ message, filter = "" }) {
 
   }, [filter, query, pathname, currentUser, taskStatus, taskPriority]);
 
+
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
+    <Container className="h-100">
+      <div className="py-2 p-0 p-lg-2 MainCol">
         <ProfileList mobile />
         <i className={`fas fa-search ${styles.SearchIcon}`} />
-        <SearchBar query={query} setQuery={setQuery} />
+        <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
         {hasLoaded ? (
           <>
             {tasks.results.length ? (
               <InfiniteScroll
+                key={tasks.results.map(task => task.id).join(",")}
                 children={
                   tasks.results.map((task) => (
                     <Task key={task.id} {...task} setTasks={setTasks} />
@@ -94,11 +116,8 @@ function TaskList({ message, filter = "" }) {
             <Asset spinner />
           </Container>
         )}
-      </Col>
-      <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-        {/* <ProfileList /> */}
-      </Col>
-    </Row>
+      </div>
+    </Container>
   );
 }
 
