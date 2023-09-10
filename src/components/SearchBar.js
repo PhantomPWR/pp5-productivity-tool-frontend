@@ -1,14 +1,48 @@
-import React, { useRef } from "react";
-import { Button, Form } from "react-bootstrap";
+// React library & hooks
+import React, { useEffect, useRef, useState } from "react";
 
+// Axios library for HTTP requests
+import { axiosReq } from "../api/axiosDefaults";
+
+// Bootstrap components
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
+// Styles
 import styles from '../styles/SearchBar.module.css';
 
-function SearchBar({ query, setQuery }) {
 
+function SearchBar({ query, setQuery, taskCount }) {
+
+  // Set up task category choices state variable & setter
+  const [
+    taskCategoryChoices,
+    setTaskCategoryChoices
+  ] = useState([{'value': '', 'label': ''}]);
+  
+  // Fetch task category choices
+  useEffect(() => {
+    const fetchTaskCategoryChoices = async () => {
+      try {
+        const response = await axiosReq.get("/category-choices/");
+        const categoryChoices = response.data.map(category => ({
+          key: category.id,
+          value: category.value,
+          label: category.label
+        }));
+        setTaskCategoryChoices(categoryChoices);
+      } catch (error) {
+        console.log('Error fetching category choices: ', error);
+      }
+    };
+    fetchTaskCategoryChoices();
+  }, []);
+    
+    // Set up form ref
     const formRef = useRef(null);
     const clearForm = () => {
         formRef.current.reset();
-        setQuery("");
+        setQuery('');
     };
 
   return (
@@ -17,20 +51,51 @@ function SearchBar({ query, setQuery }) {
       className={styles.SearchBar}
       onSubmit={(event) => event.preventDefault()}
     >
-      <Form.Control
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        type="text"
-        className="me-sm-2"
-        placeholder="Search tasks"
-        aria-label="Search Bar"
-      />
-
-      <div className="row mb-3">
-        {/* Task Status */}
-        <div className="col-4">
+      {/* Search bar & result count */}
+      <div className='row row-cols-2 d-flex justify-content-between align-items-center'>
+        <div className='col-9'>
           <Form.Control
-            className="col-4"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            type="text"
+            className="me-sm-2"
+            placeholder="Search tasks"
+            aria-label="Search Bar"
+          />
+        </div>  {/* /col */}
+        <div className="col-3 text-center">
+          <p className="me-sm-2">
+            Search results: {taskCount}
+          </p>
+        </div>  {/* /col */}
+      </div>  {/* /row */}
+
+      {/* Filter buttons */}
+      <div className="row row-cols-4 mb-3 justify-content-even g-3">
+        {/* Task Category */}
+        <div className="col">
+          <Form.Control
+            className={`form-select ${styles.Select}`}
+            as="select"
+            name="task_category"
+            onChange={(event) => setQuery(event.target.value)}
+            aria-label="task category"
+            >
+            <option value="">Select category</option>
+            {taskCategoryChoices.map((categoryChoice) => (
+              <option
+                key={categoryChoice.value}
+                value={categoryChoice.label}>
+                {categoryChoice.label}
+                </option>
+            ))}
+            </Form.Control>
+        </div>  {/* /col */}  
+
+        {/* Task Status */}
+        <div className="col">
+          <Form.Control
+            className={`form-select ${styles.Select}`}
             as="select"
             name="task_status"
             onChange={(event) => setQuery(event.target.value)}
@@ -42,10 +107,10 @@ function SearchBar({ query, setQuery }) {
             <option key="INPROGRESS" value="INPROGRESS">In Progress</option>
             <option key="COMPLETED" value="COMPLETED">Completed</option>
           </Form.Control>
-        </div>
+        </div>  {/* /col */}
 
         {/* Task Priority */}
-        <div className="col-4">
+        <div className="col">
           <Form.Control
             as="select"
             name="priority"
@@ -57,12 +122,15 @@ function SearchBar({ query, setQuery }) {
             <option key="PRIORITY2" value="PRIORITY2">Priority 2</option>
             <option key="PRIORITY3" value="PRIORITY3">Priority 3</option>
           </Form.Control>
-        </div>
+        </div>  {/* /col */}
+
         {/* Clear filters */}
-        <Button className="col-4" type="button" onClick={clearForm}>
-          Clear filters
-        </Button>
-      </div>
+        <div className="col text-end">
+          <Button className={styles.OrangeOutline} type="button" onClick={clearForm}>
+            Clear filters
+          </Button>
+        </div>  {/* /col */}
+      </div>  {/* /row */}
     </Form>
   );
 }
