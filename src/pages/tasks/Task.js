@@ -14,6 +14,7 @@ import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 // Reusable components
 import { MoreDropdown } from "../../components/MoreDropdown";
 import TaskStatus from "../../components/TaskStatus";
+import StatusUpdateForm from "../../components/StatusUpdateForm";
 
 // Bootstrap components
 import Row from "react-bootstrap/Row";
@@ -78,6 +79,12 @@ const Task = (props) => {
   const [showStatusUpdateForm, setShowStatusUpdateForm] = useState(true);
   const [taskCategory, setTaskCategory] = useState([]);
 
+  // Handle task status update
+  const handleStatusUpdate = async (newStatus) => {
+    setTaskStatus(newStatus);
+    setShowStatusUpdateForm(newStatus !== 'COMPLETED');
+  };
+  
   // Open modal
   const openModal = () => {
     setShowModal(true);
