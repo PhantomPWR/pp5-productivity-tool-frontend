@@ -9,10 +9,11 @@ import { Link, useHistory } from "react-router-dom";
 
 // Axios library for HTTP requests
 import axios from "axios";
-import { axiosRes } from "../../api/axiosDefaults";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
 // Reusable components
 import { MoreDropdown } from "../../components/MoreDropdown";
+import TaskStatus from "../../components/TaskStatus";
 
 // Bootstrap components
 import Row from "react-bootstrap/Row";
@@ -68,18 +69,26 @@ const Task = (props) => {
   const [assignedUser, setAssignedUser] = useState(null);
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
-  const currentDate = new Date().setHours(0, 0, 0, 0);
-  const isDueDateInPast = new Date(due_date) < currentDate;
-  const isDueDateToday = new Date(due_date).setHours(0, 0, 0, 0) === currentDate;
+  const currentDate = new Date();
+  const isDueDateInPast = new Date(due_date).setHours(0,0,0,0) < currentDate.setHours(0,0,0,0);
+  const isDueDateToday =
+  new Date(due_date).toLocaleDateString() === currentDate.toLocaleDateString();
 
+  const [taskStatus, setTaskStatus] = useState(props.task_status);
+  const [showStatusUpdateForm, setShowStatusUpdateForm] = useState(true);
+  const [taskCategory, setTaskCategory] = useState([]);
+
+  // Open modal
   const openModal = () => {
     setShowModal(true);
   };
 
+  // Handle task edit
   const handleEdit = () => {
     history.push(`/tasks/${id}/edit`);
   };
 
+  // Handle task delete
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/tasks/${id}/`);
@@ -89,6 +98,21 @@ const Task = (props) => {
     }
   };
 
+  // Fetch task categories from the API
+  useEffect(() => {
+    const fetchTaskCategory = async () => {
+      try {
+        const response = await axiosReq.get(`/categories/${category}`);
+        setTaskCategory(response.data.title);
+      } catch (error) {
+        console.error('Error fetching category options:', error);
+      }
+    };
+    
+    fetchTaskCategory();
+  }, [category]);
+
+  // Fetch assigned user
   useEffect(() => {
     if (assigned_to) {
       axios.get(`/profiles/${assigned_to}`).then((response) => {
@@ -103,20 +127,127 @@ const Task = (props) => {
     <Card className={styles.Task}>
       <Card.Body className={styles.TaskBody}>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/tasks/${id}`}>
-            {title && <Card.Title className="fs-2 text-center">{title}</Card.Title>}
-          </Link>
+          {!taskPage ? (
+            /* Task List Header */
+            <Link to={`/tasks/${id}`}>
+              <Row className="row-cols-2 d-flex justify-content-between align-items-center">
+                <Col className="text-start">
+                  {title && (
+                    <Card.Title className={`fs-4 ${styles.TaskTitle}`}>{title}</Card.Title>
+                  )}
+                </Col>
+                <Col className="text-end">
+                  {isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.OverDue}`}>
+                      Overdue{' '}
+                      {new Date(due_date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  ) : isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.DueToday}`}>
+                      Due Today{' '}
+                      {new Date(due_date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  ) : task_status !== 'COMPLETED' ? (
+                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.DueDate}`}>
+                      Due on{' '}
+                      {/* {due_date} */}
+                      {new Date(due_date).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  ) : task_status === 'COMPLETED' || taskStatus === 'COMPLETED' ? (
+                      <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.Completed}`}>
+                        Completed on{' '}
+                        {new Date(completed_date).toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </span>
+
+                  ):null}
+                </Col>
+              </Row>
+            </Link>
+          ):null}
+          {/* Task Detail Header */}
+          <div className="row text-center">
+             {taskPage && title && (
+                    <Card.Title className={`fs-4 mb-5 ${styles.TaskTitle}`}>{title}</Card.Title>
+                  )}
+          </div>
           <div className="d-flex row-cols-4 justify-content-between align-items-center">
-            <span className="col-md-3">Created<br/>{created_date}</span>
-            {isDueDateInPast && task_status !== "COMPLETED" ? (
-                <span className={`col-md-3 ms-auto ${styles.OverDue}`}>Overdue<br />{due_date}</span>
-              ) : isDueDateToday && task_status !== "COMPLETED" ? (
-                <span className={`col-md-3 ms-auto ${styles.DueToday}`}>Due Today<br />{due_date}</span>
-              ) : (
-                <span className="col-md-3 ms-auto">Due on<br />{due_date}</span>
-              )}
-            {/* <span className="col-md-3 ms-auto">{`${task_status === "COMPLETED" ? `Completed on<br/>${completed_date.substr(0, 10)}` : ""}`}</span> */}
-            <span className="col-md-3 ms-auto" dangerouslySetInnerHTML={{ __html: `${task_status === "COMPLETED" ? `Completed on<br/>${completed_date.substr(0, 10)}` : ""}` }}></span>
+            {taskPage && (
+              <span className="col-md-3">
+                Created<br />
+                {new Date(created_date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+              </span>
+            )}
+            {taskPage && isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.OverDue}`}>
+                Overdue<br />
+                {new Date(due_date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+            ) : taskPage && isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.DueToday}`}>
+                Due Today<br />
+                {new Date(due_date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+            ) : taskPage && task_status !== 'COMPLETED' ? (
+              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.DueDate}`}>
+                Due on<br />
+                {/* {due_date} */}
+                {new Date(due_date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </span>
+            ):null}
+            {task_status !== 'COMPLETED' && taskPage && showStatusUpdateForm ? (
+              <span className={`col-md-3 ms-auto`}>
+                <span>Update Task Status</span>
+                <StatusUpdateForm
+                  taskId={id}
+                  onUpdateStatus={handleStatusUpdate}
+                />
+              </span>
+            ) : (
+              <>
+              {taskPage && (task_status === 'COMPLETED' || taskStatus === 'COMPLETED') ? (
+                <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.Completed}`}>
+                  Completed on<br/>
+                  {new Date(completed_date).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+                </span>
+              ) : null}
+              </>
+            )}
             <span className="col-1 d-flex justify-content-end">
               {is_owner && taskPage && (
                 <MoreDropdown
@@ -129,61 +260,92 @@ const Task = (props) => {
         </Media>
       </Card.Body>
 
-      <Card.Body  className={styles.TaskBody}>
-        <div className={styles.TaskBar}>            
-            {/* Assigned Users */}
-            <div align='center'>
-              <strong className="fw-bold">Assigned to: </strong>
-              <div className="row">
-                <p className="col-6"><i className="fas fa-crown"></i>{owner}</p>
-                <p className="col-6"><i className="fas fa-user-check" />{assignedUser}</p>
+      <Card.Body className={styles.TaskBody}>
+        {/* Task List Body */}
+        {!taskPage ? (
+          <Row className="row-cols-2">
+            <Col className={`d-flex flex-column justify-content-center align-items-start ${styles.Meta}`}>
+              <div className={styles.MetaDetail}>
+                {/* Owner */}
+                <span className="me-1">
+                  <i className="fas fa-crown"/>
+                  {owner}
+                </span>
               </div>
-            </div>
-            <div className="row">
-              {/* Category */}
-              <span className="col-md-3">
-                <i className="far fa-folder" />
-                Category: {category}
-              </span>
+              <div className={styles.MetaDetail}>
+                {/* Assigned User */}
+                <span className="me-1">
+                  <i className="fas fa-user-check"/>
+                  {assignedUser}
+                </span>
+              </div>
+              <div className={styles.MetaDetail}>
+                {/* Comment Count */}
+                <span className="me-1">
+                  <i className="far fa-comments" />
+                  {comment_count}
+                </span>
+              </div>
+            </Col>
+            <Col className={`d-flex flex-column justify-content-center align-items-end ${styles.Meta}`}>
+              <div className="d-flex flex-column align-items-start">
+                <div className={styles.MetaDetail}>
+                  <span className="me-1">
+                    <i className="fas fa-triangle-exclamation"></i>
+                    {priority_choices[priority]}
+                  </span>
+                </div>
+                <div className={styles.MetaDetail}>
+                  {/* Task Status */}
+                  <span className="me-1">
+                    <i className="fas fa-list-check"></i>
+                    { !taskStatus ? (
+                      <TaskStatus taskStatus={task_status} />
+                    ) : (
+                      <TaskStatus taskStatus={taskStatus} />
+                    ) }
+                  </span>
+                </div>
+                <div className={styles.MetaDetail}>
+                  {/* Category */}
+                  <span className="me-1">
+                    <i className="far fa-folder" />
+                    {taskCategory}
+                  </span>
+              </div>
+              </div>
+            </Col>
+          </Row>
+        ) : (
+          // Task Detail Body
+          <>
+          <Card.Body className={!taskPage ? "py-0" : ""}>
 
-              {/* Task Status */}
-              <span className="col-md-3">
-                <i className="fas fa-list-check"></i>
-                Status: {status_choices[task_status]}
-              </span>
-
-              {/* Priority */}
-              <span className="col-md-3">
-                <i className="fas fa-triangle-exclamation"></i>
-                Priority: {priority_choices[priority]}
-              </span>
-
-              {/* Comment Count */}
-              <span className="col-md-3">
-                <i className="far fa-comments" />
-                Comments: {comment_count}
-              </span>
-            </div>
-        </div>
-      </Card.Body>
-      <Card.Body>
         <div className="row row-cols-1 row-cols-lg-4 justify-content-between">
           <div className="col col-lg-8">
-            {description && <Card.Text align={'left'}>{description}</Card.Text>}
+            {taskPage && description && (
+              <Card.Text align={"left"}>{description}</Card.Text>
+            )}
           </div>
           {taskPage && (
             <div className="col col-lg-2 text-center">
-              <Card.Text className="d-flex align-items-center"><i className="fas fa-paperclip"></i> Attachment</Card.Text>
-                <Card.Img src={image} alt={title} onClick={openModal} className="w-50
-                 mx-auto" />
+              <Card.Text className="d-flex align-items-center">
+                <i className="fas fa-paperclip"></i> Attachment
+              </Card.Text>
+              <Card.Img
+                src={image}
+                alt={title}
+                onClick={openModal}
+                className="w-50
+                 mx-auto"
+              />
               <Modal
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 size="lg"
                 closeVariant="black"
-                >
-                <Modal.Header closeButton>
-                </Modal.Header>
+              >
+                <Modal.Header closeButton></Modal.Header>
                 <Modal.Body>
                   <Card.Img src={image} alt={title} />
                 </Modal.Body>
@@ -191,6 +353,49 @@ const Task = (props) => {
             </div>
           )}
         </div>
+      </Card.Body>
+          <div className={styles.TaskBar}>
+            {/* Assigned User */}
+            <div align="center">
+              <strong className="fw-bold">Assigned to: </strong>
+              <div className="row">
+                <p className="col-6">
+                  <i className="fas fa-crown"></i>
+                  {owner}
+                </p>
+                <p className="col-6">
+                  <i className="fas fa-user-check" />
+                  {assignedUser}
+                </p>
+              </div>
+            </div>
+            <div className="row row-cols-3 justify-content-between">
+              {/* Category */}
+              <span className="col">
+                <i className="far fa-folder" />
+                Category: {taskCategory}
+              </span>
+
+              {/* Task Status */}
+              <span className="col">
+                <span><i className="fas fa-list-check"></i>Status:  </span>
+                { !taskStatus ? (
+                  <TaskStatus taskStatus={task_status} />
+                ) : (
+                  <TaskStatus taskStatus={taskStatus} />
+                ) }
+              </span>
+
+              {/* Priority */}
+              <span className="col">
+                <i className="fas fa-triangle-exclamation"></i>
+                Priority: {priority_choices[priority]}
+              </span>
+            </div>
+          </div>
+          </>
+        )}
+        
       </Card.Body>
     </Card>
   );
