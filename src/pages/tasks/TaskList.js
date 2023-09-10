@@ -26,7 +26,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Container from "react-bootstrap/Container";
 
 // Styles
-import appStyles from "../../App.module.css";  // ???
+import appStyles from "../../App.module.css";
 import styles from "../../styles/TaskList.module.css";
 
 // Assets
