@@ -1,5 +1,5 @@
 // React library & hooks
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 
 // Axios library for HTTP requests
 import axios from "axios";
@@ -10,7 +10,6 @@ import Form from 'react-bootstrap/Form';
 // Styles
 import styles from "../styles/StatusUpdateForm.module.css";
 
-// Status choices
 const status_choices = {
   BACKLOG: "Backlog",
   TODO: "To Do",
@@ -18,56 +17,47 @@ const status_choices = {
   COMPLETED: "Completed",
 };
 
-// Status update form
+
 const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus }) => {
+  // Set initial state
+  const [newStatus, setNewStatus] = useState(currentStatus);
+  const [loading, setLoading] = useState(false);
 
-    // Set up state variables
-    const [newStatus, setNewStatus] = useState(currentStatus);
-    const [loading, setLoading] = useState(false);
+  // Handle status change
+  const handleStatusChange = (event) => {
+    setNewStatus(event.target.value);
+  };
 
-    // Handle status change
-    const handleStatusChange = (e) => {
-        setNewStatus(e.target.value);
-};
-
-    
-    const submitForm = useCallback(async () => {
-        setLoading(true);
-        try {
-            await axios.patch(`/tasks/${taskId}/`, { task_status: newStatus });
-            onUpdateStatus(newStatus);
-        } catch (err) {
-            // Handle error
-        }
-        setLoading(false);
-    }, [taskId, newStatus, onUpdateStatus]);
-
-    useEffect(() => {
+  // Update status
+  useEffect(() => {
     let cancelRequest = false;
 
+    // Submit form
     const submitForm = async () => {
-        setLoading(true);
-        try {
-            await axios.patch(`/tasks/${taskId}/`, { task_status: newStatus });
-            if (!cancelRequest) {
-            onUpdateStatus(newStatus);
-            }
-        } catch (err) {
-            // Handle error
-        } finally {
-            setLoading(false);
+      setLoading(true);
+      try {
+        // Send PATCH request
+        await axios.patch(`/tasks/${taskId}/`, { task_status: newStatus });
+        if (!cancelRequest) {
+          onUpdateStatus(newStatus);
         }
+      } catch (err) {
+        // Handle error
+      } finally {
+        setLoading(false);
+      }
     };
 
+    // Check if status has changed
     if (newStatus !== currentStatus && newStatus !== "") {
-        submitForm();
+      submitForm();
     }
 
     return () => {
-        cancelRequest = true;
+      // Cancel request
+      cancelRequest = true;
     };
-}, [newStatus, currentStatus, onUpdateStatus, taskId]);
-
+  }, [newStatus, currentStatus, onUpdateStatus, taskId]);
 
   return (
     <Form>
