@@ -1,33 +1,52 @@
+// React library & hooks
 import React, { useRef, useState, useEffect } from "react";
-import Upload from "../../assets/upload.png";
-import styles from "../../styles/TaskCreateEditForm.module.css";
+
+// react-router-dom components for page navigation
+import { useHistory, useParams } from "react-router-dom";
+
+// Custom hooks
+import { useRedirect } from '../../hooks/useRedirect';
+
+// Axios library for HTTP requests
+import axios from "axios";
+import { axiosReq } from "../../api/axiosDefaults";
+
+// Reusable components
+import Asset from "../../components/Asset";
+
+// Bootstrap components
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from 'react-bootstrap/Form';
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
+
+// Styles
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
-import Asset from "../../components/Asset";
-import { useHistory, useParams } from "react-router-dom";
-import { axiosReq } from "../../api/axiosDefaults";
-import axios from "axios";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Image,
-  Alert
-} from "react-bootstrap"
+import styles from "../../styles/TaskCreateEditForm.module.css";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Assets
+import Upload from "../../assets/upload.png";
+
+
 
 function TaskEditForm() {
 
+  // Set up state variables
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
   const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
-    const [
+  const [
     taskCategoryChoices,
     setTaskCategoryChoices
-    ] = useState([{'value': '', 'label': ''}]);
+  ] = useState([{'value': '', 'label': ''}]);
+  const [taskCategory, setTaskCategory] = useState([]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -82,7 +101,7 @@ function TaskEditForm() {
     fetchTaskPriorityChoices();
   }, []);
 
-
+  // taskData state variable
   const [taskData, setTaskData] = useState({
     title: '',
     category: '',
@@ -97,6 +116,8 @@ function TaskEditForm() {
     completed_date: '',
     assigned_to: '',
   });
+
+  // Destructure taskData
   const {
     title,
     description,
@@ -113,6 +134,12 @@ function TaskEditForm() {
   const history = useHistory();
   const {id} = useParams();
 
+  // Populate due date field with existing due date
+  useEffect(() => {
+    setSelectedDate(taskData.due_date);
+  }, [taskData.due_date]);
+
+  // Fetch task data from the API
   useEffect(() => {
     const handleMount = async () => {
       try {
@@ -129,8 +156,11 @@ function TaskEditForm() {
           updated_date,
           owner_comments,
           assigned_to, 
-          is_owner } = data;
+          is_owner
+        } = data;
 
+        // Redirect if user is not the owner of the task
+        // otherwise populate the form with the task data
         is_owner ? setTaskData({
           title,
           category,
@@ -152,6 +182,22 @@ function TaskEditForm() {
     handleMount();
   }, [history, id]);
 
+
+  // Fetch task categories from the API
+  useEffect(() => {
+    const fetchTaskCategory = async () => {
+      try {
+        const response = await axiosReq.get(`/categories/${category}`);
+        setTaskCategory(response.data.title);
+      } catch (error) {
+        console.error('Error fetching category options:', error);
+      }
+    };
+    
+    fetchTaskCategory();
+  }, []);
+
+  // Handle form input change
   const handleChange = (event) => {
     setTaskData({
       ...taskData,
@@ -159,6 +205,7 @@ function TaskEditForm() {
     });
   };
 
+  // Handle image upload
   const handleChangeImage = (event) => {
     if (event.target.files.length) {
       URL.revokeObjectURL(image);
@@ -169,6 +216,7 @@ function TaskEditForm() {
     }
   };
 
+  // Handle date change
   const handleChangeDate = (event) => {
     setSelectedDate(event.target.value);
     setTaskData({
@@ -177,6 +225,7 @@ function TaskEditForm() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -205,7 +254,7 @@ function TaskEditForm() {
     }
   };
 
-
+  // Form fields
   const textFields = (
     <div className="text-center">
       
@@ -231,7 +280,7 @@ function TaskEditForm() {
         <Form.Control
           as="select"
           name="category"
-          value={category.id}
+          value={category}
           onChange={handleChange}
           aria-label="task category"
         >
@@ -256,12 +305,11 @@ function TaskEditForm() {
         <Form.Label>Due Date</Form.Label>
         <Form.Control
           type="date"
+          id="dueDateInput"
           name="due_date"
           value={selectedDate}
           onChange={handleChangeDate}
         />
-
-
       </Form.Group>
       {errors?.description?.map((message, idx) => (
         <Alert variant="warning" key={idx}>
@@ -358,12 +406,12 @@ function TaskEditForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.Orange}`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange}`} type="submit">
         Update
       </Button>
     </div>
@@ -390,7 +438,7 @@ function TaskEditForm() {
                   </figure>
                   <div>
                     <Form.Label
-                      className={`${btnStyles.Button} ${btnStyles.Blue} btn`}
+                      className={`${btnStyles.Button} ${btnStyles.Orange} btn`}
                       htmlFor="image-upload"
                     >
                       Replace image

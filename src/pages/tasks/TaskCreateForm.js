@@ -78,7 +78,7 @@ function TaskCreateForm() {
     }, []);
  
 
-  // taskData state variables
+  // taskData state variable
   const [taskData, setTaskData] = useState({
     title: '',
     category: '',
