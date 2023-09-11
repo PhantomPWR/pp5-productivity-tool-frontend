@@ -1,23 +1,40 @@
-import styles from './App.module.css';
-import NavBar from './components/NavBar';
-import { Container } from 'react-bootstrap';
+// react-router-dom components for routing & page navigation
 import { Route, Switch } from 'react-router-dom';
+
+// Context hooks
+import { useCurrentUser } from './contexts/CurrentUserContext';
+
+// Axios defaults
 import './api/axiosDefaults';
-import SignUpForm from './pages/auth/SignUpForm'
-import SignInForm from './pages/auth/SignInForm';
-import TaskCreateForm from './pages/tasks/TaskCreateForm';
+
+// Reusable components
+import NavBar from './components/NavBar';
+import NotFound from './components/NotFound';
+
+// Bootstrap components
+import Container from 'react-bootstrap/Container';
+
+// Styles
+import styles from './App.module.css';
+
+// Pages
+import ProfileList from './pages/profiles/ProfileList';
+import ProfilePage from './pages/profiles/ProfilePage';
+import CategoryList from './pages/categories/CategoryList';
+import CategoryPage from './pages/categories/CategoryPage';
 import TaskList from './pages/tasks/TaskList';
 import TaskPage from './pages/tasks/TaskPage';
-import { useCurrentUser } from './contexts/CurrentUserContext';
+
+// Forms
+import SignInForm from './pages/auth/SignInForm';
+import SignUpForm from './pages/auth/SignUpForm'
+import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import TaskEditForm from './pages/tasks/TaskEditForm';
-import ProfilePage from './pages/profiles/ProfilePage';
-import ProfileList from './pages/profiles/ProfileList';
-import CategoryList from './pages/categories/CategoryList';
+import CategoryCreateForm from './pages/categories/CategoryCreateForm';
+import CategoryEditForm from './pages/categories/CategoryEditForm';
+import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from './pages/profiles/UserPasswordForm';
-import ProfileEditForm from './pages/profiles/ProfileEditForm';
-import NotFound from './components/NotFound';
-import CategoryPage from './pages/categories/CategoryPage';
 
 
 function App() {
@@ -40,7 +57,8 @@ function App() {
               render={() => (
                 <TaskList
                   message="No results found. Adjust your search keyword."
-                  filter={`tasks__owner__profile=${profile_id}&assigned_to=${profile_id}`}
+                  // filter={`tasks__owner__profile=${profile_id}&assigned_to=${profile_id}`}
+                  filter={`&assigned_to=${profile_id}`}
                 />
               )}
             />
@@ -53,6 +71,8 @@ function App() {
             <Route exact path="/profiles/" render={() => <ProfileList />} />
             <Route exact path="/profiles/:id" render={() => <ProfilePage />} />
             <Route exact path="/categories/" render={() => <CategoryList />} />
+            <Route exact path="/categories/create" render={() => <CategoryCreateForm />} />
+            <Route exact path="/categories/:id/edit" render={() => <CategoryEditForm />} />
             <Route exact path="/categories/:id" render={() => <CategoryPage />} />
             <Route
               exact
