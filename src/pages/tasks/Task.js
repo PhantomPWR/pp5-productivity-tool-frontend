@@ -27,13 +27,6 @@ import Modal from "react-bootstrap/Modal";
 import styles from "../../styles/Task.module.css";
 
 
-const status_choices = {
-      BACKLOG: 'Backlog',
-      TODO: 'To Do',
-      INPROGRESS: 'In Progress',
-      COMPLETED: 'Completed'
-    }
-
 // Define priority choices
 const priority_choices = {
       PRIORITY1: "High",
