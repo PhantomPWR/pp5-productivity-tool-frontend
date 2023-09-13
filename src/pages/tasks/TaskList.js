@@ -13,6 +13,9 @@ import { axiosReq } from "../../api/axiosDefaults";
 // Utils
 import { fetchMoreData } from "../../utils/utils";
 
+// React components
+import InfiniteScroll from "react-infinite-scroll-component";
+
 // Reusable components
 import APIConnectionCheck from "../../components/APIConnectionCheck";
 import Asset from "../../components/Asset";
@@ -20,7 +23,6 @@ import ProfileList from "../profiles/ProfileList";
 import SearchBar from "../../components/SearchBar";
 import Task from "./Task";
 
-import InfiniteScroll from "react-infinite-scroll-component";
 
 // Bootstrap components
 import Container from "react-bootstrap/Container";

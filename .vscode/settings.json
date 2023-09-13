@@ -3,5 +3,6 @@
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
     "indentRainbow.indicatorStyle": "light",
-    "reactSnippets.settings.prettierEnabled": true
+    "reactSnippets.settings.prettierEnabled": true,
+    "prettier.useTabs": true
 }
