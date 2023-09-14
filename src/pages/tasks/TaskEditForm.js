@@ -33,7 +33,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import Upload from "../../assets/upload.png";
 
 
-
 function TaskEditForm() {
 
   // Set up state variables
@@ -181,7 +180,6 @@ function TaskEditForm() {
 
     handleMount();
   }, [history, id]);
-
 
   // Fetch task categories from the API
   useEffect(() => {

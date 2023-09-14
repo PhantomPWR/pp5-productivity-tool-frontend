@@ -4,5 +4,6 @@
     "prettier.tabWidth": 4,
     "indentRainbow.indicatorStyle": "light",
     "reactSnippets.settings.prettierEnabled": true,
-    "prettier.useTabs": true
+    "prettier.useTabs": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

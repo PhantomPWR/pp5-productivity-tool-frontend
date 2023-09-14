@@ -33,7 +33,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import Upload from "../../assets/upload.png";
 
 
-
 function TaskCreateForm() {
   useRedirect('loggedOut');
 
@@ -78,7 +77,7 @@ function TaskCreateForm() {
     }, []);
  
 
-  // taskData state variable
+  // taskData state variables
   const [taskData, setTaskData] = useState({
     title: '',
     category: '',
@@ -176,7 +175,6 @@ function TaskCreateForm() {
     }
 
   }
-
 
   // Form fields
   const textFields = (

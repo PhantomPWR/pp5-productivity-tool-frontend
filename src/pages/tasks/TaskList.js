@@ -23,7 +23,6 @@ import ProfileList from "../profiles/ProfileList";
 import SearchBar from "../../components/SearchBar";
 import Task from "./Task";
 
-
 // Bootstrap components
 import Container from "react-bootstrap/Container";
 
@@ -44,10 +43,9 @@ function TaskList({ message, filter = "" }) {
   const currentUser = useCurrentUser();
   const { taskStatus, taskPriority } = useParams();
   const [query, setQuery] = useState('');
-  
+
   // Check API connection to tasks
   APIConnectionCheck('tasks');
-
 
   useEffect(() => {
 
@@ -71,7 +69,6 @@ function TaskList({ message, filter = "" }) {
       }
     };
 
-
     setHasLoaded(false);
     // stop results flashing - fetch after 1s delay
     const timer = setTimeout(() => {
@@ -88,37 +85,38 @@ function TaskList({ message, filter = "" }) {
 
   return (
     <Container className="h-100">
-      <div className="py-2 p-0 p-lg-2 MainCol">
-        <ProfileList mobile />
-        <i className={`fas fa-search ${styles.SearchIcon}`} />
-        <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
-        {hasLoaded ? (
-          <>
-            {tasks.results.length ? (
-              <InfiniteScroll
-                key={tasks.results.map(task => task.id).join(",")}
-                children={
-                  tasks.results.map((task) => (
-                    <Task key={task.id} {...task} setTasks={setTasks} />
-                ))}
-                dataLength={tasks.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!tasks.next}
-                next={() => fetchMoreData(tasks, setTasks)}
-              />
-              
-            ) : (
-              <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className={appStyles.Content}>
-            <Asset spinner />
-          </Container>
-        )}
-      </div>
+        <div className="py-2 p-0 p-lg-2 MainCol">
+          <ProfileList mobile />
+          <i className={`fas fa-search ${styles.SearchIcon}`} />
+          <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
+          {hasLoaded ? (
+            <>
+              {console.log('tasks: ', tasks)}
+              {tasks.results.length ? (
+                <InfiniteScroll
+                  key={tasks.results.map(task => task.id).join(",")}
+                  children={
+                    tasks.results.map((task) => (
+                      <Task key={task.id} {...task} setTasks={setTasks} />
+                  ))}
+                  dataLength={tasks.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!tasks.next}
+                  next={() => fetchMoreData(tasks, setTasks)}
+                />
+                
+              ) : (
+                <Container className={appStyles.Content}>
+                  <Asset src={NoResults} message={message} />
+                </Container>
+              )}
+            </>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset spinner />
+            </Container>
+          )}
+        </div>
     </Container>
   );
 }

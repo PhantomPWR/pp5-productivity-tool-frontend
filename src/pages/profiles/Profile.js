@@ -1,7 +1,15 @@
+// React library & hooks
 import React from "react";
-import styles from "../../styles/Profile.module.css";
+
+// react-router-dom components for page navigation
 import { Link } from "react-router-dom";
+
+// Assets
 import Avatar from "../../components/Avatar";
+
+// Styles
+import styles from "../../styles/Profile.module.css";
+
 
 const Profile = (props) => {
   const { profile, mobile, imageSize = 55 } = props;
@@ -17,8 +25,8 @@ const Profile = (props) => {
           <Avatar src={image} height={imageSize} />
         </Link>
       </div>
-      <div className={`mx-2 ${styles.WordBreak}`}>
-        <strong>{owner}</strong>
+      <div className={`mx-1 ${styles.WordBreak}`}>
+        <p className='m-0 fs-6'>{owner}</p>
       </div>
     </div>
   );

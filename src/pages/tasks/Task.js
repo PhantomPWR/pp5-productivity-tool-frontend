@@ -32,7 +32,7 @@ const priority_choices = {
       PRIORITY1: "High",
       PRIORITY2: "Medium",
       PRIORITY3: "Low",
-    }
+    };
 
 const Task = (props) => {
   // Destructure task props
