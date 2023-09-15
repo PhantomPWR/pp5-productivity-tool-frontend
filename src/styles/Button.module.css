@@ -1,63 +1,71 @@
+.Button,
+.Button:hover {
+	transition: all ease-in-out 0.3s;
+}
+
 .Button {
-  font-size: 0.8rem;
-  align-self: center;
-  border-radius: 100px;
-  border-color: transparent;
-  padding: 4px 10px;
-  margin-left: 2px;
-  margin-right: 2px;
-  min-width: 75px;
+	background-color: #fa6800;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	font-weight: 500;
+	align-self: center;
+	padding: 4px 10px;
+	margin-left: 2px;
+	margin-right: 2px;
+	min-width: 75px;
 }
 
 .Button:hover {
-  opacity: 0.8;
-  border-color: transparent;
-  cursor: pointer;
+	opacity: 0.8;
+	border-color: transparent;
+	cursor: pointer;
 }
 
 .Button:hover:active {
-  background-color: #663399 !important;
+	background-color: #fa6800 !important;
 }
 
 .Button:active {
-  background-color: #663399 !important;
+	background-color: #fa6800 !important;
 }
 
 .Button:focus {
-  background-color: #663399;
+	background-color: #fa6800;
 }
 
 .Wide {
-  padding: 10px 50px;
-  width: 100%;
+	padding: 10px 50px;
+	width: 100%;
 }
 
-.Blue,
-.BlueOutline:hover,
-.Bright:hover {
-  background-color: #663399;
-  color: #ffffff;
+.Orange,
+.Orange:hover {
+	background-color: #fa6800;
+	color: #ffffff;
 }
 
-.BlueOutline,
-.Blue:hover {
-  background-color: #ffffff;
-  color: #663399;
+.OrangeOutline {
+	background-color: transparent;
+}
+.Orange:hover {
+	background-color: #ffffff;
+	border-color: #fa6800;
+	color: #fa6800;
 }
 
-.Black,
-.BlackOutline:hover {
-  background-color: #242a3d;
-  color: aliceblue;
+.Orange,
+.OrangeOutline:hover {
+	background-color: #242a3d;
+	color: #fa6800;
 }
 
-.Black:hover,
-.BlackOutline {
-  background-color: aliceblue;
-  color: #242a3d;
+.Orange:hover,
+.OrangeOutline {
+	background-color: #fa6800;
+	color: #fff;
 }
 
-.Bright {
-  background-color: #2ed9ff;
-  color: #663399;
+.Orange {
+	background-color: #fa6800;
+	color: #fff;
 }

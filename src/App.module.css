@@ -1,92 +1,106 @@
 .App {
-  font-family: "Montserrat", sans-serif;
-  background-color: #f8f8f8;
-  min-height: 100vh;
+	background-color: #141e23;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 500;
+	min-height: 100vh;
 }
 
 .Main {
-  padding-top: 81px;
+	padding-top: 81px;
 }
 
 .Content {
-  background-color: #ffffff;
-  padding: 10px;
-  border-radius: 2px;
-  border: 1px solid #dadadf;
-  position: relative;
+	background-color: #4a5359;
+	padding: 10px;
+	border-radius: 2px;
+	border: 0;
+	position: relative;
 }
 
 .FillerImage {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
 }
 
 .Image {
-  max-height: 40vh;
-  max-width: 100%;
-  object-fit: contain;
+	max-height: 40vh;
+	max-width: 100%;
+	object-fit: contain;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+span,
 strong {
-  color: #555555;
+	color: #bdc3c7;
 }
 
 a {
-  color: #555555;
-  font-weight: 500;
-  transition: color ease-in-out 0.3s;
-  border-bottom: 2px solid transparent;
-  text-decoration: none;
+	border-bottom: 1px solid transparent;
+	font-weight: 500;
+	text-decoration: none;
 }
 
+a,
 a:hover {
-  border-color: #663399;
+	transition: all ease-in-out 0.3s;
 }
 
 a:hover,
 a:hover i {
-  color: #663399;
-  transition: color ease-in-out 0.3s;
+	color: #fa6800;
 }
 
-input[type="file"] {
-  display: none;
+input[type='file'] {
+	display: none;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+textarea {
+	border-radius: 5px;
 }
 
 i {
-  color: #cfced3;
-  font-size: 1.6rem;
-  padding: 7px;
-  vertical-align: middle;
+	color: #fa6800;
+	padding: 7px;
+	vertical-align: middle;
 }
 
 .Link i:hover {
-  cursor: pointer;
-  transition: color ease-in-out 0.3s;
-  color: #663399;
-  text-decoration: none;
+	cursor: pointer;
+	color: #fa6800;
+	text-decoration: none;
 }
 
 figure {
-  text-align: center;
-  display: inline-block;
+	text-align: center;
+	display: inline-block;
 }
+
 
 /* scrollbar */
 *::-webkit-scrollbar {
-  width: 5px;
+	width: 5px;
 }
 *::-webkit-scrollbar-track {
-  background: #f1f1f1;
+	background: #f1f1f1;
 }
 *::-webkit-scrollbar-thumb {
-  background: #888;
+	background: #888;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #555;
+	background: #555;
 }
