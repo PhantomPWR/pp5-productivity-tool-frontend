@@ -20,7 +20,7 @@ function SearchBar({ query, setQuery, taskCount }) {
     setTaskCategoryChoices
   ] = useState([{'value': '', 'label': ''}]);
   
-  // Fetch task category choices
+  // Fetch task category choices from the API
   useEffect(() => {
     const fetchTaskCategoryChoices = async () => {
       try {
@@ -101,7 +101,7 @@ function SearchBar({ query, setQuery, taskCount }) {
             onChange={(event) => setQuery(event.target.value)}
             aria-label="task status"
           >
-            <option value="">Select task status</option>
+            <option value="">Select status</option>
             <option key="BACKLOG" value="BACKLOG">Backlog</option>
             <option key="TODO" value="TODO">To Do</option>
             <option key="INPROGRESS" value="INPROGRESS">In Progress</option>

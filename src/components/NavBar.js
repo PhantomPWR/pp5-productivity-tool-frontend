@@ -1,23 +1,46 @@
+// React library
 import React from 'react';
-import { Navbar, Container, Nav } from "react-bootstrap";
-import styles from '../styles/NavBar.module.css';
-import { NavLink, useHistory } from 'react-router-dom';
+
+// Context hooks
 import { 
   useCurrentUser,
   useSetCurrentUser
 } from '../contexts/CurrentUserContext';
-import axios from 'axios';
-import Avatar from './Avatar';
+
+// React-router-dom components for page navigation
+import { NavLink, useHistory } from 'react-router-dom';
+
+// Custom hooks
 import useClickOutsideToggle from '../hooks/useClickOutsideToggle';
+
+// Axios library for HTTP requests
+import axios from 'axios';
+
+// Utils
 import { removeTokenTimestamp } from '../utils/utils';
 
+// Reusable components
+import Avatar from './Avatar';
+
+// Bootstrap components
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+
+// Styles
+import styles from '../styles/NavBar.module.css';
+
+
 const NavBar = () => {
+  // State variables
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const history = useHistory();
 
+  // Custom hook for toggling the navbar
   const { expanded, setExpanded, ref } = useClickOutsideToggle();
 
+  // Handle sign out
   const handleSignOut = async () => {
     try {
       await axios.post("dj-rest-auth/logout/");
@@ -28,7 +51,8 @@ const NavBar = () => {
       // console.log(err);
     }
   };
-console.log(currentUser);
+
+  // Add task icon
   const addTaskIcon = (
     <NavLink
       className={styles.NavLink}
@@ -39,6 +63,20 @@ console.log(currentUser);
       Add task
     </NavLink>
   );
+
+  // Add category icon
+  const addCategoryIcon = (
+    <NavLink
+      className={styles.NavLink}
+      activeClassName={styles.Active}
+      to="/categories/create"
+    >
+      <i className="fas fa-folder-plus"></i>
+      Add category
+    </NavLink>
+  );
+
+  // Logged in icons
   const loggedInIcons = (
     <>
       <NavLink
@@ -53,7 +91,8 @@ console.log(currentUser);
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to={`/tasks/?search=${currentUser?.username}`}
+        // to={`/tasks/?search=${currentUser?.username}`}
+        to={`/tasks/?assigned_to=${currentUser?.pk}`}
       >
         <i className="fas fa-list-check"></i>
         My Tasks
@@ -73,6 +112,8 @@ console.log(currentUser);
       </NavLink>
     </>
   );
+
+  // Logged out icons
   const loggedOutIcons = (
   <>
     <NavLink
@@ -104,6 +145,7 @@ console.log(currentUser);
           </Navbar.Brand>
         </NavLink>
         {currentUser && addTaskIcon}
+        {currentUser && addCategoryIcon}
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}
