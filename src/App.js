@@ -10,6 +10,7 @@ import './api/axiosDefaults';
 // Reusable components
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
+import DashboardPage from './pages/dashboard/DashboardPage';
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -45,12 +46,19 @@ function App() {
     <div className={styles.App}>
       <NavBar />
         <Container className={styles.Main}>
+        {!currentUser ? (
           <Switch>
             <Route
               exact
               path="/"
               render={() => <SignInForm />}
             />
+            <Route exact path="/signin" render={() => <SignInForm />} />
+            <Route exact path="/register" render={() => <SignUpForm />} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/" render={() => <DashboardPage />} />
             <Route
               exact
               path="/mytasks"
@@ -62,8 +70,7 @@ function App() {
                 />
               )}
             />
-            <Route exact path="/signin" render={() => <SignInForm />} />
-            <Route exact path="/register" render={() => <SignUpForm />} />
+
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
             <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
             <Route exact path="/tasks/:id" render={() => <TaskPage />} />
@@ -91,6 +98,7 @@ function App() {
             />
             <Route render={() => <NotFound />} />
           </Switch>
+          )}
         </Container>
     </div>
   );
