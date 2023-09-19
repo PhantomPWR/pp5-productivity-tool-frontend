@@ -72,7 +72,7 @@ function SearchBar({ query, setQuery, taskCount }) {
       </div> {/* /row */}
 
       {/* Filter buttons */}
-      <div className="row row-cols-4 mb-3 justify-content-even g-3">
+      <div className="row row-cols-2 row-cols-md-4 mb-3 justify-content-even g-3">
         {/* Task Category */}
         <div className="col">
           <Form.Control

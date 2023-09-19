@@ -1,0 +1,15 @@
+.Card {
+    background-color: #4A5358;
+    /* outline: 3px solid red; */
+}
+
+.CardTitle {
+    color: #bdc3c7;
+    font-weight: 600;
+    text-align: center;
+
+}
+
+.CardText {
+    margin-top: 1em;
+}

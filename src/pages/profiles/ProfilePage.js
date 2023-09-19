@@ -32,8 +32,8 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 
 // Styles
-import styles from "../../styles/ProfilePage.module.css";
 import appStyles from "../../App.module.css";
+import styles from "../../styles/ProfilePage.module.css";
 
 // Assets
 import NoResults from "../../assets/no-results.png"

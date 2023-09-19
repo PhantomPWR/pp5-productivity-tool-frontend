@@ -142,7 +142,7 @@ const NavBar = () => {
         <NavLink to='/'>
           <Navbar.Brand className={styles.Brand}>
             <i className="fa-solid fa-calendar-check"></i>
-            <em><strong>TICKED</strong> OFF</em>
+            <em><strong>TICK</strong> OFF</em>
           </Navbar.Brand>
         </NavLink>
         {currentUser && addTaskIcon}

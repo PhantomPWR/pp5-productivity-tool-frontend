@@ -22,7 +22,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 // Reusable components
 import Asset from '../../components/Asset';
-import DashboardTaskList from './DashBoardTaskList';
+import DashboardTaskList from './DashboardTaskList';
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -31,6 +31,7 @@ import Col from 'react-bootstrap/Col';
 
 // Styles
 import appStyles from '../../App.module.css';
+import styles from '../../styles/DashboardPage.module.css';
 
 // Assets
 import NoResults from '../../assets/no-results.png';
@@ -79,18 +80,23 @@ function DashboardPage() {
     const profileTaskCount = profileTasks.results.length;
     const assignedTaskCount = assignedTasks.results.length;
 
+    const dashboardTitle = (
+        <h1 className={appStyles.PageTitle}>
+            {currentUser.username}'s Dashboard
+        </h1>
+    );
+
     
     return (
         <>
-            <Container fluid className={appStyles.Container}>
+            <Container fluid className={`dashboard px-0 {styles.Container}`}>
                 <Row>
-                    <h1>Dashboard</h1>
+                    <h1>{dashboardTitle}</h1>
                 </Row>
             </Container>
-            <Container fluid className={appStyles.Container}>
+            <Container fluid className={`dashboard px-0 {styles.Container}`}>
                 <Row>
-                    <h2>My Tasks</h2>
-                    <Col>
+                    <Col className='px-0'>
                         <DashboardTaskList/>
                     </Col>
                 </Row>

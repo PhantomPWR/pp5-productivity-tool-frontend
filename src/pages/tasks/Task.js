@@ -137,45 +137,52 @@ const Task = (props) => {
                   )}
                 </Col>
                 <Col className="text-end">
-                  {isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.OverDue}`}>
-                      Overdue{' '}
-                      {new Date(due_date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  ) : isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.DueToday}`}>
-                      Due Today{' '}
-                      {new Date(due_date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  ) : task_status !== 'COMPLETED' ? (
-                    <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.DueDate}`}>
-                      Due on{' '}
-                      {/* {due_date} */}
-                      {new Date(due_date).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  ) : task_status === 'COMPLETED' || taskStatus === 'COMPLETED' ? (
-                      <span className={`px-3 py-2 ${styles.StatusBadge} ${styles.Completed}`}>
-                        Completed on{' '}
-                        {new Date(completed_date).toLocaleDateString("en-GB", {
-                          day: "2-digit",
-                          month: "short",
-                          year: "numeric",
-                        })}
-                      </span>
+                    {isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+                        <div className={`${styles.StatusBadge} ${styles.OverDue}`}>
+                            <label className={styles.BadgeLabel}>Overdue</label>
+                            <span className={styles.BadgeDate}>
+                                {new Date(due_date).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}
+                            </span>
+                        </div>
+                    ) : isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+                        <div className={`${styles.StatusBadge} ${styles.DueToday}`}>
+                            <label className={styles.BadgeLabel}>Due Today</label>
+                            <span className={styles.BadgeDate}>
+                                {new Date(due_date).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}
+                            </span>
+                        </div>
+                    ) : task_status !== 'COMPLETED' ? (
+                        <div className={`${styles.StatusBadge} ${styles.DueDate}`}>
+                            <label className={styles.BadgeLabel}>Due on</label>
+                            <span className={styles.BadgeDate}>
+                                {new Date(due_date).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}
+                            </span>
+                        </div>
+                    ) : task_status === 'COMPLETED' || taskStatus === 'COMPLETED' ? (
+                        <div className={`${styles.StatusBadge} ${styles.Completed}`}>
+                            <label className={styles.BadgeLabel}>Completed</label>
+                            <span className={styles.BadgeDate}>
+                                {new Date(completed_date).toLocaleDateString("en-GB", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric",
+                                })}
+                            </span>
+                        </div>
 
-                  ):null}
+                    ):null}
                 </Col>
               </Row>
             </Link>

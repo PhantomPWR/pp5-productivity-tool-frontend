@@ -9,6 +9,7 @@
 .TaskTitle {
 	color: #bdc3c7;
 	font-weight: 800;
+	text-align: left;
 }
 
 .Task figure,
@@ -26,6 +27,7 @@ h5 {
 
 .TaskBody {
 	background-color: #32383c;
+	padding: 3px 4px;
 }
 
 .Eye {
