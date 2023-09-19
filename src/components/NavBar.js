@@ -24,8 +24,9 @@ import Avatar from './Avatar';
 
 // Bootstrap components
 import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
+import NavbarToggle from 'react-bootstrap/NavbarToggle';
 import Nav from 'react-bootstrap/Nav';
+import Container from 'react-bootstrap/Container';
 
 // Styles
 import styles from '../styles/NavBar.module.css';
@@ -137,7 +138,7 @@ const NavBar = () => {
   );
 
   return (
-    <Navbar expanded={expanded} className={styles.NavBar} expand="md" fixed="top">
+    <Navbar expanded={expanded} className={styles.NavBar} expand="lg" fixed="top">
       <Container>
         <NavLink to='/'>
           <Navbar.Brand className={styles.Brand}>
@@ -147,7 +148,15 @@ const NavBar = () => {
         </NavLink>
         {currentUser && addTaskIcon}
         {currentUser && addCategoryIcon}
-        <Navbar.Toggle
+        {/* <Navbar.Toggle
+          className={styles.Toggle}
+          ref={ref}
+          onClick={() => setExpanded(!expanded)}
+          aria-controls="basic-navbar-nav"
+        /> */}
+        <NavbarToggle
+          bsPrefix='tickoff-toggle'
+          className={styles.Toggle}
           ref={ref}
           onClick={() => setExpanded(!expanded)}
           aria-controls="basic-navbar-nav"

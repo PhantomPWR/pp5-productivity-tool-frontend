@@ -4,31 +4,51 @@ import React from "react";
 // react-router-dom components for page navigation
 import { Link } from "react-router-dom";
 
-// Assets
-import Avatar from "../../components/Avatar";
+
+// Bootstrap components
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 // Styles
 import styles from "../../styles/Profile.module.css";
 
+// Assets
+import Avatar from "../../components/Avatar";
+
 
 const Profile = (props) => {
-  const { profile, mobile, imageSize = 55 } = props;
+  const { profile, mobile, imageSize = 55, dashboardPage } = props;
   const { id, image, owner } = profile;
 
 
   return (
-    <div
-      className={`my-3 d-flex align-items-center ${mobile && "flex-column"}`}
-    >
-      <div>
-        <Link className="align-self-center" to={`/profiles/${id}`}>
-          <Avatar src={image} height={imageSize} />
-        </Link>
-      </div>
-      <div className={`mx-1 ${styles.WordBreak}`}>
-        <p className='m-0 fs-6'>{owner}</p>
-      </div>
-    </div>
+    <Link className="align-self-center" to={`/profiles/${id}`}>
+      <Container
+        className={`my-3 d-flex align-items-center`}
+      >
+      {dashboardPage ? (
+        <Row className='flex-column align-items-center justify-content-start g-0'>
+          <Col>
+            <Avatar src={image} height={imageSize} />
+          </Col>
+          <Col>
+            {owner}
+          </Col>
+        </Row>
+      ):(
+        <Row className='align-items-center justify-content-start g-0'>
+          <Col>
+            <Avatar src={image} height={imageSize} />
+          </Col>
+          <Col>
+            {owner}
+          </Col>
+        </Row>
+      )}
+          
+      </Container>
+    </Link>
   );
 };
 

@@ -90,11 +90,11 @@ return (
             {/* <ProfileList mobile />
             <i className={`fas fa-search ${styles.SearchIcon}`} />
             <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} /> */}
-            <Row className={`row-cols-md-2 ${styles.Row}`}>
+            <Row className={`row-cols-1 row-cols-md-2 ${styles.Row}`}>
                 <Col className={styles.Col}>
                     <Card className={dashboardStyles.Card}>
                         <Card.Body>
-                            <Card.Title className={dashboardStyles.CardTitle}>Outstanding Tasks You Own</Card.Title>
+                            <Card.Title className={dashboardStyles.CardTitle}>Pending Tasks Owned</Card.Title>
                             <Card.Text className={dashboardStyles.CardText}>
                                 {hasLoaded ? (
                                 <>
@@ -115,7 +115,7 @@ return (
                                     
                                     ) : (
                                     <Container className={appStyles.Content}>
-                                        <Asset message='You have no outstanding tasks you own' />
+                                        <Asset message='You have no pending tasks you own' />
                                     </Container>
                                     )}
                                 </>
@@ -131,7 +131,7 @@ return (
                 <Col className={styles.Col}>
                     <Card className={dashboardStyles.Card}>
                         <Card.Body>
-                            <Card.Title className={dashboardStyles.CardTitle}>Outstanding Tasks Assigned to You</Card.Title>
+                            <Card.Title className={dashboardStyles.CardTitle}>Pending Tasks Assigned</Card.Title>
                             <Card.Text className={dashboardStyles.CardText}>
                                 {hasLoaded ? (
                                 <>
@@ -152,7 +152,7 @@ return (
                                     
                                     ) : (
                                     <Container className={appStyles.Content}>
-                                        <Asset message='You have no outstanding tasks assigned to you' />
+                                        <Asset message='You have no pending tasks assigned to you' />
                                     </Container>
                                     )}
                                 </>
