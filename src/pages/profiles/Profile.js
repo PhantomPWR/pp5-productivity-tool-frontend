@@ -2,7 +2,7 @@
 import React from "react";
 
 // react-router-dom components for page navigation
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 // Bootstrap components
@@ -18,21 +18,29 @@ import Avatar from "../../components/Avatar";
 
 
 const Profile = (props) => {
-  const { profile, mobile, imageSize = 55, dashboardPage } = props;
+
+  // Set up state variables
+  const location = useLocation();
+
+  // Destructure props
+  const { profile, mobile, imageSize = 55 } = props;
   const { id, image, owner } = profile;
+
+  // Check if on dashboard page
+  const isDashboardPage = location.pathname === '/';
 
 
   return (
     <Link className="align-self-center" to={`/profiles/${id}`}>
       <Container
-        className={`my-3 d-flex align-items-center`}
+        className={`my-3 d-flex align-items-center justify-content-center ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
       >
-      {dashboardPage ? (
-        <Row className='flex-column align-items-center justify-content-start g-0'>
-          <Col>
+      {isDashboardPage ? (
+        <Row className='flex-column align-items-center justify-content-center g-0'>
+          <Col className='text-center'>
             <Avatar src={image} height={imageSize} />
           </Col>
-          <Col>
+          <Col className='text-center mt-1'>
             {owner}
           </Col>
         </Row>

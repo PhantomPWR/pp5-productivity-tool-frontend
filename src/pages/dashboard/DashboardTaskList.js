@@ -128,7 +128,7 @@ return (
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col className={styles.Col}>
+                <Col className={`${styles.Col} mt-3 mt-sm-0`}>
                     <Card className={dashboardStyles.Card}>
                         <Card.Body>
                             <Card.Title className={dashboardStyles.CardTitle}>Pending Tasks Assigned</Card.Title>

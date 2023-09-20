@@ -103,7 +103,7 @@ function DashboardPage() {
                 </Row>
                 <Row>
                     <Col className='px-0'>
-                        <ProfileList dashboardPage/>
+                        <ProfileList/>
                     </Col>
                 </Row>
 

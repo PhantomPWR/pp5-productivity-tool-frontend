@@ -9,9 +9,12 @@ import Profile from "./Profile";
 
 // Bootstrap components
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from 'react-bootstrap/Card';
 
 // Styles
-import appStyles from "../../App.module.css";
+import styles from "../../styles/ProfileList.module.css";
 
 // Assets
 import Asset from "../../components/Asset";
@@ -21,30 +24,32 @@ const ListProfiles = ({ mobile }) => {
   const { listProfiles } = useProfileData();
 
   return (
-    <Container
-      className={`${appStyles.Content} ${
-        mobile && "d-lg-none text-center mb-3"
-      }`}
-    >
-      {listProfiles.results.length ? (
-        <>
-          <p>User list</p>
-          {mobile ? (
-            <div className="d-flex justify-content-around">
-              {listProfiles.results.slice(0, 4).map((profile) => (
-                <Profile key={profile.id} profile={profile} mobile />
-              ))}
-            </div>
-          ) : (
-            listProfiles.results.map((profile) => (
-              < Profile key={profile.id} profile={profile} />
-            ))
-          )}
-        </>
-      ) : (
-        <Asset spinner />
-      )}
-    </Container>
+    <Card className={`${styles.Card} mt-3`}>
+      <Card.Body>
+        <Card.Title className={styles.CardTitle}>Users</Card.Title>
+          <Card.Text className={styles.CardText}>
+            {listProfiles.results.length ? (
+              mobile ? (
+                <div className="d-flex justify-content-around">
+                  {listProfiles.results.slice(0, 4).map((profile) => (
+                    <Profile key={profile.id} profile={profile} mobile />
+                  ))}
+                </div>
+              ) : (
+                <Row className='justify-content-even'>
+                  {listProfiles.results.map((profile) => (
+                    <Col key={profile.id}>
+                      <Profile key={profile.id} profile={profile} />
+                    </Col>
+                  ))}
+                </Row>
+                )
+              ) : (
+                <Asset spinner />
+            )}
+          </Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 
