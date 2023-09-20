@@ -5,6 +5,25 @@
     margin: 4px;
 }
 
+.Card {
+    background-color: #333337;
+}
+
+.CardTitle {
+    border-radius: 5px;
+    color: #bdc3c7;
+    font-weight: 600;
+    text-align: center;
+
+}
+
+.CardText {
+    background-color: #4A5358;
+    border-radius: 5px;
+    margin-top: 1em;
+    padding: 15px;
+}
+
 @media screen and (max-width: 991px) {
     .ProfileImage {
         width: 150px;

@@ -62,8 +62,26 @@ a:hover {
 }
 
 a:hover,
-a:hover i {
+a:hover i,
+.textOrange {
 	color: #fa6800;
+}
+
+.textBold {
+	font-weight: 600;
+}
+
+.underline {
+	border-bottom: 2px solid;
+}
+
+.underlineOrange {
+	border-bottom: 2px solid #fa6800;
+	padding-bottom: 4px;
+}
+
+.noRadius {
+	border-radius: 0;
 }
 
 input[type='file'] {

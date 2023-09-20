@@ -30,13 +30,11 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
+import Card from "react-bootstrap/Card";
 
 // Styles
 import appStyles from "../../App.module.css";
 import styles from "../../styles/ProfilePage.module.css";
-
-// Assets
-import NoResults from "../../assets/no-results.png"
 
 
 function ProfilePage() {
@@ -85,30 +83,43 @@ function ProfilePage() {
   const mainProfile = (
     <>
       {profile?.is_owner && <ProfileEditDropdown id={profile?.id} />}
-      <Row className="px-3 text-center no-gutters">
-        <Col lg={3} className="text-lg-left">
-          <Image 
-            className={styles.ProfileImage}
-            roundedCircle 
-            src={profile?.image}
-          />
-        </Col>
-        <Col lg={6}>
-          <h3 className="m-2">{profile?.owner}</h3>
-          <div>Tasks</div>
-          <Row className="row-cols-2">
-            <Col>Created: {profileTaskCount}</Col>
-            <Col>Assigned: {assignedTaskCount}</Col>
+        <Container>
+          <Row className="justify-content-between">
+            <Col>
+              <Image 
+                className={styles.ProfileImage}
+                roundedCircle 
+                src={profile?.image}
+              />
+              <h3 className="m-2">{profile?.owner}</h3>
+            </Col>
+            <Col className="d-flex flex-column justify-content-center align-items-center">
+              <h3 className={`${appStyles.underlineOrange} ${appStyles.textBold}`}>
+                Tasks
+              </h3>
+              <Container>
+                <Row className="row-cols-2 mt-3">
+                  <Col>
+                    <span>Created: </span>
+                    <span className={appStyles.textOrange}>{profileTaskCount}</span>
+                  </Col>
+                  <Col>
+                    <span>Assigned: </span>
+                    <span className={appStyles.textOrange}>{assignedTaskCount}</span>
+                  </Col>
+                </Row>
+              </Container>
+            </Col>
+            {profile?.content && <Col className="p-3">{profile.content}</Col>}
           </Row>
-        </Col>
-        {profile?.content && <Col className="p-3">{profile.content}</Col>}
-      </Row>
+        </Container>
     </>
   );
 
-  // Returns profile tasks owned by profile owner
+  // Returns tasks owned by profile owner
   const mainProfileTasks = (
     <>
+      <h3 className={`${appStyles.textBold} ${appStyles.underlineOrange} text-center`}>Created Tasks</h3>
       {profileTasks.results.length ? (
         <InfiniteScroll
           children={profileTasks.results.map((task) => (
@@ -121,8 +132,7 @@ function ProfilePage() {
         />
       ) : (
         <Asset
-          src={NoResults}
-          message={`No results found, ${profile?.owner} hasn't posted yet.`}
+          message={`${profile?.owner} hasn't created any tasks yet.`}
         />
       )}
     </>
@@ -134,6 +144,9 @@ function ProfilePage() {
   // Returns tasks assigned to profile owner
   const mainAssignedTasks = (
     <>
+      <h3 className={`${appStyles.textBold} ${appStyles.underlineOrange} text-center`}>
+        Assigned Tasks
+      </h3>
       {assignedTasks.results.length ? (
         <React.Fragment>
           <InfiniteScroll
@@ -155,39 +168,45 @@ function ProfilePage() {
           />
           {taskCount === assignedTasks.results.length && (
             <Asset
-              src={NoResults}
-              message={`No results found. No tasks assigned to ${profile?.owner} yet.`}
+              message={`No tasks assigned to ${profile?.owner} yet.`}
             />
           )}
         </React.Fragment>
       ) : (
         <Asset
-          src={NoResults}
-          message={`No results found. No tasks assigned to ${profile?.owner} yet.`}
+          message={`No tasks assigned to ${profile?.owner} yet.`}
         />
       )}
     </>
   );
 
   return (
+    <>
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <Container className={appStyles.Content}>
-          {hasLoaded ? (
-            <>
-              {mainProfile}
-              {mainProfileTasks}
-              {mainAssignedTasks}
-            </>
-          ) : (
-            <Asset spinner />
-          )}
-        </Container>
+        <Card className={styles.Card}>
+          <Card.Body>
+            {hasLoaded ? (
+              <>
+                <Card.Title className={styles.CardTitle}>
+                  {mainProfile}
+                </Card.Title>
+                  <Card.Text className={styles.CardText}>
+                    {mainProfileTasks}
+                    {mainAssignedTasks}
+                  </Card.Text>
+              </>
+            ) : (
+              <Asset spinner />
+            )}
+          </Card.Body>
+        </Card>
       </Col>
       <Col lg={4} className="d-none d-lg-block p-0 p-lg-2">
         <ProfileList />
       </Col>
     </Row>
+    </>
   );
 }
 

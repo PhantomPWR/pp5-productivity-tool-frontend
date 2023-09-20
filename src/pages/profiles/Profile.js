@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 // Styles
+import appStyles from "../../App.module.css";
 import styles from "../../styles/Profile.module.css";
 
 // Assets
@@ -31,32 +32,39 @@ const Profile = (props) => {
 
 
   return (
-    <Link className="align-self-center" to={`/profiles/${id}`}>
-      <Container
-        className={`my-3 d-flex align-items-center justify-content-center ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
-      >
-      {isDashboardPage ? (
-        <Row className='flex-column align-items-center justify-content-center g-0'>
-          <Col className='text-center'>
-            <Avatar src={image} height={imageSize} />
-          </Col>
-          <Col className='text-center mt-1'>
-            {owner}
-          </Col>
-        </Row>
-      ):(
-        <Row className='align-items-center justify-content-start g-0'>
-          <Col>
-            <Avatar src={image} height={imageSize} />
-          </Col>
-          <Col>
-            {owner}
-          </Col>
-        </Row>
-      )}
-          
-      </Container>
-    </Link>
+    <>
+    {isDashboardPage ? (
+        <Link className="align-self-center" to={`/profiles/${id}`}>
+          <Container
+            className={`my-3 d-flex align-items-center justify-content-center ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
+          >
+            <Row className='flex-column align-items-center justify-content-center g-0'>
+              <Col className='text-center'>
+                <Avatar src={image} height={45} />
+              </Col>
+              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.textBold}`}>
+                {owner}
+              </Col>
+            </Row>
+          </Container>
+        </Link>
+      ) : (
+          <Link className="align-self-start" to={`/profiles/${id}`}>
+          <Container
+            className={`my-3 d-flex align-items-center justify-content-start ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
+          >
+            <Row className='align-items-center justify-content-start g-0'>
+              <Col>
+                <Avatar src={image} height={45} />
+              </Col>
+              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.textBold}`}>
+                {owner}
+              </Col>
+            </Row>
+          </Container>
+        </Link>
+    )}
+    </>
   );
 };
 
