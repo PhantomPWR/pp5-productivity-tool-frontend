@@ -1,5 +1,5 @@
 .DashboardTitle {
-    text-align: center;
+    text-align: left;
 }
 
 .Card {
@@ -7,7 +7,6 @@
 }
 
 .CardTitle {
-    border-radius: 5px;
     color: #bdc3c7;
     font-weight: 600;
     text-align: center;
@@ -23,4 +22,18 @@
 
 .Asset {
     text-align: center;
+}
+
+.Link {
+    font-size: 1rem;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+	padding: 5px;
+}
+
+.Link,
+.Link i {
+    color: #fa6800;
 }

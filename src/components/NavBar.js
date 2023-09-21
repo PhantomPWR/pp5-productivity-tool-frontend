@@ -53,33 +53,10 @@ const NavBar = () => {
     }
   };
 
-  // Add task icon
-  const addTaskIcon = (
-    <NavLink
-      className={styles.NavLink}
-      activeClassName={styles.Active}
-      to="/tasks/create"
-    >
-      <i className="far fa-plus-square"></i>
-      Add task
-    </NavLink>
-  );
-
-  // Add category icon
-  const addCategoryIcon = (
-    <NavLink
-      className={styles.NavLink}
-      activeClassName={styles.Active}
-      to="/categories/create"
-    >
-      <i className="fas fa-folder-plus"></i>
-      Add category
-    </NavLink>
-  );
-
   // Logged in icons
   const loggedInIcons = (
     <>
+      {/* Dashboard */}
       <NavLink
         exact
         className={styles.NavLink}
@@ -89,15 +66,38 @@ const NavBar = () => {
         <i className='fs-6 fas fa-dashboard'></i>
         Dashboard
       </NavLink>
+
+      {/* Add Task */}
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        // to={`/tasks/?search=${currentUser?.username}`}
-        to={`/tasks/?assigned_to=${currentUser?.pk}`}
+        to="/tasks/create"
+      >
+        <i className="far fa-plus-square"></i>
+        Add task
+      </NavLink>
+
+      {/* Add Category */}
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/categories/create"
+      >
+        <i className="fas fa-folder-plus"></i>
+        Add category
+      </NavLink>
+
+      {/* All Tasks */}
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to={`/tasks/`}
       >
         <i className="fas fa-list-check"></i>
-        My Tasks
+        All Tasks
       </NavLink>
+
+      {/* Sign Out */}
       <NavLink className={styles.NavLink}
         to="/"
         onClick={handleSignOut}
@@ -105,12 +105,14 @@ const NavBar = () => {
         <i className="fas fa-sign-out-alt"></i>
         Sign out
       </NavLink>
+
+      {/* Profile */}
       <NavLink
         className={styles.NavLink}
         to={`/profiles/${currentUser?.profile_id}`}
         // to={'/'}
       >
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+        <Avatar src={currentUser?.profile_image} height={40} />
       </NavLink>
     </>
   );
@@ -146,8 +148,8 @@ const NavBar = () => {
             <em><strong>TICK</strong> OFF</em>
           </Navbar.Brand>
         </NavLink>
-        {currentUser && addTaskIcon}
-        {currentUser && addCategoryIcon}
+
+        {/* Navbar Toggle */}
         <NavbarToggle
           bsPrefix='tickoff-toggle'
           className={styles.Toggle}

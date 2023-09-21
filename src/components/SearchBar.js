@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 // Styles
+import appStyles from "../App.module.css";
 import styles from '../styles/SearchBar.module.css';
 
 
@@ -55,24 +56,26 @@ function SearchBar({ query, setQuery, taskCount }) {
       {/* Search bar & result count */}
       <div className='row row-cols-2 d-flex justify-content-between align-items-center'>
         <div className="col-9">
+          <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form.Control
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             type="text"
-            className="me-sm-2"
-            placeholder="Search tasks"
+            className='me-sm-2'
+            placeholder="Search tasks..."
             aria-label="Search Bar"
           />
         </div> {/* /col */}
-        <div className="col-3 text-center">
+        <div className="col-3 fs-5">
           <p className="me-sm-2">
-            Search results: {taskCount}
+            <span>Results: </span>
+            <span className={`${appStyles.textBold} ${appStyles.textOrange}`}>{taskCount}</span>
           </p>
         </div> {/* /col */}
       </div> {/* /row */}
 
       {/* Filter buttons */}
-      <div className="row row-cols-2 row-cols-md-4 mb-3 justify-content-even g-3">
+      <div className={`row row-cols-2 row-cols-lg-4 mb-3 pb-3 justify-content-even g-3 ${appStyles.underlineOrange}`}>
         {/* Task Category */}
         <div className="col">
           <Form.Control
@@ -126,7 +129,7 @@ function SearchBar({ query, setQuery, taskCount }) {
         </div> {/* /col */}
         {/* Clear filters */}
         <div className="col text-end">
-          <Button className={styles.OrangeOutline} type="button" onClick={clearForm}>
+          <Button className={`${styles.OrangeOutline} btn-sm`} type="button" onClick={clearForm}>
             Clear filters
           </Button>
         </div> {/* /col */}

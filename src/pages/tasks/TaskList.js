@@ -25,6 +25,8 @@ import Task from "./Task";
 
 // Bootstrap components
 import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 // Styles
 import appStyles from "../../App.module.css";
@@ -85,38 +87,44 @@ function TaskList({ message, filter = "" }) {
 
   return (
     <Container className="h-100">
-        <div className="py-2 p-0 p-lg-2 MainCol">
-          <ProfileList mobile />
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
-          <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
-          {hasLoaded ? (
-            <>
-              {console.log('tasks: ', tasks)}
-              {tasks.results.length ? (
-                <InfiniteScroll
-                  key={tasks.results.map(task => task.id).join(",")}
-                  children={
-                    tasks.results.map((task) => (
-                      <Task key={task.id} {...task} setTasks={setTasks} />
-                  ))}
-                  dataLength={tasks.results.length}
-                  loader={<Asset spinner />}
-                  hasMore={!!tasks.next}
-                  next={() => fetchMoreData(tasks, setTasks)}
-                />
-                
-              ) : (
-                <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
-                </Container>
-              )}
-            </>
-          ) : (
-            <Container className={appStyles.Content}>
-              <Asset spinner />
-            </Container>
-          )}
-        </div>
+      <Row className='row-cols-md-2'>
+        <Col md={8}>
+          <div className="py-2 p-0 p-lg-2 MainCol">
+            
+            <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
+            {hasLoaded ? (
+              <>
+                {console.log('tasks: ', tasks)}
+                {tasks.results.length ? (
+                  <InfiniteScroll
+                    key={tasks.results.map(task => task.id).join(",")}
+                    children={
+                      tasks.results.map((task) => (
+                        <Task key={task.id} {...task} setTasks={setTasks} />
+                    ))}
+                    dataLength={tasks.results.length}
+                    loader={<Asset spinner />}
+                    hasMore={!!tasks.next}
+                    next={() => fetchMoreData(tasks, setTasks)}
+                  />
+                  
+                ) : (
+                  <Container className={appStyles.Content}>
+                    <Asset src={NoResults} message={message} />
+                  </Container>
+                )}
+              </>
+            ) : (
+              <Container className={appStyles.Content}>
+                <Asset spinner />
+              </Container>
+            )}
+          </div>
+        </Col>
+        <Col md={4}>
+          <ProfileList />
+        </Col>
+      </Row>
     </Container>
   );
 }

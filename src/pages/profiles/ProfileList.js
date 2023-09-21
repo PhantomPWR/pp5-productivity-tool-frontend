@@ -35,7 +35,7 @@ const ListProfiles = ({ mobile }) => {
   return (
     <Card className={`${styles.Card} mt-3`}>
       <Card.Body>
-        <Card.Title className={`${styles.CardTitle} ${appStyles.textBold} ${appStyles.underlineOrange}  ${appStyles.noRadius}`}>
+        <Card.Title className={`${styles.CardTitle} ${appStyles.textBold} ${appStyles.underlineOrange} ${appStyles.noRadius}`}>
           Users
         </Card.Title>
           <Card.Text className={styles.CardText}>
