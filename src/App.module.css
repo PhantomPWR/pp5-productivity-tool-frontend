@@ -80,7 +80,8 @@ a:hover i,
 	padding-bottom: 4px;
 }
 
-.noRadius {
+.noRadius,
+.CardTitle.noRadius {
 	border-radius: 0;
 }
 

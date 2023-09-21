@@ -19,6 +19,7 @@ import {fetchMoreData} from '../../utils/utils';
 
 // React components
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Link from 'react-router-dom/Link';
 
 // Reusable components
 import Asset from '../../components/Asset';
@@ -82,9 +83,23 @@ function DashboardPage() {
     const assignedTaskCount = assignedTasks.results.length;
 
     const dashboardTitle = (
-        <h1 className={styles.DashboardTitle}>
-            {currentUser.username}'s Dashboard
-        </h1>
+        <Container>
+            <Row className='row-cols-2'>
+                <Col>
+                    <h1 className={styles.DashboardTitle}>
+                        {currentUser.username}'s Dashboard
+                    </h1>
+                </Col>
+                <Col>
+                    <Link
+                        to={`/tasks/`}
+                        className='btn btn-primary'
+                    >
+                        View all tasks
+                    </Link>
+                </Col>
+            </Row>
+        </Container>
     );
 
     

@@ -148,12 +148,6 @@ const NavBar = () => {
         </NavLink>
         {currentUser && addTaskIcon}
         {currentUser && addCategoryIcon}
-        {/* <Navbar.Toggle
-          className={styles.Toggle}
-          ref={ref}
-          onClick={() => setExpanded(!expanded)}
-          aria-controls="basic-navbar-nav"
-        /> */}
         <NavbarToggle
           bsPrefix='tickoff-toggle'
           className={styles.Toggle}
