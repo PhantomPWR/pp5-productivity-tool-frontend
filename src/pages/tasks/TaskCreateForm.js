@@ -200,6 +200,7 @@ function TaskCreateForm() {
       <Form.Group>
         <Form.Label>Task Category</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="category"
           value={category.id}
@@ -259,6 +260,7 @@ function TaskCreateForm() {
       <Form.Group>
         <Form.Label>Task Status</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="task_status"
           value={task_status}
@@ -282,6 +284,7 @@ function TaskCreateForm() {
       <Form.Group>
         <Form.Label>Task Priority</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="priority"
           value={priority}
@@ -304,9 +307,9 @@ function TaskCreateForm() {
       <Form.Group>
         <Form.Label>Assigned to</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="assigned_to"
-          className={appStyles.Input}
           value={assigned_to}
           onChange={handleChange}
           aria-label="assigned to"
@@ -328,12 +331,12 @@ function TaskCreateForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Orange}`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-5`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-5 ms-5`} type="submit">
         create
       </Button>
     </div>

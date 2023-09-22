@@ -36,6 +36,11 @@
 	font-weight: 600;
 }
 
+.ResultCount i {
+	color: #cfced3;
+	font-size: 0.9rem;
+}
+
 .SearchIcon:hover {
 	cursor: default;
 	color: #cfced3;

@@ -1,3 +1,12 @@
 .WordBreak {
     word-break: break-all;
 }
+
+.ProfileLink > div,
+.ProfileLink:hover > div {
+    transition: all ease-in-out 0.3s;
+}
+
+.ProfileLink:hover > div {
+    background-color: #32383C;
+}

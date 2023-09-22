@@ -129,11 +129,11 @@ const Task = (props) => {
         <Media className="align-items-center justify-content-between">
           {!taskPage ? (
             /* Task List Header */
-            <Link to={`/tasks/${id}`}>
-              <Row className="row-cols-2 d-flex justify-content-between align-items-center">
-                <Col className="text-start">
+            <Link to={`/tasks/${id}`} className={styles.TaskLink}>
+              <Row className="row-cols-2 py-2 d-flex justify-content-between align-items-center">
+                <Col className="text-start mb-0">
                   {title && (
-                    <Card.Title className={`fs-4 ${styles.TaskTitle}`}>{title}</Card.Title>
+                    <Card.Title className={`fs-4 mb-0 ${styles.TaskTitle}`}>{title}</Card.Title>
                   )}
                 </Col>
                 <Col className="text-end">
@@ -189,7 +189,7 @@ const Task = (props) => {
           ):null}
           {/* Task Detail Header */}
           <div className="row text-center">
-             {taskPage && title && (
+              {taskPage && title && (
                     <Card.Title className={`fs-4 mb-5 ${styles.TaskTitle}`}>{title}</Card.Title>
                   )}
           </div>

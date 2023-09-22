@@ -46,6 +46,7 @@
 
 .OrangeOutline {
 	background-color: transparent;
+	border-color: #fa6800;
 }
 .Orange:hover {
 	background-color: #ffffff;
@@ -60,7 +61,7 @@
 }
 
 .Orange:hover,
-.OrangeOutline {
+.OrangeOutline:hover {
 	background-color: #fa6800;
 	color: #fff;
 }

@@ -59,7 +59,7 @@ function SearchBar({ query, setQuery, taskCount }) {
       {/* Search bar & result count */}
       <Container className={`mb-3 ${styles.SearchWrap}`}>
         <Row className="row row-cols-2 d-flex justify-content-between align-items-center mb-2">
-          <div className="col-9">
+          <Col className="col-8 col-lg-10">
             <i className={`fas fa-search ${styles.SearchIcon}`} />
             <Form.Control
               value={query}
@@ -69,10 +69,10 @@ function SearchBar({ query, setQuery, taskCount }) {
               placeholder="Search tasks..."
               aria-label="Search Bar"
             />
-          </div> {/* /col */}
-          <div className={`col-3 fs-5 ${styles.Results}`}>
-            <p className="m-0 text-center">
-              <span className="me-2 fs-6">Results:</span>
+          </Col> {/* /col */}
+          <div className={`col-4 col-lg-2 fs-5 ps-0 ${styles.Results}`}>
+            <p className="m-0 text-center d-flex align-items-center justify-content-center">
+              <span className={`fs-6 ${styles.ResultCount}`}><i class="fa-solid fa-hashtag"></i></span>
               <span className={`${appStyles.textBold} ${appStyles.textOrange}`}>{taskCount}</span>
             </p>
           </div> {/* /col */}
@@ -82,7 +82,7 @@ function SearchBar({ query, setQuery, taskCount }) {
       {/* Filter buttons */}
       <div className={`row row-cols-2 row-cols-lg-4 mb-3 pb-3 justify-content-even g-3 ${appStyles.underlineOrange}`}>
         {/* Task Category */}
-        <div className="col">
+        <Col>
           <Form.Control
             className={`form-select ${styles.Select}`}
             as="select"
@@ -99,9 +99,9 @@ function SearchBar({ query, setQuery, taskCount }) {
               </option>
             ))}
           </Form.Control>
-        </div> {/* /col */}
+        </Col> {/* /col */}
         {/* Task Status */}
-        <div className="col">
+        <Col>
           <Form.Control
             className={`form-select ${styles.Select}`}
             as="select"
@@ -115,10 +115,10 @@ function SearchBar({ query, setQuery, taskCount }) {
             <option key="INPROGRESS" value="INPROGRESS">In Progress</option>
             <option key="COMPLETED" value="COMPLETED">Completed</option>
           </Form.Control>
-        </div> {/* /col */}
+        </Col> {/* /col */}
 
         {/* Task Priority */}
-        <div className="col">
+        <Col>
           <Form.Control
             className={`form-select ${styles.Select}`}
             as="select"
@@ -131,13 +131,13 @@ function SearchBar({ query, setQuery, taskCount }) {
             <option key="PRIORITY2" value="PRIORITY2">Medium</option>
             <option key="PRIORITY3" value="PRIORITY3">Low</option>
           </Form.Control>
-        </div> {/* /col */}
+        </Col> {/* /col */}
         {/* Clear filters */}
-        <div className="col text-end">
+        <Col className="text-end">
           <Button className={`${styles.OrangeOutline} btn-sm`} type="button" onClick={clearForm}>
             Clear filters
           </Button>
-        </div> {/* /col */}
+        </Col> {/* /col */}
       </div> {/* /row */}
     </Form>
   );

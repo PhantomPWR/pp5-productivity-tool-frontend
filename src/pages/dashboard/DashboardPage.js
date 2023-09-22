@@ -83,50 +83,9 @@ function DashboardPage() {
     const assignedTaskCount = assignedTasks.results.length;
 
     const dashboardTitle = (
-        <Container>
-            <Row className='row-cols-2 pt-3'>
-                <Col>
-                    <h1 className={styles.DashboardTitle}>
-                        {currentUser.username}'s Dashboard
-                    </h1>
-                </Col>
-                <Col>
-                    <Container className='px-0'>
-                        <Row className='g-0'>
-                            <Col>
-                                {/* Add task icon */}
-                                <Link
-                                    className={styles.Link}
-                                    to="/tasks/create"
-                                >
-                                    <i className="far fa-plus-square"></i>
-                                    Add task
-                                </Link>
-                            </Col>
-                            <Col>
-                                {/* Add category icon */}
-                                <Link
-                                    className={styles.Link}
-                                    to="/categories/create"
-                                >
-                                    <i className="fas fa-folder-plus"></i>
-                                    Add category
-                                </Link>
-                            </Col>
-                            <Col>
-                                <Link
-                                    className={styles.Link}
-                                    to={`/tasks/`}
-                                >
-                                    <i className="fas fa-tasks"></i>
-                                    View all tasks
-                                </Link>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Col>
-            </Row>
-        </Container>
+        <h1 className={styles.DashboardTitle}>
+            {currentUser.username}'s Dashboard
+        </h1>
     );
 
     
