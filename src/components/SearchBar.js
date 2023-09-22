@@ -5,6 +5,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { axiosReq } from "../api/axiosDefaults";
 
 // Bootstrap components
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
@@ -54,25 +57,27 @@ function SearchBar({ query, setQuery, taskCount }) {
       onSubmit={(event) => event.preventDefault()}
     >
       {/* Search bar & result count */}
-      <div className='row row-cols-2 d-flex justify-content-between align-items-center'>
-        <div className="col-9">
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
-          <Form.Control
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            type="text"
-            className='me-sm-2'
-            placeholder="Search tasks..."
-            aria-label="Search Bar"
-          />
-        </div> {/* /col */}
-        <div className="col-3 fs-5">
-          <p className="me-sm-2">
-            <span>Results: </span>
-            <span className={`${appStyles.textBold} ${appStyles.textOrange}`}>{taskCount}</span>
-          </p>
-        </div> {/* /col */}
-      </div> {/* /row */}
+      <Container className={`mb-3 ${styles.SearchWrap}`}>
+        <Row className="row row-cols-2 d-flex justify-content-between align-items-center mb-2">
+          <div className="col-9">
+            <i className={`fas fa-search ${styles.SearchIcon}`} />
+            <Form.Control
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              type="text"
+              className='me-sm-2'
+              placeholder="Search tasks..."
+              aria-label="Search Bar"
+            />
+          </div> {/* /col */}
+          <div className={`col-3 fs-5 ${styles.Results}`}>
+            <p className="m-0 text-center">
+              <span className="me-2 fs-6">Results:</span>
+              <span className={`${appStyles.textBold} ${appStyles.textOrange}`}>{taskCount}</span>
+            </p>
+          </div> {/* /col */}
+        </Row> {/* /row */}
+      </Container>
 
       {/* Filter buttons */}
       <div className={`row row-cols-2 row-cols-lg-4 mb-3 pb-3 justify-content-even g-3 ${appStyles.underlineOrange}`}>
