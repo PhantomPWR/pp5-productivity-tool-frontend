@@ -28,8 +28,9 @@
 	z-index: 1;
 }
 
-.Results {
-	border-left: 2px solid #fa6800;
+.Results p {
+	background-color: #32383C;
+	border-radius: 5px;
 }
 
 .Results p span:first-child {
@@ -69,7 +70,7 @@
 	border-radius: 5px;
 	color: #fa6800;
 	font-weight: 600;
-	padding: 0.175rem 0.75rem 0.275rem 0.75rem;
+	padding: 0.175rem 0.75rem;
 	text-align: center;
 }
 

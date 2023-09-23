@@ -64,11 +64,11 @@ a:hover {
 
 a:hover,
 a:hover i,
-.textOrange {
+.TextOrange {
 	color: #fa6800;
 }
 
-.textBold {
+.TextBold {
 	font-weight: 600;
 }
 
@@ -107,18 +107,28 @@ input[type='text'],
 input[type='password'],
 input[type='email'],
 input[type='date'],
-textarea {
+textarea,
+.form-control,
+input:-webkit-autofill {
 	background-color: #4a5359!important;
 	border-radius: 5px;
-	color: #bdc3c7!important;
-	font-weight: 600;
+	color: #bdc3c7;
+	font-weight: 600!important;
 }
 
+input:focus,
+textarea:focus,
+.Select:focus {
+	border-color: #fa6800!important;
+	font-weight: 600;
+	outline: none;
+	-webkit-box-shadow: 0px 0px 6px 0px rgba(250,104,0,1)!important;
+	-moz-box-shadow: 0px 0px 6px 0px rgba(250,104,0,1)!important;
+	box-shadow: 0px 0px 6px 0px rgba(250,104,0,1)!important;
+}
 .Select,
 .Select:focus {
 	background-color: #4a5358;
-	border: 0;
-	box-shadow: none;
 	color: #bdc3c7;
 }
 .Select {
@@ -151,6 +161,8 @@ figure {
 }
 
 
+/* user agent stylesheet overrides */
+
 /* scrollbar */
 *::-webkit-scrollbar {
 	width: 5px;
@@ -163,4 +175,37 @@ figure {
 }
 *::-webkit-scrollbar-thumb:hover {
 	background: #555;
+}
+
+/* Date picker icon */
+::-webkit-calendar-picker-indicator {
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23FF5700" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+/* placeholder text */
+::-webkit-input-placeholder,  /* Chrome/Opera/Safari */
+::-moz-placeholder,  /* Firefox 19+ */
+:-ms-input-placeholder,  /* IE10+ */
+::-ms-input-placeholder,  /* Edge */
+::placeholder,  /* modern browsers */
+::placeholder-shown,  /* modern browsers */
+/* bootstrap form-control */
+.form-control::-webkit-input-placeholder,  
+.form-control::-moz-placeholder,
+.form-control:-ms-input-placeholder,
+.form-control::-ms-input-placeholder,
+.form-control::placeholder,
+.form-control::placeholder-shown {
+	color: #a6acaf;
+}
+
+/* input autofill */
+.UserAgentOverride:focus,
+input.UserAgentOverride:-webkit-autofill:focus {
+	color: #bdc3c7;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+	transition: background-color 0s 600000s, color 0s 600000s;
 }

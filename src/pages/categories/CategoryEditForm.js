@@ -130,12 +130,12 @@ function CategoryEditForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Orange}`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-5`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-5 ms-5`} type="submit">
         update
       </Button>
     </div>

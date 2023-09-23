@@ -94,18 +94,18 @@ function ProfilePage() {
               <h3 className="m-2">{profile?.owner}</h3>
             </Col>
             <Col className="d-flex flex-column justify-content-center align-items-center">
-              <h3 className={`${appStyles.underlineOrange} ${appStyles.textBold}`}>
+              <h3 className={`${appStyles.underlineOrange} ${appStyles.TextBold}`}>
                 Tasks
               </h3>
               <Container>
-                <Row className="row-cols-2 mt-3">
+                <Row className="row-cols-1 row-cols-md-2 g-0 mt-3">
                   <Col>
                     <span>Created: </span>
-                    <span className={appStyles.textOrange}>{profileTaskCount}</span>
+                    <span className={appStyles.TextOrange}>{profileTaskCount}</span>
                   </Col>
                   <Col>
                     <span>Assigned: </span>
-                    <span className={appStyles.textOrange}>{assignedTaskCount}</span>
+                    <span className={appStyles.TextOrange}>{assignedTaskCount}</span>
                   </Col>
                 </Row>
               </Container>
@@ -119,7 +119,7 @@ function ProfilePage() {
   // Returns tasks owned by profile owner
   const mainProfileTasks = (
     <>
-      <h3 className={`${appStyles.textBold} ${appStyles.underlineOrange} text-center`}>Created Tasks</h3>
+      <h3 className={`${appStyles.TextBold} ${appStyles.underlineOrange} text-center`}>Created Tasks</h3>
       {profileTasks.results.length ? (
         <InfiniteScroll
           children={profileTasks.results.map((task) => (
@@ -144,7 +144,7 @@ function ProfilePage() {
   // Returns tasks assigned to profile owner
   const mainAssignedTasks = (
     <>
-      <h3 className={`${appStyles.textBold} ${appStyles.underlineOrange} text-center`}>
+      <h3 className={`${appStyles.TextBold} ${appStyles.underlineOrange} text-center`}>
         Assigned Tasks
       </h3>
       {assignedTasks.results.length ? (

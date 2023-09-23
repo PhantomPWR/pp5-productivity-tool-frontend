@@ -65,10 +65,10 @@ const SignUpForm = () => {
           <h1 className={styles.Header}>sign up</h1>
 
           <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="username">
+            <Form.Group className={`mb-3`} controlId="username">
               <Form.Label className="d-none">username</Form.Label>
               <Form.Control
-                className={styles.Input}
+                className={`${styles.Input} ${appStyles.UserAgentOverride}`}
                 type="text"
                 placeholder="Username"
                 name="username"
@@ -85,7 +85,7 @@ const SignUpForm = () => {
             <Form.Group className="mb-3" controlId="password1">
               <Form.Label className="d-none">Password</Form.Label>
               <Form.Control
-                className={styles.Input}
+                className={`${styles.Input} ${appStyles.UserAgentOverride}`}
                 type="password"
                 placeholder="Password"
                 name="password1"
@@ -102,7 +102,7 @@ const SignUpForm = () => {
             <Form.Group controlId="password2">
               <Form.Label className="d-none">Confirm password</Form.Label>
               <Form.Control
-                className={styles.Input}
+                className={`${styles.Input} ${appStyles.UserAgentOverride}`}
                 type="password"
                 placeholder="Confirm password"
                 name="password2"

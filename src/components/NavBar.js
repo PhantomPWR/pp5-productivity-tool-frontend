@@ -109,8 +109,8 @@ const NavBar = () => {
       {/* Profile */}
       <NavLink
         className={styles.NavLink}
+        activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}`}
-        // to={'/'}
       >
         <Avatar src={currentUser?.profile_image} height={40} />
       </NavLink>
@@ -142,7 +142,10 @@ const NavBar = () => {
   return (
     <Navbar expanded={expanded} className={styles.NavBar} expand="lg" fixed="top">
       <Container>
-        <NavLink to='/'>
+        <NavLink
+          to='/'
+          className={styles.BrandLink}
+        >
           <Navbar.Brand className={styles.Brand}>
             <i className="fa-solid fa-calendar-check"></i>
             <em><strong>TICK</strong> OFF</em>

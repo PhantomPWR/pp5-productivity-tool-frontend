@@ -3,6 +3,7 @@
     height: 100px;
     width: 100px;
     margin: 4px;
+    outline: 2px solid #141E22;
 }
 
 .Card {
@@ -24,9 +25,17 @@
     padding: 15px;
 }
 
+
 @media screen and (max-width: 991px) {
     .ProfileImage {
         width: 150px;
         height: 150px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .ProfileImage {
+        width: 100px;
+        height: 100px;
     }
 }

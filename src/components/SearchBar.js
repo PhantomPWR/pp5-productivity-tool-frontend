@@ -73,7 +73,7 @@ function SearchBar({ query, setQuery, taskCount }) {
           <div className={`col-4 col-lg-2 fs-5 ps-0 ${styles.Results}`}>
             <p className="m-0 text-center d-flex align-items-center justify-content-center">
               <span className={`fs-6 ${styles.ResultCount}`}><i class="fa-solid fa-hashtag"></i></span>
-              <span className={`${appStyles.textBold} ${appStyles.textOrange}`}>{taskCount}</span>
+              <span className={`${appStyles.TextBold} ${appStyles.TextOrange}`}>{taskCount}</span>
             </p>
           </div> {/* /col */}
         </Row> {/* /row */}

@@ -1,10 +1,23 @@
 .NavBar {
 	background-color: #333337;
+	box-shadow: 0 0 20px 0 rgba(5,6,7,0.75);
+	padding: 0;
+}
+
+.NavLink,
+.BrandLink {
+	padding: 10px 5px;
+}
+
+.BrandLink {
+	border-bottom: 2px solid transparent;
 }
 
 .Brand {
 	display: flex;
-	align-items: center;
+    align-items: center;
+    padding: 0 7px 0 0;
+    margin-right: 0;
 }
 
 .Brand,
@@ -21,14 +34,11 @@
 
 .Brand i {
 	font-size: 1.6rem;
-	padding: 7px;
 	vertical-align: middle;
 }
 
-.Brand i:hover {
-	cursor: initial;
-	transition: none;
-	color: initial;
+.NavLink i {
+	padding: 7px 7px 7px 0;
 }
 
 .NavLink,
@@ -40,7 +50,6 @@
 	font-weight: 700;
 	display: flex;
 	align-items: center;
-	padding: 5px;
 }
 
 .NavLink:not(:last-child) {
@@ -51,12 +60,16 @@
 	margin-top: 0;
 }
 
+.BrandLink:hover,
 .NavLink:hover,
-.NavLink:hover i,
-.Active,
-.Active i {
+.Active {
+	background-color: #252528;
+	border-color: #252528;
+}
+
+.NavLink:hover,
+.Active {
 	border-color: #fa6800;
-	color: #fa6800;
 }
 
 .NavLink:hover,

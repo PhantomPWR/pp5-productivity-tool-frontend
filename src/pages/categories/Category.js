@@ -13,6 +13,10 @@ import { Card, Media } from "react-bootstrap";
 // Reusable components
 import { MoreDropdown } from "../../components/MoreDropdown";
 
+// Styles
+import appStyles from "../../App.module.css";
+import styles from "../../styles/Category.module.css";
+
 
 const Category = (props) => {
 
@@ -44,13 +48,13 @@ const Category = (props) => {
     <Card>
       <Card.Body>
         <Media className="row">
-              {/* Category Description */}
-              <Media.Body className="align-self-center">
-                <Link to={`/categories/${id}`}>
-                  <h3>{title}</h3>
-                </Link>
-                  <p>{description}</p>
-              </Media.Body>
+          {/* Category Description */}
+          <Media.Body className="align-self-center">
+            <Link to={`/categories/${id}`}>
+              <h3>{title}</h3>
+            </Link>
+              <p>{description}</p>
+          </Media.Body>
           {/* MoreDropdown */}
           <div className="col d-flex justify-content-end">
             { categoryPage && (

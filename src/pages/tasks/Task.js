@@ -270,7 +270,7 @@ const Task = (props) => {
       <Card.Body className={styles.TaskBody}>
         {/* Task List Body */}
         {!taskPage ? (
-          <Row className="row-cols-2">
+          <Row className="row-cols-2 g-0">
             <Col className={`d-flex flex-column justify-content-center align-items-start ${styles.Meta}`}>
               <div className={styles.MetaDetail}>
                 {/* Owner */}

@@ -42,7 +42,7 @@ const Profile = (props) => {
               <Col className='text-center'>
                 <Avatar src={image} height={45} />
               </Col>
-              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.textBold}`}>
+              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.TextBold}`}>
                 {owner}
               </Col>
             </Row>
@@ -57,7 +57,7 @@ const Profile = (props) => {
               <Col>
                 <Avatar src={image} height={45} />
               </Col>
-              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.textBold}`}>
+              <Col className={`text-center mt-1 mt-sm-0 fs-6 ${appStyles.TextBold}`}>
                 {owner}
               </Col>
             </Row>

@@ -72,7 +72,7 @@ function SignInForm() {
     <Row className={styles.Row}>
       <Col className='m-auto p-0 p-md-2' md={6}>
         <Container className={`${appStyles.Content} p-4`}>
-          <h3 className='text-center'>Welcome to Tick Off</h3>
+          <h3 className={`text-center ${appStyles.TextOrange} ${appStyles.TextBold}`}>Welcome to Tick Off</h3>
           <hr />
           <p className='text-center fw-bold'>Tick Off is a simple task manager</p>
           <p className='text-center'>Create, assign and manage tasks.</p>

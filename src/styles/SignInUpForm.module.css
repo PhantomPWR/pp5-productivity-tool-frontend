@@ -2,15 +2,14 @@
 	height: calc(100vh - 81px);
 }
 .Input {
-	background: #ffffff;
-	border: 1px solid #f0f1f9;
 	box-sizing: border-box;
 	border-radius: 2px;
-	color: #7177a1;
+	font-weight: 600;
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 1em;
 }
+
 
 .Header {
 	font-style: normal;
