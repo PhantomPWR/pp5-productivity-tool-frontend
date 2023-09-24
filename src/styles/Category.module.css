@@ -1,19 +1,31 @@
 .Category {
-    background-color: #ffffff;
-    border: 1px solid #dadadf;
-    border-radius: 2px;
-    margin-bottom: 16px;
-    text-align: center;
+	background-color: #32383c;
+	border: 1px solid #40474c;
+	border-radius: 5px;
+	margin-bottom: 16px;
+	text-align: center;
 }
 
- .Category i {
-    font-size: 1.2em;
- }
+.CategoryTitle {
+	color: #bdc3c7;
+	font-weight: 800;
+    position: relative;
+}
+
+.MoreDropdown {
+    position: absolute;
+    right: 0.5em;
+    top: 0;
+}
+
+.MoreDropdown i {
+    font-size: 1.2rem;
+}
 
 .Category a {
     text-decoration: none;
 }
 
 .CategoryBody {
-    background-color: #f4f4f4;
+    background-color: #32383c;
 }

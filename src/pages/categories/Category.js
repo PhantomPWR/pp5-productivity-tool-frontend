@@ -8,7 +8,9 @@ import { Link, useHistory } from "react-router-dom";
 import { axiosRes } from "../../api/axiosDefaults";
 
 // Bootstrap components
-import { Card, Media } from "react-bootstrap";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 // Reusable components
 import { MoreDropdown } from "../../components/MoreDropdown";
@@ -27,8 +29,7 @@ const Category = (props) => {
   const {
     id,
     title,
-    description,
-    categoryPage
+    description
   } = props;
 
   // Handle edit
@@ -40,33 +41,34 @@ const Category = (props) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/categories/${id}/`);
-      history.goBack();
+      history.push(`/categories/`);
     } catch (err) {}
   };
 
   return (
-    <Card>
-      <Card.Body>
-        <Media className="row">
-          {/* Category Description */}
-          <Media.Body className="align-self-center">
-            <Link to={`/categories/${id}`}>
-              <h3>{title}</h3>
-            </Link>
-              <p>{description}</p>
-          </Media.Body>
-          {/* MoreDropdown */}
-          <div className="col d-flex justify-content-end">
-            { categoryPage && (
-              <MoreDropdown
-              handleEdit={handleEdit}
-              handleDelete={handleDelete}
-              />
-            )}
-          </div>
-        </Media>
+    <Card className={styles.Category}>
+      <Card.Body className={styles.CategoryBody}>
+        <Row>
+          {/* Category Title */}
+            <Card.Title
+              className={`fs-4 ${styles.CategoryTitle} ${appStyles.UnderlineOrange}`}
+            >
+              {title}
+              {/* MoreDropdown */}
+              <div className={styles.MoreDropdown}>
+                <MoreDropdown
+                  handleEdit={handleEdit}
+                  handleDelete={handleDelete}
+                />
+              </div>
+            </Card.Title>
+        </Row>
+        {/* Category Description */}
+        <div className={`mt-3 ${styles.CategoryBody}`}>
+          <p>{description}</p>
+        </div>
       </Card.Body>
-    </ Card>
+    </Card>
   );
 };
 

@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 // Custom hooks
-import { useRedirect } from '../../hooks/useRedirect';
+// import { useRedirect } from '../../hooks/useRedirect';
 
 // Axios library for HTTP requests
 import axios from "axios";
@@ -193,7 +193,7 @@ function TaskEditForm() {
     };
     
     fetchTaskCategory();
-  }, []);
+  }, [category]);
 
   // Handle form input change
   const handleChange = (event) => {
@@ -255,9 +255,10 @@ function TaskEditForm() {
   // Form fields
   const textFields = (
     <div className="text-center">
+      <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold}`}>Edit a task</h3>
       
       {/* Title */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Task Title</Form.Label>
         <Form.Control
             type="text"
@@ -273,9 +274,10 @@ function TaskEditForm() {
       ))}
       
       {/* Category */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Task Category</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="category"
           value={category}
@@ -299,13 +301,13 @@ function TaskEditForm() {
       ))}
 
       {/* Due Date */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Due Date</Form.Label>
         <Form.Control
           type="date"
           id="dueDateInput"
           name="due_date"
-          value={selectedDate}
+          value={selectedDate || ''}
           onChange={handleChangeDate}
         />
       </Form.Group>
@@ -316,7 +318,7 @@ function TaskEditForm() {
       ))}
       
       {/* Description */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Task Description</Form.Label>
         <Form.Control
             as="textarea"
@@ -333,9 +335,10 @@ function TaskEditForm() {
       ))}
 
       {/* Task Status */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Task Status</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="task_status"
           value={task_status}
@@ -355,12 +358,13 @@ function TaskEditForm() {
       ))}
 
       {/* Task Priority */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Task Priority</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="priority"
-          value={priority}
+          value={priority || ''}
           onChange={handleChange}
           aria-label="task priority"
         >
@@ -377,12 +381,12 @@ function TaskEditForm() {
       ))}
 
       {/* Assigned to */}
-      <Form.Group>
+      <Form.Group className="text-start">
         <Form.Label>Assigned to</Form.Label>
         <Form.Control
+          className={`form-select ${appStyles.Select}`}
           as="select"
           name="assigned_to"
-          className={appStyles.Input}
           value={assigned_to}
           onChange={handleChange}
           aria-label="assigned to"
@@ -404,12 +408,12 @@ function TaskEditForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Orange}`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-3 ms-5`} type="submit">
         Update
       </Button>
     </div>
@@ -420,13 +424,14 @@ function TaskEditForm() {
 
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col md={7} lg={7} className="d-none d-md-block p-0 p-md-2">
+        <Col md={6} lg={6} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
-        <Col className="py-2 p-0 p-md-2" md={5} lg={5}>
+        <Col className="py-2 p-0 p-md-2" md={6} lg={6}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >
+            <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold} text-center mb-3`}>Attachment</h3>
             <Form.Group className="text-center">
               {image ? (
                 <>

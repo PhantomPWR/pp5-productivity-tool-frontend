@@ -81,10 +81,10 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to="/categories/create"
+        to="/categories"
       >
-        <i className="fas fa-folder-plus"></i>
-        Add category
+        <i className="fas fa-folder"></i>
+        Categories
       </NavLink>
 
       {/* All Tasks */}

@@ -103,8 +103,10 @@ const Task = (props) => {
   useEffect(() => {
     const fetchTaskCategory = async () => {
       try {
-        const response = await axiosReq.get(`/categories/${category}`);
-        setTaskCategory(response.data.title);
+        if (category) {
+          const response = await axiosReq.get(`/categories/${category}`);
+          setTaskCategory(response.data.title);
+        }
       } catch (error) {
         console.error('Error fetching category options:', error);
       }
@@ -112,6 +114,7 @@ const Task = (props) => {
     
     fetchTaskCategory();
   }, [category]);
+
 
   // Fetch assigned user
   useEffect(() => {
@@ -348,8 +351,7 @@ const Task = (props) => {
                 src={image}
                 alt={title}
                 onClick={openModal}
-                className="w-50
-                 mx-auto"
+                className="w-50 mx-auto"
               />
               <Modal
                 show={showModal}

@@ -332,12 +332,12 @@ function TaskCreateForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-5`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-5 ms-5`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-3 ms-5`} type="submit">
         create
       </Button>
     </div>
@@ -354,8 +354,9 @@ function TaskCreateForm() {
         </Col>
         <Col className="py-2 p-0 p-md-2" md={6} lg={6}>
           <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
+            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-start`}
           >
+            <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold} text-center mb-3`}>Attachment</h3>
             <Form.Group className="text-center">
               {image ? (
                 <>

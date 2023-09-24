@@ -72,10 +72,11 @@ function CategoryCreateForm() {
   // Form fields
   const textFields = (
     <div className="text-center">
+    <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold}`}>Create category</h3>
       
       {/* Title */}
-      <Form.Group>
-        <Form.Label>Category Title</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label>Title</Form.Label>
         <Form.Control
             type="text"
             name="title"
@@ -90,8 +91,8 @@ function CategoryCreateForm() {
       ))}
       
       {/* Description */}
-      <Form.Group>
-        <Form.Label>Category Description</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label>Description</Form.Label>
         <Form.Control
             type="text"
             name="description"
@@ -106,12 +107,12 @@ function CategoryCreateForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-5`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-5 ms-5`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-3 ms-5`} type="submit">
         create
       </Button>
     </div>
@@ -124,7 +125,6 @@ function CategoryCreateForm() {
     <Form onSubmit={handleSubmit}>
       <Row>
         <Col md={6} lg={6} className="d-none d-md-block p-0 p-md-2 mx-auto">
-          <h1 className={`${styles.Title} text-center`}>Create Category</h1>
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>

@@ -83,7 +83,7 @@ function CategoryEditForm() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        history.push(`/categories/${id}`)
+        history.push(`/categories/`)
     } catch(err){
         if (err.response?.status !== 401){
           // console.log(err.response?.data);
@@ -96,10 +96,11 @@ function CategoryEditForm() {
   // Form fields
   const textFields = (
     <div className="text-center">
+    <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold}`}>Edit category</h3>
       
       {/* Title */}
-      <Form.Group>
-        <Form.Label>Category Title</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label>Title</Form.Label>
         <Form.Control
             type="text"
             name="title"
@@ -114,8 +115,8 @@ function CategoryEditForm() {
       ))}
       
       {/* Description */}
-      <Form.Group>
-        <Form.Label>Category Description</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label>Description</Form.Label>
         <Form.Control
             type="text"
             name="description"
@@ -130,12 +131,12 @@ function CategoryEditForm() {
       ))}
     
       <Button
-        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-5`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-5 ms-5`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-3 ms-5`} type="submit">
         update
       </Button>
     </div>
@@ -147,15 +148,8 @@ function CategoryEditForm() {
 
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col md={7} lg={7} className="d-none d-md-block p-0 p-md-2">
+        <Col md={6} lg={6} className="d-none d-md-block p-0 p-md-2 mx-auto">
           <Container className={appStyles.Content}>{textFields}</Container>
-        </Col>
-        <Col className="py-2 p-0 p-md-2" md={5} lg={5}>
-          <Container
-            className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
-          >
-            <div className="d-md-none">{textFields}</div>
-          </Container>
         </Col>
       </Row>
     </Form>

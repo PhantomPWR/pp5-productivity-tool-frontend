@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 // Context hooks
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
+// react-router-dom components for page navigation
+import { Link } from "react-router-dom";
+
 // React router components
 import { useLocation } from "react-router";
 
@@ -24,10 +27,11 @@ import Category from "../categories/Category";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 // Styles
 import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/CategoryList.module.css";
 
 // Assets
@@ -71,21 +75,7 @@ function CategoryList({ message, filter = "" }) {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
-        <i className={`fas fa-search ${styles.SearchIcon}`} />
-        <Form
-          className={styles.SearchBar}
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <Form.Control
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            type="text"
-            className="me-sm-2"
-            placeholder="Search categories"
-            aria-label="Search Bar"
-          />
-        </Form>
+      <Col className="py-2 p-0 p-lg-2 mx-auto" lg={6}>
         {hasLoaded ? (
           <>
             {categories.results.length ? (
@@ -111,6 +101,12 @@ function CategoryList({ message, filter = "" }) {
             <Asset spinner />
           </Container>
         )}
+      </Col>
+      <Col className="col-2">
+        <Link to="/categories/create" className={`${styles.AddCategory} ${btnStyles.Button} ${btnStyles.OrangeOutline}`}>
+          <i className="fas fa-folder-plus"></i>
+          <span>Add Category</span>
+        </Link>   
       </Col>
     </Row>
   );

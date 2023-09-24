@@ -37,18 +37,6 @@ h5 {
 	background-color: #32383c;
 }
 
-.Eye {
-	color: #f85032;
-}
-
-.Eye:hover {
-	color: #fa6800;
-}
-
-.EyeOutline:hover {
-	color: #f85032;
-}
-
 .TaskBar {
 	background-color: #32383c;
 	margin-top: 1em;
