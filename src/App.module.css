@@ -14,7 +14,6 @@ body {
 }
 
 .Content {
-	/* background-color: #4a5359; */
 	background-color:  #333337;
 	padding: 10px;
 	border-radius: 2px;
@@ -94,7 +93,7 @@ a:hover i,
 
 form label {
 	color: #bdc3c7;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-weight: 600;
 	margin-top: 1em;
 }

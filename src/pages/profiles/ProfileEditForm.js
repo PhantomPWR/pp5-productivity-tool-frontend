@@ -1,33 +1,48 @@
+// React library & hooks
 import React, { useState, useEffect, useRef } from "react";
+
+// react-router-dom components for page navigation
 import { useHistory, useParams } from "react-router-dom";
 
-import { Container, Row, Col, Form, Button, Image, Alert } from "react-bootstrap"
-
-import { axiosReq } from "../../api/axiosDefaults";
+// Context hooks
 import {
   useCurrentUser,
   useSetCurrentUser,
 } from "../../contexts/CurrentUserContext";
 
-import btnStyles from "../../styles/Button.module.css";
+// Axios library for HTTP requests
+import { axiosReq } from "../../api/axiosDefaults";
+
+// Bootstrap components
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from 'react-bootstrap/Button';
+import Image from "react-bootstrap/Image";
+import Alert from "react-bootstrap/Alert";
+
+// Styles
 import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
+import styles from "../../styles/ProfileEditForm.module.css";
 
 const ProfileEditForm = () => {
+  // Set up state variables
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
   const { id } = useParams();
   const history = useHistory();
   const imageFile = useRef();
-
   const [profileData, setProfileData] = useState({
     name: "",
     content: "",
     image: "",
   });
   const { name, content, image } = profileData;
-
   const [errors, setErrors] = useState({});
 
+  // Check if profile matches current user
   useEffect(() => {
     const handleMount = async () => {
       if (currentUser?.profile_id?.toString() === id) {
@@ -47,6 +62,7 @@ const ProfileEditForm = () => {
     handleMount();
   }, [currentUser, history, id]);
 
+  // Handle profile data changes
   const handleChange = (event) => {
     setProfileData({
       ...profileData,
@@ -54,6 +70,7 @@ const ProfileEditForm = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -77,13 +94,13 @@ const ProfileEditForm = () => {
     }
   };
 
+  // Form fields
   const textFields = (
     <>
-      <Form.Group>
-        <Form.Label
-          className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} w-100 mb-3`}
-        >
-          Bio
+      <h3 className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} mb-3`}>Update profile</h3>
+      <Form.Group className="text-start">
+        <Form.Label className="fs-5">
+          Biography
         </Form.Label>
         <Form.Control
           className={appStyles.UserAgentOverride}
@@ -115,12 +132,20 @@ const ProfileEditForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col className="py-2 p-0 p-md-2 text-center" md={7} lg={6}>
+        <Col md={6} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
+            <Container className={appStyles.Content}>{textFields}</Container>
+        </Col>
+        <Col className="py-2 p-0 p-md-2 text-center" md={6} lg={6}>
           <Container className={appStyles.Content}>
+            <h3 className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} mb-3`}>Profile image</h3>
             <Form.Group>
               {image && (
                 <figure>
-                  <Image src={image} fluid />
+                  <Image
+                    className={styles.ProfileImage}
+                    src={image}
+                    fluid
+                  />
                 </figure>
               )}
               {errors?.image?.map((message, idx) => (
@@ -150,11 +175,8 @@ const ProfileEditForm = () => {
                 }}
               />
             </Form.Group>
-            <div className="d-md-none">{textFields}</div>
+            <div className="d-md-none mt-5">{textFields}</div>
           </Container>
-        </Col>
-        <Col md={5} lg={6} className="d-none d-md-block p-0 p-md-2 text-center">
-          <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
     </Form>

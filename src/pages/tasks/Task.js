@@ -24,6 +24,7 @@ import Media from "react-bootstrap/Media";
 import Modal from "react-bootstrap/Modal";
 
 // Styles
+import appStyles from "../../App.module.css";
 import styles from "../../styles/Task.module.css";
 
 
@@ -190,7 +191,11 @@ const Task = (props) => {
           {/* Task Detail Header */}
           <div className="row text-center">
               {taskPage && title && (
-                    <Card.Title className={`fs-4 mb-5 ${styles.TaskTitle}`}>{title}</Card.Title>
+                    <Card.Title
+                    className={`fs-4 mb-5 ${styles.TaskTitle} ${appStyles.UnderlineOrange}`}
+                    >
+                      {title}
+                    </Card.Title>
                   )}
           </div>
           <div className="d-flex row-cols-4 justify-content-between align-items-center">

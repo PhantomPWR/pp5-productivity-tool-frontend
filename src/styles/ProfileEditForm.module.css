@@ -1,0 +1,8 @@
+.ProfileImage {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    max-width: 240px;
+    width: 100%;
+    height: 100%;
+}

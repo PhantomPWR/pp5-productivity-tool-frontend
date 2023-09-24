@@ -179,10 +179,11 @@ function TaskCreateForm() {
   // Form fields
   const textFields = (
     <div className="text-center">
+      <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold}`}>Create a new task</h3>
       
       {/* Title */}
-      <Form.Group>
-        <Form.Label>Task Title</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Task Title</Form.Label>
         <Form.Control
             type="text"
             name="title"
@@ -197,8 +198,8 @@ function TaskCreateForm() {
       ))}
       
       {/* Category */}
-      <Form.Group>
-        <Form.Label>Task Category</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Task Category</Form.Label>
         <Form.Control
           className={`form-select ${appStyles.Select}`}
           as="select"
@@ -224,8 +225,8 @@ function TaskCreateForm() {
       ))}
 
       {/* Due Date */}
-      <Form.Group>
-        <Form.Label>Due Date</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Due Date</Form.Label>
         <Form.Control
             type="date"
             name="due_date"
@@ -240,8 +241,8 @@ function TaskCreateForm() {
       ))}
       
       {/* Description */}
-      <Form.Group>
-        <Form.Label>Task Description</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Task Description</Form.Label>
         <Form.Control
             as="textarea"
             rows={6}
@@ -257,8 +258,8 @@ function TaskCreateForm() {
       ))}
 
       {/* Task Status */}
-      <Form.Group>
-        <Form.Label>Task Status</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Task Status</Form.Label>
         <Form.Control
           className={`form-select ${appStyles.Select}`}
           as="select"
@@ -281,8 +282,8 @@ function TaskCreateForm() {
       ))}
 
       {/* Task Priority */}
-      <Form.Group>
-        <Form.Label>Task Priority</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Task Priority</Form.Label>
         <Form.Control
           className={`form-select ${appStyles.Select}`}
           as="select"
@@ -304,8 +305,8 @@ function TaskCreateForm() {
       ))}
 
       {/* Assigned to */}
-      <Form.Group>
-        <Form.Label>Assigned to</Form.Label>
+      <Form.Group className="text-start">
+        <Form.Label className="mb-1">Assigned to</Form.Label>
         <Form.Control
           className={`form-select ${appStyles.Select}`}
           as="select"
@@ -348,10 +349,10 @@ function TaskCreateForm() {
 
     <Form onSubmit={handleSubmit}>
       <Row>
-        <Col md={7} lg={7} className="d-none d-md-block p-0 p-md-2">
+        <Col md={6} lg={6} className="d-none d-md-block p-0 p-md-2">
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
-        <Col className="py-2 p-0 p-md-2" md={5} lg={5}>
+        <Col className="py-2 p-0 p-md-2" md={6} lg={6}>
           <Container
             className={`${appStyles.Content} ${styles.Container} d-flex flex-column justify-content-center`}
           >

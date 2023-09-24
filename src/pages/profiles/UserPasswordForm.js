@@ -67,8 +67,9 @@ const UserPasswordForm = () => {
     <Row>
       <Col className="py-2 mx-auto text-center" md={6}>
         <Container className={appStyles.Content}>
+        <h3 className={`${appStyles.UnderlineOrange} ${appStyles.TextBold}`}>Update password</h3>
           <Form onSubmit={handleSubmit}>
-            <Form.Group>
+            <Form.Group className="text-start">
               <Form.Label>New password</Form.Label>
               <Form.Control
                 className={appStyles.UserAgentOverride}
@@ -84,7 +85,7 @@ const UserPasswordForm = () => {
                 {message}
               </Alert>
             ))}
-            <Form.Group>
+            <Form.Group className="text-start">
               <Form.Label>Confirm password</Form.Label>
               <Form.Control
                 className={appStyles.UserAgentOverride}

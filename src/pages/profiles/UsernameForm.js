@@ -67,12 +67,13 @@ const UsernameForm = () => {
     <Row>
       <Col className="py-2 mx-auto text-center" md={6}>
         <Container className={appStyles.Content}>
+          <h3
+            className={`${appStyles.TextBold} ${appStyles.UnderlineOrange}`}
+          >Update username</h3>
           <Form onSubmit={handleSubmit} className="my-2">
-            <Form.Group>
-              <Form.Label
-                className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} w-100 mb-3`}
-              >
-                Update username
+            <Form.Group className="text-start">
+              <Form.Label>
+                Username
               </Form.Label>
               <Form.Control
                 className={appStyles.UserAgentOverride}
