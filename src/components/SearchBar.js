@@ -80,7 +80,7 @@ function SearchBar({ query, setQuery, taskCount }) {
       </Container>
 
       {/* Filter buttons */}
-      <div className={`row row-cols-2 row-cols-lg-4 mb-3 pb-3 justify-content-even g-3 ${appStyles.underlineOrange}`}>
+      <div className={`row row-cols-2 row-cols-lg-4 mb-3 pb-3 justify-content-even g-3 ${appStyles.UnderlineOrange}`}>
         {/* Task Category */}
         <Col>
           <Form.Control

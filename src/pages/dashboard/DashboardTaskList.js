@@ -73,7 +73,7 @@ function DashboardTaskList({ message, filter = "" }) {
                     <Col className={styles.Col}>
                         <Card className={dashboardStyles.Card}>
                             <Card.Body>
-                                <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.underlineOrange}`}>Pending Tasks Owned</Card.Title>
+                                <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.UnderlineOrange}`}>Pending Tasks Owned</Card.Title>
                                 <Card.Text className={dashboardStyles.CardText}>
                                     {hasLoaded ? (
                                         <>
@@ -110,7 +110,7 @@ function DashboardTaskList({ message, filter = "" }) {
                     <Col className={`${styles.Col} mt-3 mt-sm-0`}>
                         <Card className={dashboardStyles.Card}>
                             <Card.Body>
-                                <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.underlineOrange}`}>Pending Tasks Assigned</Card.Title>
+                                <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.UnderlineOrange}`}>Pending Tasks Assigned</Card.Title>
                                 <Card.Text className={dashboardStyles.CardText}>
                                     {hasLoaded ? (
                                         <>

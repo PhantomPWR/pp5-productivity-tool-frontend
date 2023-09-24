@@ -84,7 +84,7 @@ function SignInForm() {
                 type='text'
                 placeholder='Username'
                 name='username'
-                className={styles.Input}
+                className={`${styles.Input} ${appStyles.UserAgentOverride}`}
                 value={username}
                 onChange={handleChange}
               />
@@ -101,7 +101,7 @@ function SignInForm() {
                 type='password'
                 placeholder='Password'
                 name='password'
-                className={styles.Input}
+                className={`${styles.Input} ${appStyles.UserAgentOverride}`}
                 value={password}
                 onChange={handleChange}
               />

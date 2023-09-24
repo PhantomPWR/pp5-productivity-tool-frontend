@@ -72,11 +72,11 @@ a:hover i,
 	font-weight: 600;
 }
 
-.underline {
+.Underline {
 	border-bottom: 2px solid;
 }
 
-.underlineOrange {
+.UnderlineOrange {
 	border-bottom: 2px solid #fa6800;
 	padding-bottom: 0.5rem;
 }
@@ -118,7 +118,8 @@ input:-webkit-autofill {
 
 input:focus,
 textarea:focus,
-.Select:focus {
+.Select:focus,
+button:focus {
 	border-color: #fa6800!important;
 	font-weight: 600;
 	outline: none;

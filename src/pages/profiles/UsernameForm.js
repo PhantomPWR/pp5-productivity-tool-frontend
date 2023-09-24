@@ -69,8 +69,13 @@ const UsernameForm = () => {
         <Container className={appStyles.Content}>
           <Form onSubmit={handleSubmit} className="my-2">
             <Form.Group>
-              <Form.Label>Change username</Form.Label>
+              <Form.Label
+                className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} w-100 mb-3`}
+              >
+                Update username
+              </Form.Label>
               <Form.Control
+                className={appStyles.UserAgentOverride}
                 placeholder="username"
                 type="text"
                 value={username}
@@ -83,13 +88,13 @@ const UsernameForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Orange}`}
+              className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3 me-3`}
               onClick={() => history.goBack()}
             >
               cancel
             </Button>
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Orange}`}
+              className={`${btnStyles.Button} ${btnStyles.Orange} mt-3`}
               type="submit"
             >
               save

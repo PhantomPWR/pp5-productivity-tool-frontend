@@ -71,6 +71,7 @@ const UserPasswordForm = () => {
             <Form.Group>
               <Form.Label>New password</Form.Label>
               <Form.Control
+                className={appStyles.UserAgentOverride}
                 placeholder="new password"
                 type="password"
                 value={new_password1}
@@ -86,6 +87,7 @@ const UserPasswordForm = () => {
             <Form.Group>
               <Form.Label>Confirm password</Form.Label>
               <Form.Control
+                className={appStyles.UserAgentOverride}
                 placeholder="confirm new password"
                 type="password"
                 value={new_password2}
@@ -99,14 +101,14 @@ const UserPasswordForm = () => {
               </Alert>
             ))}
             <Button
-              className={`${btnStyles.Button} ${btnStyles.Orange}`}
+              className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3 me-3`}
               onClick={() => history.goBack()}
             >
               cancel
             </Button>
             <Button
               type="submit"
-              className={`${btnStyles.Button} ${btnStyles.Orange}`}
+              className={`${btnStyles.Button} ${btnStyles.Orange} mt-3`}
             >
               save
             </Button>

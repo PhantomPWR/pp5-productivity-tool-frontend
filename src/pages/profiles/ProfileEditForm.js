@@ -80,8 +80,13 @@ const ProfileEditForm = () => {
   const textFields = (
     <>
       <Form.Group>
-        <Form.Label>Bio</Form.Label>
+        <Form.Label
+          className={`${appStyles.TextBold} ${appStyles.UnderlineOrange} w-100 mb-3`}
+        >
+          Bio
+        </Form.Label>
         <Form.Control
+          className={appStyles.UserAgentOverride}
           as="textarea"
           value={content}
           onChange={handleChange}
@@ -96,12 +101,12 @@ const ProfileEditForm = () => {
         </Alert>
       ))}
       <Button
-        className={`${btnStyles.Button} ${btnStyles.Blue}`}
+        className={`${btnStyles.Button} ${btnStyles.OrangeOutline} mt-3 me-5`}
         onClick={() => history.goBack()}
       >
         cancel
       </Button>
-      <Button className={`${btnStyles.Button} ${btnStyles.Blue}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Orange} mt-3`} type="submit">
         save
       </Button>
     </>
@@ -125,10 +130,10 @@ const ProfileEditForm = () => {
               ))}
               <div>
                 <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
+                  className={`${btnStyles.Button} ${btnStyles.Orange} btn my-auto`}
                   htmlFor="image-upload"
                 >
-                  Change the image
+                  Update image
                 </Form.Label>
               </div>
               <Form.File

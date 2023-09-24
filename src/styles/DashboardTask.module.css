@@ -99,8 +99,8 @@ h5 {
 }
 
 .OverDue {
-	background-color: red;
-	border-color: red;
+	background-color: #ff2b2b;
+	border-color: #ff2b2b;
 }
 
 .DueToday {

@@ -1,7 +1,26 @@
+.DropdownMenu {
+    background-color: #4A5357;
+    box-shadow: 0 4px 10px 0 rgba(5,6,7,0.25);
+}
+
 .DropdownItem {
+    color: #bdc3c7;
+    font-weight: 600;
+}
+
+.Inline {
     display: inline-block;
     max-width: 50%;
-    padding: 0px;
+}
+
+.DropdownItem:hover {
+    background-color: #333337;
+    color: #fa6800;
+}
+
+.Delete i,
+.Delete:hover i {
+    color: #ff2b2b;
 }
 
 .Absolute {
