@@ -63,6 +63,7 @@ const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus }) => {
     <Form>
       <div className="form-group">
         <select className={`form-select ${styles.Select}`} value={newStatus} onChange={handleStatusChange}>
+          {loading && <option value="">Loading...</option>}
           <option value="">Select status</option>
           {Object.keys(status_choices).map((status) => (
             <option key={status} value={status}>

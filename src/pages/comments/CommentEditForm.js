@@ -13,11 +13,11 @@ import styles from "../../styles/CommentCreateEditForm.module.css";
 
 function CommentEditForm(props) {
 
-  // State variables
-  const [formContent, setFormContent] = useState(content);
-
   // Destructure props
   const { id, content, setShowEditForm, setComments } = props;
+
+  // State variables
+  const [formContent, setFormContent] = useState(content);
 
   // Handle change in comment content
   const handleChange = (event) => {

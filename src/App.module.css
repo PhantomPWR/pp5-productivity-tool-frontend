@@ -108,10 +108,11 @@ input[type='email'],
 input[type='date'],
 textarea,
 .form-control,
+.form-control:focus,
 input:-webkit-autofill {
 	background-color: #4a5359!important;
 	border-radius: 5px;
-	color: #bdc3c7;
+	color: #bdc3c7!important;
 	font-weight: 600!important;
 }
 

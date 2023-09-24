@@ -24,7 +24,7 @@ const Profile = (props) => {
   const location = useLocation();
 
   // Destructure props
-  const { profile, mobile, imageSize = 55 } = props;
+  const { profile } = props;
   const { id, image, owner } = profile;
 
   // Check if on dashboard page

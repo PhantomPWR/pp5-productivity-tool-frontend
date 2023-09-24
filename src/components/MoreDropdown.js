@@ -8,7 +8,6 @@ import { useHistory } from "react-router";
 import Dropdown from "react-bootstrap/Dropdown";
 
 // Styles
-import appStyles from "../App.module.css";
 import styles from "../styles/MoreDropdown.module.css";
 
 

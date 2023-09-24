@@ -30,7 +30,6 @@ import Col from "react-bootstrap/Col";
 
 // Styles
 import appStyles from "../../App.module.css";
-import styles from "../../styles/TaskList.module.css";
 
 // Assets
 import NoResults from "../../assets/no-results.png";

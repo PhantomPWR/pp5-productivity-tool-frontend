@@ -38,7 +38,7 @@ const ListProfiles = ({ mobile }) => {
         <Card.Title className={`${styles.CardTitle} ${appStyles.TextBold} ${appStyles.UnderlineOrange} ${appStyles.noRadius}`}>
           Users
         </Card.Title>
-          <Card.Text className={styles.CardText}>
+          <div className={styles.CardText}>
             {listProfiles.results.length ? (
               isDashboardPage ? (
                 <Row className='justify-content-even'>
@@ -60,7 +60,7 @@ const ListProfiles = ({ mobile }) => {
             ) : (
                 <Asset spinner />
             )}
-          </Card.Text>
+          </div>
       </Card.Body>
     </Card>
   );

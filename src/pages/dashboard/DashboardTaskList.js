@@ -74,10 +74,10 @@ function DashboardTaskList({ message, filter = "" }) {
                         <Card className={dashboardStyles.Card}>
                             <Card.Body>
                                 <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.UnderlineOrange}`}>Pending Tasks Owned</Card.Title>
-                                <Card.Text className={dashboardStyles.CardText}>
+                                <div className={dashboardStyles.CardText}>
                                     {hasLoaded ? (
                                         <>
-                                            {console.log('outstandingTasks: ', outstandingTasks)}
+                                            {/* {console.log('outstandingTasks: ', outstandingTasks)} */}
                                             {outstandingTasks.results.length ? (
                                                 <InfiniteScroll
                                                     style={{overflow: 'hidden'}}
@@ -103,7 +103,7 @@ function DashboardTaskList({ message, filter = "" }) {
                                             <Asset spinner />
                                         </Container>
                                     )}
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -111,10 +111,10 @@ function DashboardTaskList({ message, filter = "" }) {
                         <Card className={dashboardStyles.Card}>
                             <Card.Body>
                                 <Card.Title className={`${dashboardStyles.CardTitle} ${appStyles.UnderlineOrange}`}>Pending Tasks Assigned</Card.Title>
-                                <Card.Text className={dashboardStyles.CardText}>
+                                <div className={dashboardStyles.CardText}>
                                     {hasLoaded ? (
                                         <>
-                                            {console.log('assignedTasks: ', assignedTasks)}
+                                            {/* {console.log('assignedTasks: ', assignedTasks)} */}
                                             {assignedTasks.results.length ? (
                                                 <InfiniteScroll
                                                     style={{overflow: 'hidden'}}
@@ -140,7 +140,7 @@ function DashboardTaskList({ message, filter = "" }) {
                                             <Asset spinner />
                                         </Container>
                                     )}
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                     </Col>
