@@ -2,14 +2,13 @@
 import React from "react";
 
 // react-router-dom components for page navigation
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // Axios library for HTTP requests
 import { axiosRes } from "../../api/axiosDefaults";
 
 // Bootstrap components
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 
 // Reusable components

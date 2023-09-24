@@ -27,7 +27,6 @@ import Category from "../categories/Category";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from 'react-bootstrap/Button';
 
 // Styles
 import appStyles from "../../App.module.css";
@@ -45,7 +44,7 @@ function CategoryList({ message, filter = "" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const currentUser = useCurrentUser();
-  const [query, setQuery] = useState('');
+  const [query] = useState('');
 
   useEffect(() => {
 
