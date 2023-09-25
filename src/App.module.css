@@ -67,6 +67,14 @@ a:hover i,
 	color: #fa6800;
 }
 
+.WeightNormal {
+	font-weight: 500;
+}
+
+.TextWhite {
+	color: #fff;
+}
+
 .TextBold {
 	font-weight: 600;
 }
@@ -159,6 +167,11 @@ i {
 figure {
 	text-align: center;
 	display: inline-block;
+}
+
+
+button.close {
+	border: 3px solid red!important;
 }
 
 

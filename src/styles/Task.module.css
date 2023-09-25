@@ -37,6 +37,11 @@ h5 {
 	background-color: #32383c;
 }
 
+.TaskDetailDescription {
+	background-color: #4a5359;
+	border-radius: 5px;
+}
+
 .TaskBar {
 	background-color: #32383c;
 	margin-top: 1em;

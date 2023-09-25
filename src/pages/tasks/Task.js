@@ -195,7 +195,7 @@ const Task = (props) => {
           <div className="row text-center">
               {taskPage && title && (
                     <Card.Title
-                    className={`fs-4 mb-5 ${styles.TaskTitle} ${appStyles.UnderlineOrange}`}
+                    className={`fs-4 mb-3 ${styles.TaskTitle} ${appStyles.UnderlineOrange}`}
                     >
                       {title}
                     </Card.Title>
@@ -203,63 +203,85 @@ const Task = (props) => {
           </div>
           <div className="d-flex row-cols-4 justify-content-between align-items-center">
             {taskPage && (
-              <span className="col-md-3">
-                Created<br />
-                {new Date(created_date).toLocaleDateString("en-GB", {
+              <div className={`col-md-3 flex-column`}>
+                <p className={`${appStyles.TextBold} mb-0 fs-6`}>
+                  Created<br />
+                </p>
+                <p className={`${appStyles.TextWhite} ${appStyles.WeightNormal} mb-0`}>
+                  {new Date(created_date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                </p>
+              </div>
+            )}
+            {taskPage && isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
+              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.OverDue}`}>
+                <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
+                  Overdue<br />
+                </p>
+                <p className={`${appStyles.TextWhite} ${appStyles.WeightNormal} mb-0`}>
+                  {new Date(due_date).toLocaleDateString("en-GB", {
                     day: "2-digit",
                     month: "short",
                     year: "numeric",
                   })}
-              </span>
-            )}
-            {taskPage && isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.OverDue}`}>
-                Overdue<br />
-                {new Date(due_date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
+                </p>
+              </div>
             ) : taskPage && isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.DueToday}`}>
-                Due Today<br />
-                {new Date(due_date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
+              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueToday}`}>
+                <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
+                  Due Today<br />
+                </p>
+                <p className={`${appStyles.TextWhite} ${appStyles.WeightNormal} mb-0`}>
+                  {new Date(due_date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
             ) : taskPage && task_status !== 'COMPLETED' ? (
-              <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.DueDate}`}>
+              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueDate}`}>
+              <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                 Due on<br />
+              </p>
                 {/* {due_date} */}
-                {new Date(due_date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
+                <p className={`${appStyles.TextWhite} ${appStyles.WeightNormal} mb-0`}>
+                  {new Date(due_date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
             ):null}
             {task_status !== 'COMPLETED' && taskPage && showStatusUpdateForm ? (
-              <span className={`col-md-3 ms-auto`}>
-                <span>Update Task Status</span>
+              <div className={`col-md-3 ms-auto flex-column`}>
+              <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
+                Update Task Status
+              </p>
                 <StatusUpdateForm
                   taskId={id}
                   onUpdateStatus={handleStatusUpdate}
                 />
-              </span>
+              </div>
             ) : (
               <>
               {taskPage && (task_status === 'COMPLETED' || taskStatus === 'COMPLETED') ? (
-                <span className={`col-md-3 ms-auto ${styles.StatusBadge} ${styles.Completed}`}>
-                  Completed on<br/>
-                  {new Date(completed_date).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-                </span>
+                <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.Completed}`}>
+                  <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
+                    Completed on<br/>
+                  </p>
+                  <p className={`${appStyles.TextWhite} ${appStyles.WeightNormal} mb-0`}>
+                    {new Date(completed_date).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                  </p>
+                </div>
               ) : null}
               </>
             )}
@@ -336,7 +358,7 @@ const Task = (props) => {
           <>
           <Card.Body className={!taskPage ? "py-0" : ""}>
 
-        <div className="row row-cols-1 row-cols-lg-4 justify-content-between">
+        <div className={`${styles.TaskDetailDescription} row row-cols-1 row-cols-lg-4 justify-content-between p-3`}>
           <div className="col col-lg-8">
             {taskPage && description && (
               <Card.Text align={"left"}>{description}</Card.Text>
@@ -345,7 +367,8 @@ const Task = (props) => {
           {taskPage && (
             <div className="col col-lg-2 text-center">
               <Card.Text className="d-flex align-items-center">
-                <i className="fas fa-paperclip"></i> Attachment
+                <i className="fas fa-paperclip"></i> 
+                <span className={appStyles.TextBold}>Attachment</span>
               </Card.Text>
               <Card.Img
                 src={image}
@@ -358,9 +381,21 @@ const Task = (props) => {
                 onHide={() => setShowModal(false)}
                 size="lg"
                 closeVariant="black"
+                className={appStyles.Modal}
               >
-                <Modal.Header closeButton></Modal.Header>
-                <Modal.Body>
+                <Modal.Header
+                  closeButton
+                  style={{
+                  backgroundColor: '#32383C',
+                  borderBottom: '2px solid #fa6800',
+                }}
+                ></Modal.Header>
+                <Modal.Body
+                  style={{
+                  backgroundColor: '#32383C',
+                  padding: '1em',
+                }}
+                >
                   <Card.Img src={image} alt={title} />
                 </Modal.Body>
               </Modal>
