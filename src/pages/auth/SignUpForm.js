@@ -10,6 +10,9 @@ import { useRedirect } from '../../hooks/useRedirect';
 // Axios library for HTTP requests
 import axios from "axios";
 
+// Reusable components
+import CopyRightContact from "../../components/CopyrightContact";
+
 // Bootstrap components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -135,6 +138,8 @@ const SignUpForm = () => {
             Already have an account? <span>Sign in</span>
           </Link>
         </Container>
+        {/* Copyright & Contact */}
+        <CopyRightContact />
       </Col>
     </Row>
   );

@@ -13,8 +13,10 @@ import Avatar from "../../components/Avatar";
 // Bootstrap components
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
 
 // Styles
+import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
 
@@ -74,13 +76,13 @@ function CommentCreateForm(props) {
           />
         </InputGroup>
       </Form.Group>
-      <button
-        className={`${styles.Button} btn d-block ms-auto`}
+      <Button
+        className={`${btnStyles.Button} d-block ms-auto mt-3`}
         disabled={!content.trim()}
         type="submit"
       >
         post
-      </button>
+      </Button>
     </Form>
   );
 }

@@ -6,8 +6,10 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 // Bootstrap components
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 // Styles
+import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
 
@@ -68,13 +70,13 @@ function CommentEditForm(props) {
         >
           cancel
         </button>
-        <button
-          className={styles.Button}
+        <Button
+          className={btnStyles.Button}
           disabled={!content.trim()}
           type="submit"
         >
           save
-        </button>
+        </Button>
       </div>
     </Form>
   );

@@ -41,7 +41,7 @@ function DashboardPage() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col className='px-0'>
+                    <Col>
                         <ProfileList/>
                     </Col>
                 </Row>

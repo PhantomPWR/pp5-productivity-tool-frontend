@@ -18,6 +18,14 @@
 .TaskTitle {
 	color: #bdc3c7;
 	font-weight: 800;
+	position: relative;
+}
+
+.MoreDropdown {
+	font-size: 1rem;
+	position: absolute;
+	top: -2px;
+	right: 1em;
 }
 
 .Task figure,
@@ -114,5 +122,28 @@ h5 {
 	.StatusBadge {
 		display: flex;
 		flex-direction: column;
+	}
+}
+
+@media (max-width: 375px) {
+	.StatusUpdateForm {
+		margin-top: 2em;
+		min-width: 100%;
+	}
+	.AssignLabel {
+		margin-bottom: 1em;
+		min-width: 100%;
+	}
+	.Assigned {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+	}
+	.Meta {
+		display: flex;
+		flex-direction: column;
+	}
+	.MetaItem {
+		width: 100%;
 	}
 }

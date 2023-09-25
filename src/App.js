@@ -60,18 +60,6 @@ function App() {
         ) : (
           <Switch>
             <Route exact path="/" render={() => <HomePage />} />
-            <Route
-              exact
-              path="/mytasks"
-              render={() => (
-                <TaskList
-                  message="No results found. Adjust your search keyword."
-                  // filter={`tasks__owner__profile=${profile_id}&assigned_to=${profile_id}`}
-                  filter={`&assigned_to=${profile_id}`}
-                />
-              )}
-            />
-
             <Route exact path="/dashboard" render={() => <DashboardPage />} />
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
             <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
@@ -100,7 +88,8 @@ function App() {
             />
             <Route render={() => <NotFound />} />
           </Switch>
-          )}
+          )
+        }
         </Container>
     </div>
   );

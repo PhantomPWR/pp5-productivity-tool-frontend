@@ -67,26 +67,6 @@ const NavBar = () => {
         Dashboard
       </NavLink>
 
-      {/* Add Task */}
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/tasks/create"
-      >
-        <i className="far fa-plus-square"></i>
-        Add task
-      </NavLink>
-
-      {/* Add Category */}
-      <NavLink
-        className={styles.NavLink}
-        activeClassName={styles.Active}
-        to="/categories"
-      >
-        <i className="fas fa-folder"></i>
-        Categories
-      </NavLink>
-
       {/* All Tasks */}
       <NavLink
         className={styles.NavLink}
@@ -97,12 +77,33 @@ const NavBar = () => {
         All Tasks
       </NavLink>
 
+      {/* Add Task */}
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/tasks/create"
+      >
+        <i className="far fa-plus-square"></i>
+        Add task
+      </NavLink>
+
+      {/* Categories */}
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/categories"
+      >
+        <i className="fas fa-folder"></i>
+        Categories
+      </NavLink>
+
+
       {/* Sign Out */}
       <NavLink className={styles.NavLink}
         to="/"
         onClick={handleSignOut}
       >
-        <i className="fas fa-sign-out-alt"></i>
+        <i className="fas fa-person-walking-arrow-right"></i>
         Sign out
       </NavLink>
 

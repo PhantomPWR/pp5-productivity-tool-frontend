@@ -204,12 +204,20 @@ const Task = (props) => {
                     className={`fs-4 mb-3 ${styles.TaskTitle} ${appStyles.UnderlineOrange}`}
                     >
                       {title}
+                      <span className={styles.MoreDropdown}>
+                        {is_owner && taskPage && (
+                          <MoreDropdown
+                            handleEdit={handleEdit}
+                            handleDelete={handleDelete}
+                          />
+                        )}
+                      </span>
                     </Card.Title>
                   )}
           </div>
-          <div className="d-flex row-cols-4 justify-content-between align-items-center">
+          <div className="d-flex row-cols-2 row-cols-md-3 justify-content-between align-items-center flex-wrap g-3">
             {taskPage && (
-              <div className={`col-md-3 flex-column`}>
+              <div className={`col col-md-3 flex-column`}>
                 <p className={`${appStyles.TextBold} mb-0 fs-6`}>
                   Created<br />
                 </p>
@@ -223,7 +231,7 @@ const Task = (props) => {
               </div>
             )}
             {taskPage && isDueDateInPast && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.OverDue}`}>
+              <div className={`col col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.OverDue}`}>
                 <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                   Overdue<br />
                 </p>
@@ -236,7 +244,7 @@ const Task = (props) => {
                 </p>
               </div>
             ) : taskPage && isDueDateToday && task_status !== 'COMPLETED' && showStatusUpdateForm ? (
-              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueToday}`}>
+              <div className={`col col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueToday}`}>
                 <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                   Due Today<br />
                 </p>
@@ -249,7 +257,7 @@ const Task = (props) => {
                 </p>
               </div>
             ) : taskPage && task_status !== 'COMPLETED' ? (
-              <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueDate}`}>
+              <div className={`col col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.DueDate}`}>
               <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                 Due on<br />
               </p>
@@ -264,7 +272,7 @@ const Task = (props) => {
               </div>
             ):null}
             {task_status !== 'COMPLETED' && taskPage && showStatusUpdateForm ? (
-              <div className={`col-md-3 ms-auto flex-column`}>
+              <div className={`col col-md-3 ms-auto flex-column ${styles.StatusUpdateForm}`}>
               <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                 Update Task Status
               </p>
@@ -276,7 +284,7 @@ const Task = (props) => {
             ) : (
               <>
               {taskPage && (task_status === 'COMPLETED' || taskStatus === 'COMPLETED') ? (
-                <div className={`col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.Completed}`}>
+                <div className={`col col-md-3 ms-auto flex-column ${styles.StatusBadge} ${styles.Completed}`}>
                   <p className={`${appStyles.TextBold} ${appStyles.TextWhite} mb-0 fs-6`}>
                     Completed on<br/>
                   </p>
@@ -291,14 +299,6 @@ const Task = (props) => {
               ) : null}
               </>
             )}
-            <span className="col-1 d-flex justify-content-end">
-              {is_owner && taskPage && (
-                <MoreDropdown
-                  handleEdit={handleEdit}
-                  handleDelete={handleDelete}
-                />
-              )}
-            </span>
           </div>
         </Media>
       </Card.Body>
@@ -372,7 +372,7 @@ const Task = (props) => {
           </div>
           {taskPage && (
             <div className="col col-lg-2 text-center">
-              <Card.Text className="d-flex align-items-center">
+              <Card.Text className="d-flex align-items-center justify-content-center mt-5 mt-md-0 card-text">
                 <i className="fas fa-paperclip"></i> 
                 <span className={appStyles.TextBold}>Attachment</span>
               </Card.Text>
@@ -417,27 +417,28 @@ const Task = (props) => {
           <div className={styles.TaskBar}>
             {/* Assigned User */}
             <div align="center">
-              <strong className="fw-bold">Assigned to: </strong>
-              <div className="row">
-                <p className="col-6">
+              <div className="row row-cols-md-3 d-flex g-0">
+                <strong className={`fw-bold fs-6 col ${styles.AssignLabel}`}>Assigned to: </strong>
+                <p className={`col ${styles.Assigned}`}>
                   <i className="fas fa-crown"></i>
                   {owner}
                 </p>
-                <p className="col-6">
+                <p className={`col ${styles.Assigned}`}>
                   <i className="fas fa-user-check" />
                   {assignedUser}
                 </p>
               </div>
             </div>
-            <div className="row row-cols-3 justify-content-between">
+            <hr className="mt-0"/>
+            <div className={`row row-cols-3 justify-content-between ${styles.Meta}`}>
               {/* Category */}
-              <span className="col">
+              <span className={`col ${styles.MetaItem}`}>
                 <i className="far fa-folder" />
                 Category: {taskCategory}
               </span>
 
               {/* Task Status */}
-              <span className="col">
+              <span className={`col ${styles.MetaItem}`}>
                 <span><i className="fas fa-list-check"></i>Status:  </span>
                 { !taskStatus ? (
                   <TaskStatus taskStatus={task_status} />
@@ -447,7 +448,7 @@ const Task = (props) => {
               </span>
 
               {/* Priority */}
-              <span className="col">
+              <span className={`col ${styles.MetaItem}`}>
                 <i className="fas fa-triangle-exclamation"></i>
                 Priority: {priority_choices[priority]}
               </span>

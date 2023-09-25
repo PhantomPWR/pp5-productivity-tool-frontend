@@ -1,0 +1,13 @@
+.Copyright,
+.Contact {
+    margin: 0;
+}
+
+.Copyright {
+    font-size: 0.8rem;
+}
+
+.Contact {
+    font-size: 1.2rem;
+    text-align: right;
+}

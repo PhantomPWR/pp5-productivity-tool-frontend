@@ -30,7 +30,8 @@ const ListProfiles = ({ mobile }) => {
   const { listProfiles } = useProfileData();
 
   // Check if on dashboard page
-  const isDashboardPage = location.pathname === '/';
+  const isDashboardPage = location.pathname === '/dashboard';
+  const isHomePage = location.pathname === '/';
 
   return (
     <Card className={`${styles.Card} mt-3`}>
@@ -40,7 +41,7 @@ const ListProfiles = ({ mobile }) => {
         </Card.Title>
           <div className={styles.CardText}>
             {listProfiles.results.length ? (
-              isDashboardPage ? (
+              isDashboardPage || isHomePage ? (
                 <Row className='justify-content-even'>
                   {listProfiles.results.map((profile) => (
                     <Col key={profile.id}>

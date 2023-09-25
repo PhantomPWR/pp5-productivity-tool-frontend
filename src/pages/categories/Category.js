@@ -7,12 +7,12 @@ import { useHistory } from "react-router-dom";
 // Axios library for HTTP requests
 import { axiosRes } from "../../api/axiosDefaults";
 
+// Reusable components
+import { MoreDropdown } from "../../components/MoreDropdown";
+
 // Bootstrap components
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
-
-// Reusable components
-import { MoreDropdown } from "../../components/MoreDropdown";
 
 // Styles
 import appStyles from "../../App.module.css";

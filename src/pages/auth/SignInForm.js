@@ -16,6 +16,9 @@ import axios from 'axios';
 // Utils
 import { setTokenTimestamp } from '../../utils/utils';
 
+// Reusable components
+import CopyRightContact from '../../components/CopyrightContact';
+
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -130,6 +133,8 @@ function SignInForm() {
             Don't have an account? <span>Sign up here.</span>
           </Link>
         </Container>
+        {/* Copyright & Contact */}
+        <CopyRightContact />
       </Col>
     </Row>
   );

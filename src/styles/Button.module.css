@@ -45,7 +45,8 @@
 	color: #ffffff;
 }
 
-.OrangeOutline {
+.OrangeOutline,
+.Button:disabled {
 	background-color: transparent;
 	border-color: #fa6800;
 }
