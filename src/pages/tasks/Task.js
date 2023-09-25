@@ -26,6 +26,7 @@ import Modal from "react-bootstrap/Modal";
 // Styles
 import appStyles from "../../App.module.css";
 import styles from "../../styles/Task.module.css";
+import { Button } from "react-bootstrap";
 
 
 // Define priority choices
@@ -82,6 +83,11 @@ const Task = (props) => {
   // Open modal
   const openModal = () => {
     setShowModal(true);
+  };
+
+  // Close modal
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   // Handle task edit
@@ -384,12 +390,17 @@ const Task = (props) => {
                 className={appStyles.Modal}
               >
                 <Modal.Header
-                  closeButton
                   style={{
                   backgroundColor: '#32383C',
                   borderBottom: '2px solid #fa6800',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
                 }}
-                ></Modal.Header>
+                >
+                  <Button className={appStyles.CloseModal} onClick={handleCloseModal} type="button">
+                    <i className="fas fa-times"></i>
+                  </Button>
+                </Modal.Header>
                 <Modal.Body
                   style={{
                   backgroundColor: '#32383C',

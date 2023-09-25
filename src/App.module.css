@@ -170,8 +170,9 @@ figure {
 }
 
 
-button.close {
-	border: 3px solid red!important;
+.CloseModal {
+	background-color: transparent;
+	border: 0;
 }
 
 
