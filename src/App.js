@@ -10,7 +10,6 @@ import './api/axiosDefaults';
 // Reusable components
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
-import DashboardPage from './pages/dashboard/DashboardPage';
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -19,6 +18,8 @@ import Container from 'react-bootstrap/Container';
 import styles from './App.module.css';
 
 // Pages
+import DashboardPage from './pages/dashboard/DashboardPage';
+import HomePage from './pages/home/HomePage';
 import ProfileList from './pages/profiles/ProfileList';
 import ProfilePage from './pages/profiles/ProfilePage';
 import CategoryList from './pages/categories/CategoryList';
@@ -58,7 +59,7 @@ function App() {
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" render={() => <DashboardPage />} />
+            <Route exact path="/" render={() => <HomePage />} />
             <Route
               exact
               path="/mytasks"
@@ -71,6 +72,7 @@ function App() {
               )}
             />
 
+            <Route exact path="/dashboard" render={() => <DashboardPage />} />
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
             <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />
             <Route exact path="/tasks/:id" render={() => <TaskPage />} />

@@ -1,5 +1,6 @@
-.Button,
-.Button:hover {
+
+.Button *,
+.Button:hover * {
 	transition: all ease-in-out 0.3s;
 }
 
@@ -63,6 +64,11 @@
 .Orange:hover,
 .OrangeOutline:hover {
 	background-color: #fa6800;
+	color: #fff;
+}
+
+.OrangeOutline:hover span,
+.OrangeOutline:hover i {
 	color: #fff;
 }
 

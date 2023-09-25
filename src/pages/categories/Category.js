@@ -40,9 +40,20 @@ const Category = (props) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/categories/${id}/`);
+
+      // Get the updated categories list by filtering out the deleted category
+      const updatedCategories = {
+        ...props.categories,
+        results: props.categories.results.filter((category) => category.id !== id),
+      };
+
+      // Update the categories list in the CategoryList component
+      props.setCategories(updatedCategories);
+
       history.push(`/categories/`);
     } catch (err) {}
   };
+
 
   return (
     <Card className={styles.Category}>

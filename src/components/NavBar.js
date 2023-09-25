@@ -61,7 +61,7 @@ const NavBar = () => {
         exact
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to='/'
+        to='/dashboard'
       >
         <i className='fs-6 fas fa-dashboard'></i>
         Dashboard

@@ -58,7 +58,7 @@ function CategoryCreateForm() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        history.push(`/categories/${data.id}`)
+        history.push(`/categories`)
     } catch(err){
         if (err.response?.status !== 401){
           // console.log(err.response?.data);

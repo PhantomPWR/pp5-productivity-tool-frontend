@@ -73,41 +73,52 @@ function CategoryList({ message, filter = "" }) {
   }, [filter, query, pathname, currentUser]);
 
   return (
-    <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2 mx-auto" lg={6}>
-        {hasLoaded ? (
-          <>
-            {categories.results.length ? (
-              <InfiniteScroll
-                children={
-                  categories.results.map((category) => (
-                    <Category key={category.id} {...category} setCategories={setCategories} />
-                ))}
-                dataLength={categories.results.length}
-                loader={<Asset spinner />}
-                hasMore={!!categories.next}
-                next={() => fetchMoreData(categories, setCategories)}
-              />
-              
-            ) : (
-              <Container className={appStyles.Content}>
-                <Asset src={NoResults} message={message} />
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className={appStyles.Content}>
-            <Asset spinner />
-          </Container>
-        )}
+    <Container>
+    <Col lg={6} className="mx-auto">
+      <Row className="text-center mt-3 g-0 justify-content-between">
+        <Col>
+          <h1 className={appStyles.Heading}>Categories</h1>
+        </Col>
+        <Col className="d-flex justify-content-end me-3">
+        <Link to="/categories/create" className={`${styles.AddCategory} ${btnStyles.Button} ${btnStyles.OrangeOutline} d-inline-flex align-items-center mb-3`}>
+            <i className="fas fa-folder-plus"></i>
+            <span>Add</span>
+          </Link> 
+        </Col>
+      </Row>
       </Col>
-      <Col className="col-2">
-        <Link to="/categories/create" className={`${styles.AddCategory} ${btnStyles.Button} ${btnStyles.OrangeOutline}`}>
-          <i className="fas fa-folder-plus"></i>
-          <span>Add Category</span>
-        </Link>   
-      </Col>
-    </Row>
+      <Row className="h-100">
+        <Col className="py-2 p-0 p-lg-2 mx-auto" lg={6}>
+          
+          {hasLoaded ? (
+            <>
+              {categories.results.length ? (
+                <InfiniteScroll
+                  children={
+                    categories.results.map((category) => (
+                      <Category key={category.id} {...category} setCategories={setCategories} categories={categories} />
+                    ))
+                  }
+                  dataLength={categories.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!categories.next}
+                  next={() => fetchMoreData(categories, setCategories)}
+                />
+                
+              ) : (
+                <Container className={appStyles.Content}>
+                  <Asset src={NoResults} message={message} />
+                </Container>
+              )}
+            </>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset spinner />
+            </Container>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
