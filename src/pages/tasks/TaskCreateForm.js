@@ -146,6 +146,11 @@ function TaskCreateForm() {
       setErrors({ assigned_to: ['Please select a user'] });
       return;
     }
+    // Check if due_date is empty
+    if (!due_date) {
+      setErrors({ due_date: ['Please select a due date'] });
+      return;
+    }
     const formData = new FormData();
 
     formData.append('title', title);

@@ -10,6 +10,14 @@
     line-height: 1.3;
 }
 
+.BodyContainer p {
+    margin-bottom: 0.5em;
+}
+
+.ContainerLast {
+    margin-bottom: 6em;
+}
+
 .Card {
     background-color: #333337;
 }
@@ -45,4 +53,52 @@
 .Link,
 .Link i {
     color: #fa6800;
+}
+
+.StatusBadge {
+	border: 1px solid #bdc3c7;
+	border-radius: 5px;
+	color: #fff;
+	font-weight: 500;
+	display: inline-flex;
+	justify-content: space-evenly;
+	align-items: center;
+	padding: 0 0 0 3px;
+}
+
+.BadgeLabel,
+.BadgeDate {
+	color: inherit;
+	text-align: center;
+}
+
+.BadgeLabel {
+	font-weight: 600;
+}
+
+.BadgeDate {
+	background-color: #32383C;
+	border-radius: 0 5px 5px 0;
+	margin-left: 0.3em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.DueDate {
+	border: 1px solid;
+	color: #bdc3c7;
+}
+
+.OverDue {
+	background-color: #ff2b2b;
+	border-color: #ff2b2b;
+}
+
+.DueToday {
+	background-color: darkorange;
+	border-color: darkorange;
+}
+
+.Completed {
+	background-color: green;
+	border-color: green;
 }

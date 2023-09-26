@@ -74,7 +74,7 @@ const NavBar = () => {
         to={`/tasks/`}
       >
         <i className="fas fa-list-check"></i>
-        All Tasks
+        All tasks
       </NavLink>
 
       {/* Add Task */}
