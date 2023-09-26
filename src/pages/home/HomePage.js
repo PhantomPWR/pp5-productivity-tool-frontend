@@ -41,6 +41,26 @@ function HomePage() {
         </div>
     );
 
+    // Navigating
+    const homeNavigate = (
+        <>
+            <h3 className={`${appStyles.UnderlineOrange} my-3`}>Finding your way</h3>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 fs-6`}>Tick Off Logo</strong>
+            <p>Brings you back to this page.</p>
+
+            {/* Dashboard */}
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-dashboard ps-0'></i> Dashboard</strong>
+            <p>Gives you a bird's-eye view of pending tasks you created, and pending tasks assigned to you.</p>
+            <p>Colour-coded due dates allow you to immediately see tasks due in the future, tasks due today and overdue tasks.</p>
+            <p>Completed tasks are not displayed on the dashboard, to avoid noise and clutter.</p>
+            <p>Clicking/tapping on a tasks will take you to the Task Detail page, where you can manage the task further.</p>
+
+            {/* All Tasks */}
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0'></i> All Tasks</strong>
+            <p>Displays a complete list of tasks, </p>
+        </>
+    )
+
     return (
         <>
             <Container fluid className={`{styles.Container}`}>
@@ -55,10 +75,15 @@ function HomePage() {
                     </Col>
                 </Row>
                 <Row>
+                    <Col>
+                        {homeNavigate}
+                    </Col>
+                </Row>
+                {/* <Row>
                     <Col className=''>
                         <ProfileList/>
                     </Col>
-                </Row>
+                </Row> */}
 
             </Container>
         </>
