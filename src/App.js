@@ -10,6 +10,7 @@ import './api/axiosDefaults';
 // Reusable components
 import NavBar from './components/NavBar';
 import NotFound from './components/NotFound';
+import CopyRightContact from './components/CopyrightContact';
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -91,6 +92,13 @@ function App() {
           )
         }
         </Container>
+
+        {currentUser && (
+          <div className={styles.Footer}>
+            <CopyRightContact />
+          </div>
+        )}
+        
     </div>
   );
 }

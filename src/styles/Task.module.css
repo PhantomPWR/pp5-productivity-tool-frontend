@@ -12,7 +12,7 @@
 }
 
 .TaskLink:hover > div {
-	background-color: #4a5359;
+	background-color: #4a5358;
 }
 
 .TaskTitle {
@@ -46,7 +46,7 @@ h5 {
 }
 
 .TaskDetailDescription {
-	background-color: #4a5359;
+	background-color: #4a5358;
 	border-radius: 5px;
 }
 

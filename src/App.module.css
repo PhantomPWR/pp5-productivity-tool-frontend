@@ -1,4 +1,5 @@
 body {
+	background-color: #141E23;
 	font-size: 14px;
 }
 
@@ -7,10 +8,15 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
 	min-height: 100vh;
+
 }
 
 .Main {
+	background-color: #141E23;
+	margin-bottom: 40px;
 	padding-top: 81px;
+	position: relative;
+	z-index: 1;
 }
 
 .Content {
@@ -118,7 +124,7 @@ textarea,
 .form-control,
 .form-control:focus,
 input:-webkit-autofill {
-	background-color: #4a5359!important;
+	background-color: #4a5358!important;
 	border-radius: 5px;
 	color: #bdc3c7!important;
 	font-weight: 600!important;
@@ -149,7 +155,7 @@ button:focus {
 }
 
 .Link:hover {
-	background-color: #4a5359;
+	background-color: #4a5358;
 }
 
 i {
@@ -169,6 +175,15 @@ figure {
 	display: inline-block;
 }
 
+.Divider {
+	border-color: #bdc3c7;
+}
+
+.Footer {
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
 .CloseModal {
 	background-color: transparent;

@@ -429,17 +429,17 @@ const Task = (props) => {
                 </p>
               </div>
             </div>
-            <hr className="mt-0"/>
+            <hr className={`${appStyles.Divider} mt-0`}/>
             <div className={`row row-cols-3 justify-content-between ${styles.Meta}`}>
               {/* Category */}
               <span className={`col ${styles.MetaItem}`}>
                 <i className="far fa-folder" />
-                Category: {taskCategory}
+                {taskCategory}
               </span>
 
               {/* Task Status */}
               <span className={`col ${styles.MetaItem}`}>
-                <span><i className="fas fa-list-check"></i>Status:  </span>
+                <span><i className="fas fa-list-check"></i></span>
                 { !taskStatus ? (
                   <TaskStatus taskStatus={task_status} />
                 ) : (
@@ -450,7 +450,7 @@ const Task = (props) => {
               {/* Priority */}
               <span className={`col ${styles.MetaItem}`}>
                 <i className="fas fa-triangle-exclamation"></i>
-                Priority: {priority_choices[priority]}
+                {priority_choices[priority]}
               </span>
             </div>
           </div>

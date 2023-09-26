@@ -22,7 +22,9 @@ const CopyRightContact = () => {
             <Row className="mt-2 align-items-center">
                 <Col>
                     <p className={styles.Copyright}>
-                        &copy; {currentYear} | Jean de Villiers
+                        <span>
+                            &copy; {currentYear} | Jean de Villiers
+                        </span>
                     </p>
                 </Col>
                 <Col>
