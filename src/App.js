@@ -9,7 +9,7 @@ import './api/axiosDefaults';
 
 // Reusable components
 import NavBar from './components/NavBar';
-import NotFound from './components/NotFound';
+import PageNotFound from './components/PageNotFound';
 import CopyRightContact from './components/CopyrightContact';
 import ScrollTop from './components/ScrollTop';
 
@@ -87,7 +87,7 @@ function App() {
               path="/profiles/:id/edit"
               render={() => <ProfileEditForm />}
             />
-            <Route render={() => <NotFound />} />
+            <Route render={() => <PageNotFound />} />
           </Switch>
           )
         }
