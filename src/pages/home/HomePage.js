@@ -1,16 +1,13 @@
 // React
 import React from 'react';
 
+// Context hooks
 import {useCurrentUser} from '../../contexts/CurrentUserContext';
-
-// Reusable components
-import ProfileList from "../profiles/ProfileList";
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 
 // Styles
 import appStyles from '../../App.module.css';

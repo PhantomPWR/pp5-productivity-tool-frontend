@@ -151,7 +151,7 @@ function ProfilePage() {
         <React.Fragment>
           <InfiniteScroll
             children={assignedTasks.results.map((task) => {
-              console.log(task);
+              // console.log(task);
               if (task.assigned_to === profile.id) {
                 return (
                   <Task key={task.id} {...task} setTasks={setAssignedTasks} />
@@ -191,10 +191,10 @@ function ProfilePage() {
                 <Card.Title className={styles.CardTitle}>
                   {mainProfile}
                 </Card.Title>
-                  <Card.Text className={styles.CardText}>
+                  <div className={styles.CardText}>
                     {mainProfileTasks}
                     {mainAssignedTasks}
-                  </Card.Text>
+                  </div>
               </>
             ) : (
               <Asset spinner />

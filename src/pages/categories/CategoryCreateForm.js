@@ -53,18 +53,19 @@ function CategoryCreateForm() {
     formData.append('description', description);
   
     try {
-        const {data} = await axiosReq.post('/categories/', formData, {
+      await axiosReq.post('/categories/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
         });
-        history.push(`/categories`)
-    } catch(err){
+        history.push(`/categories`);
+      } catch(err){
         if (err.response?.status !== 401){
-          // console.log(err.response?.data);
-          setErrors(err.response?.data);
+            // console.log(err.response?.data);
+            setErrors(err.response?.data);
         }
-    }
+  }
+  
 
   }
 

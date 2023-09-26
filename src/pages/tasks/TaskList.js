@@ -93,7 +93,7 @@ function TaskList({ message, filter = "" }) {
             <SearchBar query={query} setQuery={setQuery} taskCount={tasks.count} />
             {hasLoaded ? (
               <>
-                {console.log('tasks: ', tasks)}
+                {/* {console.log('tasks: ', tasks)} */}
                 {tasks.results.length ? (
                   <InfiniteScroll
                     key={tasks.results.map(task => task.id).join(",")}
