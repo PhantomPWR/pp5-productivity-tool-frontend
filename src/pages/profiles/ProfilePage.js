@@ -76,9 +76,7 @@ function ProfilePage() {
   }, [id, setProfileData]);
 
   // Calculate task count
-  // const profileTaskCount = profileTasks.results.length;
   const profileTaskCount = profileTasks.count;
-  // const assignedTaskCount = assignedTasks.results.length;
   const assignedTaskCount = assignedTasks.count;
 
   // Returns profile & task details
