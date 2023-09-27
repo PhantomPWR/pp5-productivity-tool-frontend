@@ -24,7 +24,7 @@ const PageNotFound = () => {
                 </h2>
                 <Link
                 to="/home"
-                aria-label='Home'
+                aria-label='Back to home page'
                 >
                     <Button>
                     This way <i aria-hidden="true" className="fas fa-arrow-right ml-2" />

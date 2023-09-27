@@ -37,7 +37,8 @@ const ScrollTop = () => {
                     className={`btn btn-outline-secondary ${styles.ScrollTop}`}
                     onClick={scrollToTop}
                 >
-                    <i className="fas fa-arrow-up" />
+                    <i aria-hidden="true" className="fas fa-arrow-up" />
+                    <span className="sr-only">Scroll to top</span>
                 </button>
             )}
         </>

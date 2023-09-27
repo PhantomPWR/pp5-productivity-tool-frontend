@@ -71,7 +71,10 @@ const Comment = (props) => {
           </div>
           <div className="col d-flex justify-content-start">
             {/* Profile Image */}
-            <Link to={`/profiles/${profile_id}`}>
+            <Link
+              to={`/profiles/${profile_id}`}
+              aria-label='Profile Link'
+            >
               <Avatar src={profile_image}  height={70}/>
             </Link>
             <div className="col mt-2">

@@ -66,15 +66,15 @@
 
 .OrangeOutline {
 	background-color: transparent;
-	border-color: #fa6800;
+	border-color: #ff7614;
 	border-radius: 5px;
-	color: #fa6800;
+	color: #ff7614;
 	font-weight: 600;
 	padding: 0.175rem 0.75rem;
 	text-align: center;
 }
 
 .OrangeOutline:hover {
-	background-color: #fa6800;
-	border-color: #fa6800;
+	background-color: #ff7614;
+	border-color: #ff7614;
 }

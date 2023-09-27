@@ -34,7 +34,11 @@ const Profile = (props) => {
   return (
     <>
     {isDashboardPage ? (
-        <Link className={`align-self-center ${styles.ProfileLink}`} to={`/profiles/${id}`}>
+        <Link
+          className={`align-self-center ${styles.ProfileLink}`}
+          to={`/profiles/${id}`}
+          aria-label="Profile"
+        >
           <Container
             className={`my-3 py-2 d-flex align-items-center justify-content-center ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
           >
@@ -49,7 +53,11 @@ const Profile = (props) => {
           </Container>
         </Link>
       ) : (
-          <Link className={`align-self-start ${styles.ProfileLink}`} to={`/profiles/${id}`}>
+          <Link
+            className={`align-self-start ${styles.ProfileLink}`}
+            to={`/profiles/${id}`}
+            aria-label="Profile"
+          >
           <Container
             className={`my-3 py-2 d-flex align-items-center justify-content-start ${isDashboardPage ? styles.DashboardProfile : styles.Profile}`}
           >

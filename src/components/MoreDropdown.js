@@ -14,7 +14,7 @@ import styles from "../styles/MoreDropdown.module.css";
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
 const ThreeDots = React.forwardRef(({ onClick }, ref) => (
-  <i
+  <i aria-hidden="true"
     className="fas fa-ellipsis-v"
     ref={ref}
     onClick={(e) => {
@@ -41,14 +41,14 @@ export const MoreDropdown = ({ handleEdit, handleDelete }) => {
           onClick={handleEdit}
           aria-label="edit"
         >
-          <i className="fas fa-edit" />
+          <i aria-hidden="true" className="fas fa-edit" />
         </Dropdown.Item>
         <Dropdown.Item
           className={`${styles.DropdownItem} ${styles.Inline} ${styles.Delete}`}
           onClick={handleDelete}
           aria-label="delete"
         >
-          <i className="fas fa-trash-alt" />
+          <i aria-hidden="true" className="fas fa-trash-alt" />
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
@@ -72,7 +72,7 @@ export const ProfileEditDropdown = ({ id }) => {
           onClick={() => history.push(`/profiles/${id}/edit`)}
           aria-label="edit-profile"
         >
-          <i className="fas fa-edit" />
+          <i aria-hidden="true" className="fas fa-edit" />
           edit profile
         </Dropdown.Item>
         <Dropdown.Item
@@ -80,7 +80,7 @@ export const ProfileEditDropdown = ({ id }) => {
           onClick={() => history.push(`/profiles/${id}/edit/username`)}
           aria-label="edit-username"
         >
-          <i className="far fa-id-card" />
+          <i aria-hidden="true" className="far fa-id-card" />
           update username
         </Dropdown.Item>
         <Dropdown.Item
@@ -88,7 +88,7 @@ export const ProfileEditDropdown = ({ id }) => {
           onClick={() => history.push(`/profiles/${id}/edit/password`)}
           aria-label="edit-password"
         >
-          <i className="fas fa-key" />
+          <i aria-hidden="true" className="fas fa-key" />
           reset password
         </Dropdown.Item>
       </Dropdown.Menu>

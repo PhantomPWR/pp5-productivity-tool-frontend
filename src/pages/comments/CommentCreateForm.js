@@ -63,7 +63,10 @@ function CommentCreateForm(props) {
     <Form className="mt-2" onSubmit={handleSubmit}>
       <Form.Group>
         <InputGroup>
-          <Link to={`/profiles/${profile_id}`}>
+          <Link
+            to={`/profiles/${profile_id}`}
+            aria-label="Profile Link"
+          >
             <Avatar src={profileImage} />
           </Link>
           <Form.Control

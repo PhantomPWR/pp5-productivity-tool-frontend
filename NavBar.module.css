@@ -24,7 +24,7 @@
 .Brand strong,
 .Brand em,
 .Brand i {
-	color: #fa6800;
+	color: #ff7614;
 }
 
 .Brand strong {
@@ -43,7 +43,7 @@
 
 .NavLink,
 .NavLink i {
-	color: #fa6800;
+	color: #ff7614;
 }
 
 .NavLink {
@@ -69,19 +69,19 @@
 
 .NavLink:hover,
 .Active {
-	border-color: #fa6800;
+	border-color: #ff7614;
 }
 
 .NavLink:hover,
 .NavLink.active {
-	border-bottom-color: #fa6800;
+	border-bottom-color: #ff7614;
 }
 
 .Toggle {
 	background-color: transparent;
-	border: 1px solid #fa6800;
+	border: 1px solid #ff7614;
 	border-radius: 5px;
-	color: #fa6800;
+	color: #ff7614;
 	padding: .25rem .75rem;
 }
 

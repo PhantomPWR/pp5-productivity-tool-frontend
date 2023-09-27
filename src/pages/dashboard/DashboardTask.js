@@ -36,7 +36,10 @@ const DashboardTask = (props) => {
             <Card.Body className={styles.TaskBody}>
                 <Media className="align-items-center justify-content-between">
                     {/* Task List Header */}
-                    <Link to={`/tasks/${id}`}>
+                    <Link
+                        to={`/tasks/${id}`}
+                        aria-label="Task Link"
+                    >
                         <Row className="row-cols-2 align-items-center">
                             <Col>
                                 <Card.Title className={`fs-6 text-left mb-0 ${styles.TaskTitle}`}>{title}</Card.Title>

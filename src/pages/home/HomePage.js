@@ -46,41 +46,41 @@ function HomePage() {
             <p>Brings you back to this page.</p>
 
             {/* Dashboard */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-dashboard ps-0' /> Dashboard</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-dashboard ps-0' /> Dashboard</strong>
             <p>Gives you a bird's-eye view of pending tasks you created, and pending tasks assigned to you.</p>
             <p>Colour-coded due dates allow you to immediately see tasks due in the future, tasks due today and overdue tasks.</p>
             <p>Completed tasks are not displayed on the dashboard, to avoid noise and clutter.</p>
             <p>Clicking/tapping on a tasks will take you to the Task Detail page, where you can manage the task further.</p>
 
             {/* All Tasks */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0' /> All Tasks</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-list-check ps-0' /> All Tasks</strong>
             <p>Displays a complete list of tasks, with additional details, including users working on a task, priority, status & category.</p>
             <p>At the top of the page you'll find a search bar with the result count, as well as pre-determined filters.</p>
 
             {/* Task Detail */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0' />Task Detail</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-list-check ps-0' />Task Detail</strong>
             <p>Clicking/tapping on the task title, will take you to the detail view of the selected task.</p>
             <p>Here you can find further details about the task content, view attached images/screenshots, take part in discussions and update the task status.</p>
-            <p>If you are the original task creator, you'll have access to an additional menu (<i className='fas fa-ellipsis-v' />) in the task header, which will allow you to edit or delete the task.</p>
+            <p>If you are the original task creator, you'll have access to an additional menu (<i aria-hidden="true" className='fas fa-ellipsis-v' />) in the task header, which will allow you to edit or delete the task.</p>
 
             {/* Add Task */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-plus-square ps-0' /> Add Task</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-plus-square ps-0' /> Add Task</strong>
             <p>Clicking/tapping on the task title, will take you to the detail view of the selected task.</p>
 
             {/* Categories */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-folder ps-0' /> Categories</strong>
-            <p>Here you can view a list of all task categories, again with a menu button (<i className='fas fa-ellipsis-v' />) in each category header, allowing you to edit/delete a category.</p>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-folder ps-0' /> Categories</strong>
+            <p>Here you can view a list of all task categories, again with a menu button (<i aria-hidden="true" className='fas fa-ellipsis-v' />) in each category header, allowing you to edit/delete a category.</p>
 
             {/* Sign Out */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className="fas fa-person-walking-arrow-right" /> Sign out</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className="fas fa-person-walking-arrow-right" /> Sign out</strong>
             <p>As the name suggests, this link will sign you out of the app and take you back to the sign-in page.</p>
 
             {/* Profile */}
-            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i className="fas fa-circle-user" /> Profile</strong>
+            <strong className={`${appStyles.TextOrange} d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className="fas fa-circle-user" /> Profile</strong>
             <p>Clicking/tapping on your profile picture, will take you to your profile page.</p>
             <p>Here you can view your profile details, as well as a list of tasks you created, and tasks assigned to you.</p>
             <p>A list of all other users is also available, so you can see which tasks they're working on.</p>
-            <p>Using the <i className='fas fa-ellipsis-v' /> icon, you'll have access to editing your profile, updating your username or resetting your password.</p>
+            <p>Using the <i aria-hidden="true" className='fas fa-ellipsis-v' /> icon, you'll have access to editing your profile, updating your username or resetting your password.</p>
         </>
     );
     
@@ -89,12 +89,12 @@ function HomePage() {
         <>
             <h3 className={`${appStyles.UnderlineOrange} mt-5`}>Task Icons</h3>
             <p>Here is a list of task icons and their meaning:</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-crown ps-0' /> - Task creator/owner</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-user-check ps-0' /> - Task assignee</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-folder ps-0' /> - Task category</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0' /> - Task status</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-triangle-exclamation ps-0' /> - Task Priority</p>
-            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-comments ps-0' /> - Task Comments</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-crown ps-0' /> - Task creator/owner</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-user-check ps-0' /> - Task assignee</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-folder ps-0' /> - Task category</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-list-check ps-0' /> - Task status</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-triangle-exclamation ps-0' /> - Task Priority</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i aria-hidden="true" className='fs-6 fas fa-comments ps-0' /> - Task Comments</p>
             
         </>
     );

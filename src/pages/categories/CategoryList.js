@@ -80,8 +80,12 @@ function CategoryList({ message, filter = "" }) {
           <h1 className={appStyles.Heading}>Categories</h1>
         </Col>
         <Col className="d-flex justify-content-end me-3">
-        <Link to="/categories/create" className={`${styles.AddCategory} ${btnStyles.Button} ${btnStyles.OrangeOutline} d-inline-flex align-items-center mb-3`}>
-            <i className="fas fa-folder-plus"></i>
+        <Link
+          to="/categories/create"
+          className={`${styles.AddCategory} ${btnStyles.Button} ${btnStyles.OrangeOutline} d-inline-flex align-items-center mb-3`}
+          aria-label="Add category"
+          >
+            <i aria-hidden="true" className="fas fa-folder-plus"></i>
             <span>Add</span>
           </Link> 
         </Col>
@@ -93,7 +97,7 @@ function CategoryList({ message, filter = "" }) {
           {hasLoaded ? (
             <>
               {categories.results.length ? (
-                <InfiniteScroll
+                <infiniteScroll
                   children={
                     categories.results.map((category) => (
                       <Category key={category.id} {...category} setCategories={setCategories} categories={categories} />

@@ -70,7 +70,7 @@ a:hover {
 a:hover,
 a:hover i,
 .TextOrange {
-	color: #fa6800;
+	color: #ff7614;
 }
 
 .WeightNormal {
@@ -90,7 +90,7 @@ a:hover i,
 }
 
 .UnderlineOrange {
-	border-bottom: 2px solid #fa6800;
+	border-bottom: 2px solid #ff7614;
 	padding-bottom: 0.5rem;
 }
 
@@ -134,7 +134,7 @@ input:focus,
 textarea:focus,
 .Select:focus,
 button:focus {
-	border-color: #fa6800!important;
+	border-color: #ff7614!important;
 	font-weight: 600;
 	outline: none;
 	-webkit-box-shadow: 0px 0px 6px 0px rgba(250,104,0,1)!important;
@@ -159,14 +159,14 @@ button:focus {
 }
 
 i {
-	color: #fa6800;
+	color: #ff7614;
 	padding: 7px;
 	vertical-align: middle;
 }
 
 .Link i:hover {
 	cursor: pointer;
-	color: #fa6800;
+	color: #ff7614;
 	text-decoration: none;
 }
 

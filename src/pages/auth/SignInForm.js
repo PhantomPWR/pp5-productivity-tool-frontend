@@ -129,7 +129,11 @@ function SignInForm() {
           </Form>
         </Container>
         <Container className={`mt-3 ${appStyles.Content}`}>
-          <Link className={styles.Link} to='/register'>
+          <Link
+            className={styles.Link}
+            to='/register'
+            aria-label='Register'
+            >
             Don't have an account? <span>Sign up here.</span>
           </Link>
         </Container>

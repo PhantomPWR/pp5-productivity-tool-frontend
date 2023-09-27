@@ -29,8 +29,13 @@ const CopyRightContact = () => {
                 </Col>
                 <Col>
                     <p className={styles.Contact}>
-                        <Link to={{ pathname: "https://github.com/PhantomPWR"}} target="_blank">
-                            <i className="fa fa-github"></i>
+                        <Link
+                        to={{ pathname: "https://github.com/PhantomPWR"}}
+                        target="_blank"
+                        aria-label="GitHub"
+                        >
+                            <i aria-hidden="true" className="fa fa-github"></i>
+                            <span className="sr-only">GitHub</span>
                         </Link>
                     </p>
                 </Col>

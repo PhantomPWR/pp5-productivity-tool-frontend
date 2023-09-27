@@ -139,7 +139,11 @@ const Task = (props) => {
         <Media className="align-items-center justify-content-between">
           {!taskPage ? (
             /* Task List Header */
-            <Link to={`/tasks/${id}`} className={styles.TaskLink}>
+            <Link
+              to={`/tasks/${id}`}
+              className={styles.TaskLink}
+              aria-label="Task"
+            >
               <Row className="row-cols-2 py-2 d-flex justify-content-between align-items-center">
                 <Col className="text-start mb-0">
                   {title && (
@@ -311,21 +315,21 @@ const Task = (props) => {
               <div className={styles.MetaDetail}>
                 {/* Owner */}
                 <span className="me-1">
-                  <i className="fas fa-crown"/>
+                  <i aria-hidden="true" className="fas fa-crown"/>
                   {owner}
                 </span>
               </div>
               <div className={styles.MetaDetail}>
                 {/* Assigned User */}
                 <span className="me-1">
-                  <i className="fas fa-user-check"/>
+                  <i aria-hidden="true" className="fas fa-user-check"/>
                   {assignedUser}
                 </span>
               </div>
               <div className={styles.MetaDetail}>
                 {/* Comment Count */}
                 <span className="me-1">
-                  <i className="far fa-comments" />
+                  <i aria-hidden="true" className="far fa-comments" />
                   {comment_count}
                 </span>
               </div>
@@ -334,14 +338,14 @@ const Task = (props) => {
               <div className="d-flex flex-column align-items-start">
                 <div className={styles.MetaDetail}>
                   <span className="me-1">
-                    <i className="fas fa-triangle-exclamation"></i>
+                    <i aria-hidden="true" className="fas fa-triangle-exclamation"></i>
                     {priority_choices[priority]}
                   </span>
                 </div>
                 <div className={styles.MetaDetail}>
                   {/* Task Status */}
                   <span className="me-1">
-                    <i className="fas fa-list-check"></i>
+                    <i aria-hidden="true" className="fas fa-list-check"></i>
                     { !taskStatus ? (
                       <TaskStatus taskStatus={task_status} />
                     ) : (
@@ -352,7 +356,7 @@ const Task = (props) => {
                 <div className={styles.MetaDetail}>
                   {/* Category */}
                   <span className="me-1">
-                    <i className="far fa-folder" />
+                    <i aria-hidden="true" className="far fa-folder" />
                     {taskCategory}
                   </span>
               </div>
@@ -373,7 +377,7 @@ const Task = (props) => {
           {taskPage && (
             <div className="col col-lg-2 text-center">
               <Card.Text className="d-flex align-items-center justify-content-center mt-5 mt-md-0 card-text">
-                <i className="fas fa-paperclip"></i> 
+                <i aria-hidden="true" className="fas fa-paperclip"></i> 
                 <span className={appStyles.TextBold}>Attachment</span>
               </Card.Text>
               <Card.Img
@@ -392,13 +396,13 @@ const Task = (props) => {
                 <Modal.Header
                   style={{
                   backgroundColor: '#32383C',
-                  borderBottom: '2px solid #fa6800',
+                  borderBottom: '2px solid #ff7614',
                   display: 'flex',
                   justifyContent: 'flex-end',
                 }}
                 >
                   <Button className={appStyles.CloseModal} onClick={handleCloseModal} type="button">
-                    <i className="fas fa-times"></i>
+                    <i aria-hidden="true" className="fas fa-times"></i>
                   </Button>
                 </Modal.Header>
                 <Modal.Body
@@ -420,11 +424,11 @@ const Task = (props) => {
               <div className="row row-cols-md-3 d-flex g-0">
                 <strong className={`fw-bold fs-6 col ${styles.AssignLabel}`}>Assigned to: </strong>
                 <p className={`col ${styles.Assigned}`}>
-                  <i className="fas fa-crown"></i>
+                  <i aria-hidden="true" className="fas fa-crown"></i>
                   {owner}
                 </p>
                 <p className={`col ${styles.Assigned}`}>
-                  <i className="fas fa-user-check" />
+                  <i aria-hidden="true" className="fas fa-user-check" />
                   {assignedUser}
                 </p>
               </div>
@@ -433,13 +437,13 @@ const Task = (props) => {
             <div className={`row row-cols-3 justify-content-between ${styles.Meta}`}>
               {/* Category */}
               <span className={`col ${styles.MetaItem}`}>
-                <i className="far fa-folder" />
+                <i aria-hidden="true" className="far fa-folder" />
                 {taskCategory}
               </span>
 
               {/* Task Status */}
               <span className={`col ${styles.MetaItem}`}>
-                <span><i className="fas fa-list-check"></i></span>
+                <span><i aria-hidden="true" className="fas fa-list-check"></i></span>
                 { !taskStatus ? (
                   <TaskStatus taskStatus={task_status} />
                 ) : (
@@ -449,7 +453,7 @@ const Task = (props) => {
 
               {/* Priority */}
               <span className={`col ${styles.MetaItem}`}>
-                <i className="fas fa-triangle-exclamation"></i>
+                <i aria-hidden="true" className="fas fa-triangle-exclamation"></i>
                 {priority_choices[priority]}
               </span>
             </div>

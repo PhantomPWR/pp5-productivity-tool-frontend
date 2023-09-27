@@ -60,7 +60,7 @@ function SearchBar({ query, setQuery, taskCount }) {
       <Container className={`mb-3 ${styles.SearchWrap}`}>
         <Row className="row row-cols-2 d-flex justify-content-between align-items-center mb-2">
           <Col className="col-8 col-lg-10">
-            <i className={`fas fa-search ${styles.SearchIcon}`} />
+            <i aria-hidden="true" className={`fas fa-search ${styles.SearchIcon}`} />
             <Form.Control
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -72,7 +72,7 @@ function SearchBar({ query, setQuery, taskCount }) {
           </Col> {/* /col */}
           <div className={`col-4 col-lg-2 fs-5 ps-0 ${styles.Results}`}>
             <p className="m-0 text-center d-flex align-items-center justify-content-center">
-              <span className={`fs-6 ${styles.ResultCount}`}><i className="fa-solid fa-hashtag"></i></span>
+              <span className={`fs-6 ${styles.ResultCount}`}><i aria-hidden="true" className="fa-solid fa-hashtag"></i></span>
               <span className={`${appStyles.TextBold} ${appStyles.TextOrange}`}>{taskCount}</span>
             </p>
           </div> {/* /col */}
