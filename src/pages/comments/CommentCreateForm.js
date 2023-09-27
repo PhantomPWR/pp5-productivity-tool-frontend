@@ -69,6 +69,7 @@ function CommentCreateForm(props) {
           >
             <Avatar src={profileImage} />
           </Link>
+          <Form.Label htmlFor="content" className="sr-only">Create comment</Form.Label>
           <Form.Control
             className={styles.Form}
             placeholder="Add your comment here..."

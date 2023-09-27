@@ -75,9 +75,11 @@ function ProfilePage() {
     fetchData();
   }, [id, setProfileData]);
 
-  // Calculate total task count
-  const profileTaskCount = profileTasks.results.length;
-  const assignedTaskCount = assignedTasks.results.length;
+  // Calculate task count
+  // const profileTaskCount = profileTasks.results.length;
+  const profileTaskCount = profileTasks.count;
+  // const assignedTaskCount = assignedTasks.results.length;
+  const assignedTaskCount = assignedTasks.count;
 
   // Returns profile & task details
   const mainProfile = (
@@ -157,7 +159,6 @@ function ProfilePage() {
                   <Task key={task.id} {...task} setTasks={setAssignedTasks} />
                 );
               } else {
-                taskCount++;
                 return null;
               }
             })}

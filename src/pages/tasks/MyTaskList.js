@@ -68,7 +68,7 @@ function MyTaskList({ message, filter = "" }) {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <ProfileList mobile />
-        <i className={`fas fa-search ${styles.SearchIcon}`} />
+        <i aria-hidden="true" className={`fas fa-search ${styles.SearchIcon}`} />
         <SearchBar query={query} setQuery={setQuery} />
         {hasLoaded ? (
           <>

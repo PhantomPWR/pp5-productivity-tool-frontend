@@ -77,3 +77,19 @@
 	background-color: #ff7614;
 	color: #fff;
 }
+
+.BackButton {
+	display: inline-flex;
+    align-items: center;
+    padding: 0 5px;
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+
+@media (max-width: 375px) {
+	.BackButton span {
+		display: none;
+	}
+}

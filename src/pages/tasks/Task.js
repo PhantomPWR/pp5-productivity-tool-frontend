@@ -22,11 +22,12 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";
 import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 // Styles
 import appStyles from "../../App.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/Task.module.css";
-import { Button } from "react-bootstrap";
 
 
 // Define priority choices
@@ -207,6 +208,14 @@ const Task = (props) => {
                     <Card.Title
                     className={`fs-4 mb-3 ${styles.TaskTitle} ${appStyles.UnderlineOrange}`}
                     >
+                      <Button
+                        className={`${btnStyles.OrangeOutline} ${btnStyles.BackButton}`}
+                        onClick={() => history.goBack()}
+                        aria-label="Go back"
+                      >
+                        <i aria-hidden="true" className="fas fa-arrow-left"></i>
+                        <span>Back</span>
+                      </Button>
                       {title}
                       <span className={styles.MoreDropdown}>
                         {is_owner && taskPage && (
