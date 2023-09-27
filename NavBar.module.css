@@ -1,5 +1,5 @@
 .NavBar {
-	background-color: #111112;
+	background-color: #232325;
 	box-shadow: 0 0 20px 0 rgba(5,6,7,0.75);
 	padding: 0;
 }
@@ -24,7 +24,7 @@
 .Brand strong,
 .Brand em,
 .Brand i {
-	color: #FF7614;
+	color: #fa6800;
 }
 
 .Brand strong {
@@ -43,7 +43,7 @@
 
 .NavLink,
 .NavLink i {
-	color: #FF7614;
+	color: #fa6800;
 }
 
 .NavLink {

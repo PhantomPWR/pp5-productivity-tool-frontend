@@ -62,8 +62,9 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to='/dashboard'
+        aria-label='Dashboard'
       >
-        <i className='fs-6 fas fa-dashboard'></i>
+        <i aria-hidden="true" className='fs-6 fas fa-dashboard'></i>
         Dashboard
       </NavLink>
 
@@ -71,9 +72,10 @@ const NavBar = () => {
       <NavLink
         className={styles.NavLink}
         activeClassName={styles.Active}
-        to={`/tasks/`}
+        to='/tasks'
+        aria-label='All tasks'
       >
-        <i className="fas fa-list-check"></i>
+        <i aria-hidden="true" className="fas fa-list-check"></i>
         All tasks
       </NavLink>
 
@@ -82,8 +84,9 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/tasks/create"
+        aria-label='Add task'
       >
-        <i className="far fa-plus-square"></i>
+        <i aria-hidden="true" className="far fa-plus-square"></i>
         Add task
       </NavLink>
 
@@ -92,8 +95,9 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to="/categories"
+        aria-label='Categories'
       >
-        <i className="fas fa-folder"></i>
+        <i aria-hidden="true" className="fas fa-folder"></i>
         Categories
       </NavLink>
 
@@ -101,9 +105,10 @@ const NavBar = () => {
       {/* Sign Out */}
       <NavLink className={styles.NavLink}
         to="/"
+        aria-label='Sign out'
         onClick={handleSignOut}
       >
-        <i className="fas fa-person-walking-arrow-right"></i>
+        <i aria-hidden="true" className="fas fa-person-walking-arrow-right"></i>
         Sign out
       </NavLink>
 
@@ -112,6 +117,7 @@ const NavBar = () => {
         className={styles.NavLink}
         activeClassName={styles.Active}
         to={`/profiles/${currentUser?.profile_id}`}
+        aria-label='Profile'
       >
         <Avatar src={currentUser?.profile_image} height={40} />
       </NavLink>
@@ -125,16 +131,18 @@ const NavBar = () => {
       className={styles.NavLink}
       activeClassName={styles.Active}
       to='/signin'
+      aria-label='Sign in'
     >
-      <i className='fs-6 fas fa-sign-in-alt'></i>
+      <i aria-hidden="true" className='fs-6 fas fa-sign-in-alt'></i>
       Sign in
     </NavLink>
     <NavLink
       className={styles.NavLink}
       activeClassName={styles.Active}
       to='/register'
+      aria-label='Register'
     >
-      <i className='fs-6 fas fa-user-plus'></i>
+      <i aria-hidden="true" className='fs-6 fas fa-user-plus'></i>
       Register
     </NavLink>
   </>
@@ -148,7 +156,7 @@ const NavBar = () => {
           className={styles.BrandLink}
         >
           <Navbar.Brand className={styles.Brand}>
-            <i className="fa-solid fa-calendar-check"></i>
+            <i aria-hidden="true" className="fa-solid fa-calendar-check"></i>
             <em><strong>TICK</strong> OFF</em>
           </Navbar.Brand>
         </NavLink>
