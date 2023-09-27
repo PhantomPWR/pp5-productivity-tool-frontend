@@ -89,11 +89,12 @@ function HomePage() {
         <>
             <h3 className={`${appStyles.UnderlineOrange} mt-5`}>Task Icons</h3>
             <p>Here is a list of task icons and their meaning:</p>
-            <strong className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-crown ps-0' /> - Task creator/owner</strong>
-            <strong className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-user-check ps-0' /> - Task assignee</strong>
-            <strong className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-folder ps-0' /> - Task category</strong>
-            <strong className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0' /> - Task status</strong>
-            <strong className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-triangle-exclamation ps-0' /> - Task Priority</strong>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-crown ps-0' /> - Task creator/owner</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-user-check ps-0' /> - Task assignee</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-folder ps-0' /> - Task category</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-list-check ps-0' /> - Task status</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-triangle-exclamation ps-0' /> - Task Priority</p>
+            <p className={`d-block mt-3 mb-1 fs-6`}><i className='fs-6 fas fa-comments ps-0' /> - Task Comments</p>
             
         </>
     );

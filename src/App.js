@@ -1,5 +1,5 @@
 // react-router-dom components for routing & page navigation
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 // Context hooks
 import { useCurrentUser } from './contexts/CurrentUserContext';
@@ -43,13 +43,14 @@ import UserPasswordForm from './pages/profiles/UserPasswordForm';
 
 function App() {
   const currentUser = useCurrentUser();
+  const location = useLocation();
 
   return (
     <div className={styles.App}>
       <NavBar />
         <Container className={styles.Main}>
         {!currentUser ? (
-          <Switch>
+          <Switch location={location}>
             <Route
               exact
               path="/"
@@ -59,8 +60,9 @@ function App() {
             <Route exact path="/register" render={() => <SignUpForm />} />
           </Switch>
         ) : (
-          <Switch>
+          <Switch location={location}>
             <Route exact path="/" render={() => <HomePage />} />
+            <Route exact path="/home" render={() => <HomePage />} />
             <Route exact path="/dashboard" render={() => <DashboardPage />} />
             <Route exact path="/tasks/create" render={() => <TaskCreateForm />} />
             <Route exact path="/tasks/:id/edit" render={() => <TaskEditForm />} />

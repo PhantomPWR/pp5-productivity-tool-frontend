@@ -1,0 +1,54 @@
+.Main {
+    background-image: url('../assets/404.webp');
+    background-position: center bottom;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+}
+
+.Main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+    left: 0;
+}
+
+.Col {
+    background-color: rgba(33, 14, 3, 0.7);
+    width: 50%;
+}
+
+.Col h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.Col button {
+    border: 3px solid #fff;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.Col button i {
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .Col {
+        width: 100%;
+    }
+}

@@ -18,7 +18,7 @@ const status_choices = {
 };
 
 
-const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus }) => {
+const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus, task }) => {
   // Set initial state
   const [newStatus, setNewStatus] = useState(currentStatus);
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus }) => {
         // Send PATCH request
         await axios.patch(`/tasks/${taskId}/`, { task_status: newStatus });
         if (!cancelRequest) {
-          onUpdateStatus(newStatus);
+          onUpdateStatus(newStatus); // Corrected line
         }
       } catch (err) {
         // Handle error
@@ -57,7 +57,7 @@ const StatusUpdateForm = ({ taskId, currentStatus, onUpdateStatus }) => {
       // Cancel request
       cancelRequest = true;
     };
-  }, [newStatus, currentStatus, onUpdateStatus, taskId]);
+  }, [newStatus, currentStatus, onUpdateStatus, taskId, task]);
 
   return (
     <Form>
