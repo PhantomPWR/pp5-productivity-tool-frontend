@@ -13,6 +13,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 // Reusable components
 import Asset from "../../components/Asset";
+import MessageToast from "../../components/MessageToast";
 
 // Bootstrap components
 import Container from "react-bootstrap/Container";
@@ -38,6 +39,7 @@ function TaskEditForm() {
   // Set up state variables
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [taskStatusChoices, setTaskStatusChoices] = useState([{'value': '', 'label': ''}]);
   const [taskPriorityChoices, setTaskPriorityChoices] = useState([{'value': '', 'label': ''}]);
@@ -243,7 +245,10 @@ function TaskEditForm() {
 
     try {
       await axiosReq.put(`/tasks/${id}/`, formData);
-      history.push(`/tasks/${id}`);
+      setSuccessMessage('Task successfully updated');
+      setTimeout(() => {
+        history.push(`/tasks/${id}`);
+      }, 3000);
     } catch (err) {
       // console.log(err);
       if (err.response?.status !== 401) {
@@ -470,6 +475,13 @@ function TaskEditForm() {
           </Container>
         </Col>
       </Row>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 }

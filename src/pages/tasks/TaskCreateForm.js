@@ -13,6 +13,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 // Reusable components
 import Asset from "../../components/Asset";
+import MessageToast from "../../components/MessageToast";
 
 // Bootstrap components
 import Container from "react-bootstrap/Container";
@@ -39,6 +40,7 @@ function TaskCreateForm() {
   // Set up state variables
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [
     taskCategoryChoices,
@@ -171,7 +173,10 @@ function TaskCreateForm() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        history.push(`/tasks/${data.id}`)
+        setSuccessMessage('Task successfully created');
+        setTimeout(() => {
+          history.push(`/tasks/`)
+        }, 3000);
     } catch(err){
         if (err.response?.status !== 401){
           // console.log(err.response?.data);
@@ -400,6 +405,13 @@ function TaskCreateForm() {
           </Container>
         </Col>
       </Row>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 }

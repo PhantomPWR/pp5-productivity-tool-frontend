@@ -4,6 +4,9 @@ import React, { useState } from "react";
 // Axios library for HTTP requests
 import { axiosRes } from "../../api/axiosDefaults";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Bootstrap components
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -20,6 +23,7 @@ function CommentEditForm(props) {
 
   // State variables
   const [formContent, setFormContent] = useState(content);
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Handle change in comment content
   const handleChange = (event) => {
@@ -45,7 +49,10 @@ function CommentEditForm(props) {
             : comment;
         }),
       }));
-      setShowEditForm(false);
+      setSuccessMessage('Comment updated');
+      setTimeout(() => {
+        setShowEditForm(false);
+      }, 3000);
     } catch (err) {
       console.log(err);
     }
@@ -77,6 +84,13 @@ function CommentEditForm(props) {
         >
           save
         </Button>
+        {successMessage && (
+          <MessageToast
+            message={successMessage}
+            type="success"
+            setSuccessMessage={setSuccessMessage}
+          />
+        )}
       </div>
     </Form>
   );

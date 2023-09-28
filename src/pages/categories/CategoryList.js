@@ -97,7 +97,7 @@ function CategoryList({ message, filter = "" }) {
           {hasLoaded ? (
             <>
               {categories.results.length ? (
-                <infiniteScroll
+                <InfiniteScroll
                   children={
                     categories.results.map((category) => (
                       <Category key={category.id} {...category} setCategories={setCategories} categories={categories} />

@@ -7,6 +7,9 @@ import { useHistory } from "react-router-dom";
 // Axios library for HTTP requests
 import { axiosReq } from "../../api/axiosDefaults";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Bootstrap components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -24,7 +27,9 @@ function CategoryCreateForm() {
 
   // State variables
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
   const history = useHistory();
+
 
   // Destructure categoryData
   const [categoryData, setCategoryData] = useState({
@@ -54,20 +59,22 @@ function CategoryCreateForm() {
   
     try {
       await axiosReq.post('/categories/', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        history.push(`/categories`);
-      } catch(err){
-        if (err.response?.status !== 401){
-            // console.log(err.response?.data);
-            setErrors(err.response?.data);
-        }
-  }
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
   
-
-  }
+      setSuccessMessage('Category successfully created');
+      setTimeout(() => {
+        history.push(`/categories`);
+      }, 3000);
+    } catch (err) {
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+  
 
   // Form fields
   const textFields = (
@@ -128,6 +135,13 @@ function CategoryCreateForm() {
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 }

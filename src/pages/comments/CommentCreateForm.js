@@ -9,6 +9,7 @@ import { axiosRes } from "../../api/axiosDefaults";
 
 // Reusable components
 import Avatar from "../../components/Avatar";
+import MessageToast from "../../components/MessageToast";
 
 // Bootstrap components
 import Form from "react-bootstrap/Form";
@@ -24,6 +25,7 @@ function CommentCreateForm(props) {
 
   // State variables
   const [content, setContent] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Destructure props
   const { task, setTask, setComments, profileImage, profile_id } = props;
@@ -54,6 +56,7 @@ function CommentCreateForm(props) {
         ],
       }));
       setContent("");
+      setSuccessMessage("Comment posted");
     } catch (err) {
       console.log(err);
     }
@@ -87,6 +90,13 @@ function CommentCreateForm(props) {
       >
         post
       </Button>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 }

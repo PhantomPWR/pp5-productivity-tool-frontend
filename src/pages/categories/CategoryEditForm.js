@@ -7,6 +7,9 @@ import { useHistory, useParams } from "react-router-dom";
 // Axios library for HTTP requests
 import { axiosReq } from "../../api/axiosDefaults";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Bootstrap components
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row";
@@ -24,6 +27,7 @@ function CategoryEditForm() {
 
   // State variables 
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
   const [categoryData, setCategoryData] = useState({
     title: '',
     description: '',
@@ -82,7 +86,10 @@ function CategoryEditForm() {
             'Content-Type': 'multipart/form-data',
           },
         });
-        history.push(`/categories/`)
+        setSuccessMessage('Category successfully updated');
+        setTimeout(() => {
+          history.push(`/categories`);
+        }, 3000);
     } catch(err){
         if (err.response?.status !== 401){
           // console.log(err.response?.data);
@@ -151,6 +158,13 @@ function CategoryEditForm() {
           <Container className={appStyles.Content}>{textFields}</Container>
         </Col>
       </Row>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 }

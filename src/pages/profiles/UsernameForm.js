@@ -4,6 +4,9 @@ import React, { useEffect, useState } from "react";
 // react-router-dom components for page navigation
 import { useHistory, useParams } from "react-router-dom";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Context hooks
 import {
   useCurrentUser,
@@ -35,6 +38,7 @@ const UsernameForm = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Check if profile matches current user
   useEffect(() => {
@@ -56,7 +60,10 @@ const UsernameForm = () => {
         ...prevUser,
         username,
       }));
-      history.goBack();
+      setSuccessMessage('Username updated');
+      setTimeout(() => {
+        history.goBack();
+      }, 3000);
     } catch (err) {
       // console.log(err);
       setErrors(err.response?.data);
@@ -100,6 +107,13 @@ const UsernameForm = () => {
             >
               save
             </Button>
+            {successMessage && (
+              <MessageToast
+                message={successMessage}
+                type="success"
+                setSuccessMessage={setSuccessMessage}
+              />
+            )}
           </Form>
         </Container>
       </Col>

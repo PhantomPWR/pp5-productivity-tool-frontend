@@ -10,6 +10,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 // Axios library for HTTP requests
 import { axiosRes } from "../../api/axiosDefaults";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Bootstrap components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -34,6 +37,7 @@ const UserPasswordForm = () => {
     new_password2: "",
   });
   const { new_password1, new_password2 } = userData;
+  const [successMessage, setSuccessMessage] = useState('');
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -56,7 +60,10 @@ const UserPasswordForm = () => {
     event.preventDefault();
     try {
       await axiosRes.post("/dj-rest-auth/password/change/", userData);
-      history.goBack();
+      setSuccessMessage('Password successfully updated');
+      setTimeout(() => {
+        history.goBack();
+      }, 3000);
     } catch (err) {
       // console.log(err);
       setErrors(err.response?.data);
@@ -113,6 +120,13 @@ const UserPasswordForm = () => {
             >
               save
             </Button>
+            {successMessage && (
+              <MessageToast
+                message={successMessage}
+                type="success"
+                setSuccessMessage={setSuccessMessage}
+              />
+            )}
           </Form>
         </Container>
       </Col>

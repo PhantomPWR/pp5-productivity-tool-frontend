@@ -13,6 +13,9 @@ import {
 // Axios library for HTTP requests
 import { axiosReq } from "../../api/axiosDefaults";
 
+// Reusable components
+import MessageToast from "../../components/MessageToast";
+
 // Bootstrap components
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -41,6 +44,7 @@ const ProfileEditForm = () => {
   });
   const { name, content, image } = profileData;
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   // Check if profile matches current user
   useEffect(() => {
@@ -87,7 +91,10 @@ const ProfileEditForm = () => {
         ...currentUser,
         profile_image: data.image,
       }));
-      history.goBack();
+      setSuccessMessage('Profile successfully updated');
+        setTimeout(() => {
+          history.goBack();
+        }, 3000);
     } catch (err) {
       // console.log(err);
       setErrors(err.response?.data);
@@ -179,6 +186,13 @@ const ProfileEditForm = () => {
           </Container>
         </Col>
       </Row>
+      {successMessage && (
+        <MessageToast
+          message={successMessage}
+          type="success"
+          setSuccessMessage={setSuccessMessage}
+        />
+      )}
     </Form>
   );
 };

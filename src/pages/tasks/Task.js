@@ -452,7 +452,9 @@ const Task = (props) => {
 
               {/* Task Status */}
               <span className={`col ${styles.MetaItem}`}>
-                <span><i aria-hidden="true" className="fas fa-list-check"></i></span>
+                <span>
+                  <i aria-hidden="true" className="fas fa-list-check"></i>
+                </span>
                 { !taskStatus ? (
                   <TaskStatus taskStatus={task_status} />
                 ) : (

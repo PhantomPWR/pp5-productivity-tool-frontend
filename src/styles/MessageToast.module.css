@@ -1,0 +1,34 @@
+.Toast {
+    position: fixed;
+    top: 50vh;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+    z-index: 9999;
+}
+
+.Toast,
+.ToastHeader,
+.ToastBody {
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+}
+
+.ToastHeader {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.ToastHeader button {
+    display: none;
+}
+
+.ToastBody {
+    border-radius: 0 0 5px 5px;
+}
