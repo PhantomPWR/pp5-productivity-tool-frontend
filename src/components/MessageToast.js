@@ -23,7 +23,7 @@ function MessageToast({ message, type, setSuccessMessage }) {
     };
 
   // Set the delay and autohide for the toast
-    const toastDelay = 2000;
+    const toastDelay = 3000;
     const autohide = true;
 
   // Update the toast message when the message prop changes

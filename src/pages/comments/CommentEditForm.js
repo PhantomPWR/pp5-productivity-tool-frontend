@@ -12,7 +12,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 // Styles
-import btnStyles from "../../styles/Button.module.css";
+// import btnStyles from "../../styles/Button.module.css";
 import styles from "../../styles/CommentCreateEditForm.module.css";
 
 
@@ -71,14 +71,14 @@ function CommentEditForm(props) {
       </Form.Group>
       <div className="text-right">
         <button
-          className={styles.Button}
+          className={`${styles.ButtonCancel}`}
           onClick={() => setShowEditForm(false)}
           type="button"
         >
           cancel
         </button>
         <Button
-          className={btnStyles.Button}
+          className={styles.Button}
           disabled={!content.trim()}
           type="submit"
         >

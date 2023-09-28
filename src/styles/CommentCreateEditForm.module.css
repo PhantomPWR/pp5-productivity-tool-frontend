@@ -3,18 +3,28 @@
 	border-bottom: 2px #ff76148a solid;
 }
 
-.Button {
-	border: none;
-	background-color: #242a3d;
-	color: #ff7614;
-	border-radius: 100px;
+.Button,
+.ButtonCancel,
+.Button:hover,
+.ButtonCancel:hover {
+	background-color: #ff7614;
+	border: 2px solid #ff7614;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 600;
 	padding: 4px 10px;
 	min-width: 75px;
 	margin: 5px;
 }
 
-.Button:hover {
+.ButtonCancel {
+	background-color: transparent;
+}
+
+.Button:hover,
+.ButtonCancel:hover {
 	cursor: pointer;
-	background-color: #ff7614;
-	color: #242a3d;
+	opacity: 0.8;
+	transition: all 0.2s ease-in-out;
 }
