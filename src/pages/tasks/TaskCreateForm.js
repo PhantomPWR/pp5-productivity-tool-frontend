@@ -168,7 +168,7 @@ function TaskCreateForm() {
     formData.append('assigned_to', assigned_to);
   
     try {
-        const {data} = await axiosReq.post('/tasks/', formData, {
+        await axiosReq.post('/tasks/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

@@ -12,6 +12,11 @@
   - [Target Audience](#target-audience)
   - [User Requirements](#user-requirements)
   - [User Stories](#user-stories)
+    - [User Account/Profile](#user-accountprofile)
+    - [Task Management](#task-management)
+    - [Discussions](#discussions)
+    - [Category Management](#category-management)
+    - [Navigation](#navigation)
   - [Owner Stories](#owner-stories)
 - [Technical Design](#technical-design)
   - [Agile Methodology](#agile-methodology)
@@ -107,7 +112,46 @@ Key features:
 -
 
 ### User Stories
--
+
+#### User Account/Profile
+
+1. As a new user I can register an account so that I can take part in managing and completing tasks
+2. As a user I can log into my account so that I can view & manage tasks and update my profile
+3. As a user I can update my username so that I can change it if I need to
+4. As a user I can reset my password so that I can always access my account
+5. As a user I can edit my profile so that my information is up to date
+6. As a user I can view a home page so that I can read instructions on how to use the Tick Off
+
+#### Task Management
+
+1. As a user I can access my own dashboard so that I can get an overview of tasks I created and tasks assigned to me
+2. As a user I can create tasks so that I can track and manage my activities
+3. As a user I can view a list of tasks so that I can see details of tasks I own and tasks assigned to me
+4. As a user I can search and filter a task list so that I can quickly find what I'm looking for
+5. As a user I can edit tasks I own so that task details can be correct and up to date
+6. As an assigned user I can update a task's status so that the task progress is clear
+7. As a user I can delete tasks i own so that I can remove any duplicates, or tasks created in error
+8. As a user I can add attachments to tasks so that I can clearly demonstrate a point an avoid describing it insufficiently
+9. As an assigned user I can update a task's status so that the task progress is clear
+
+#### Discussions
+
+1. As a role I can create comments so that I can take part in discussions around a task
+2. As a user I can view comments so that I can stay up to date with task discussions
+3. As a user I can update my own comments so that I can keep information relevant and up to date
+4. As a user I can delete my own comments so that I can correct any mistakes
+
+#### Category Management
+
+1. As a user I can create categories so that keep tasks organised
+2. As a user I can view a list of categories so that I know if a certain category already exists
+3. As a user I can update categories so that they are always relevant and up to date
+4. As a user I can delete categories so that unnecessary clutter can be avoided
+
+#### Navigation
+
+1. As a user I can access a navbar on every page so that I can easily navigate between pages
+2. As a user I can see a 404 - Not Found page with a redirect button so that I can easily navigate back to a working page
 
 ### Owner Stories
 -

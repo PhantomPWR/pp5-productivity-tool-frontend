@@ -47,7 +47,7 @@ function TaskEditForm() {
     taskCategoryChoices,
     setTaskCategoryChoices
   ] = useState([{'value': '', 'label': ''}]);
-  const [taskCategory, setTaskCategory] = useState([]);
+  const [setTaskCategory] = useState([]);
 
   // Fetch profiles from the API
   useEffect(() => {
@@ -195,7 +195,7 @@ function TaskEditForm() {
     };
     
     fetchTaskCategory();
-  }, [category]);
+  }, [category, setTaskCategory]);
 
   // Handle form input change
   const handleChange = (event) => {
@@ -247,7 +247,7 @@ function TaskEditForm() {
       await axiosReq.put(`/tasks/${id}/`, formData);
       setSuccessMessage('Task successfully updated');
       setTimeout(() => {
-        history.push(`/tasks/${id}`);
+        history.push(`/tasks`);
       }, 3000);
     } catch (err) {
       // console.log(err);

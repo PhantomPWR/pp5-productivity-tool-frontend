@@ -31,7 +31,7 @@ import TaskPage from './pages/tasks/TaskPage';
 
 // Forms
 import SignInForm from './pages/auth/SignInForm';
-import SignUpForm from './pages/auth/SignUpForm'
+import SignUpForm from './pages/auth/SignUpForm';
 import TaskCreateForm from './pages/tasks/TaskCreateForm';
 import TaskEditForm from './pages/tasks/TaskEditForm';
 import CategoryCreateForm from './pages/categories/CategoryCreateForm';
@@ -52,7 +52,6 @@ function App() {
         {!currentUser ? (
           <Switch location={location}>
             <Route
-              exact
               path="/"
               render={() => <SignInForm />}
             />
