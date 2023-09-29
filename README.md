@@ -112,7 +112,12 @@ The main audience for Tick Off are remote workers who need to collaborate with e
 
 ### User Requirements
 
--
+- Interactivity amongst users
+- Links and functionality working as expected
+- Feedback on user actions
+- Clear, digestible content
+- Accessibility
+- Responsiveness for an enjoyable experience across devices
 
 ### User Stories
 
@@ -301,8 +306,15 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 ## Frontend
 
 ### React
+React was used because of:
+- Flexibility: The modular structure means code is easier to maintain, due to separation of concerns
+- Speed: Components are dynamically updated as needed, rather than reloading an entire page
+- Components can be reused anywhere it is needed in the app
+- React is widely used, and therefor well maintained
 
--
+### Reusable components in Tick Off
+- APIConnectionCheck.js - Used to check API connection for tasks, categories, profiles, etc. without having to add loads of console logs
+- Asset.js - 
 
 ## Backend API
 
@@ -312,165 +324,67 @@ The backend API consumed by the frontend application was built on the Django RES
 
 The README for the API can be [accessed here](https://github.com/PhantomPWR/pp5-productivity-tool-backend/blob/main/README.md)
 
-## Features
-
-hgfd
-
-### Registration
-
--
-
-### Authentication
-
--
-
-### Sign In
-
--
-
-### Sign Out
-
--
-
-### Navigation Bar
-
--
-
-### Home Page
-
--
-
-### Dashboard
-
--
-
-### Tasks List
-
--
-
-### Task Search & Filter
-
--
-
-### Add a Task
-
--
-
-### Edit a Task
-
--
-
-### Delete a Task
-
--
-
-### Categories
-
--
-
-### Add a Category
-
--
-
-### Edit a Category
-
--
-
-### Delete a Category
-
--
-
-### Task Comments
-
--
-
-### Create a Comment
-
--
-
-### Update a Comment
-
--
-
-### Delete a Comment
-
--
-
-### Profile Page
-
--
-
-### Task Count
-
--
-
-### Edit Profile
-
--
-
-### Update Username
-
--
-
-### Update Password
-
--
-
-### User List
-
--
-
-### Error Page
-
--
-
-### User Action Feedback
-
--
 
 ### Future Improvements
 
--
+- Creating projects
+- Assign multiple users to a task
+- Calendar to display tasks due
 
 ## Validation
 
-### HTML Validation
+- HTML Validation
+- CSS Validation
+- ESLint Javascript Validation
+- Chrome Dev Tools Lighthouse Validation
+- Mobile
+- WAVE Accessibility Validation
 
--
-
-### CSS Validation
-
--
-
-### ESLint Javascript Validation
-
--
-
-### Chrome Dev Tools Lighthouse Validation
-
--
-
-#### Mobile
-
--
-
-### WAVE Accessibility Validation
-
--
 
 ## Testing
 
 ### Devices
-
--
+- Desktop
+- Tablet
+- Phone
 
 ### Web Browsers
 
--
+- Google Chrome
+- Mozilla FireFox
+- Microsoft Edge
 
 ### Manual Tests
+Components, pages & features were constantly tested during development, including:
 
--
+- Registration
+- Authentication
+- Sign In
+- Sign Out
+- Navigation Bar
+- Home Page
+- Dashboard
+- Tasks List
+- Task Search & Filter
+- Add a Task
+- Edit a Task
+- Delete a Task
+- Categories
+- Add a Category
+- Edit a Category
+- Delete a Category
+- Task Comments
+- Create a Comment
+- Update a Comment
+- Delete a Comment
+- Profile Page
+- Task Count
+- Edit Profile
+- Update Username
+- Update Password
+- User List
+- Error Page
+- User Action Feedback
 
 ## Bugs
 
