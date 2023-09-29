@@ -197,12 +197,17 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 -
 
 ### Colours
-
--
+- I used limited colours to keep the user interface clean and focused
+- Various shades of slate for backgrounds
+- Dark orange navigation, accents and decoration
+- Red for overdue tasks and alerts
+- Bright orange for tasks due today
+- Green for completed tasks and success messages
 
 ### Fonts
 
--
+- Google Fonts - Montserrat
+- Fallback - Sans Serif, system-ui
 
 ### Wireframes
 
@@ -509,10 +514,18 @@ Clone the repository as follows:
 
 ## Credits
 
+### Code
+
+- I used the Moments walkthrough project as a starting point for my codebase.
+- [Stack Overflow](https://stackoverflow.com/) for various solutions
+
 ### Images
 
--
+- [Pexels](https://www.pexels.com/search/rombo/) for sample user avatars
+- [Pixabay](https://pixabay.com/users/chadonihi-634818/) for the 404 page background image
+- [Real Time Audio Website](https://www.realtimeaudio.ca/blog/what-is-phantom-power/) - For the phantom power avatar
 
 ### README
 
--
+- [Code Institue README Template](https://github.com/Code-Institute-Solutions/readme-template) - README structure example
+- [Jamie King](https://github.com/jkingportfolio/ci_pp5_tick_it_react/tree/main#readme) - README structure example
