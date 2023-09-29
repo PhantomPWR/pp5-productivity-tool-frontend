@@ -168,7 +168,26 @@ Access the backend repository on **[Github](https://github.com/PhantomPWR/pp5-pr
 
 ### Agile Methodology
 
--
+I followed Agile principles during creation of this app. I used a GitHub project to create Kanban boards and issues.
+
+#### The Kanban board contains 4 columns:
+
+**Backlog** - An issue hasn't been reviewed/assigned yet  
+**Todo** - An issue hasn't been started  
+**In Progress** - Issue actively being worked on  
+**Done** - Completed issues
+
+#### **MoSCoW Prioritisation**
+
+I created issue labels for:  
+**Must Have** - Non-negotiable and must be delivered  
+**Should Have** - Adds significant value, but isn't vital  
+**Could Have** - No significant impact, if left out  
+**Won't Have** - Not a priority for this iteration  
+
+Following Agile principles allowed me to know exactly where I was in the process.
+
+Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 
 ### CRUD Functionality
 
@@ -403,6 +422,7 @@ and `const assignedTaskCount = assignedTasks.results.length;` with `const assign
 The project was deployed to [Heroku](https://www.heroku.com) as follows:
 
 #### 1. requirements.txt
+
 1.1 In the terminal, run `pip freeze > requirements.txt` - this will save a list of all libraries the project requires
 
 #### 2. Cloudinary
@@ -428,6 +448,7 @@ The database is hosted on [ElephantSQL](https://www.elephantsql.com/).
 3.11 On the details page, copy the database URL and keep it to hand
 
 #### 4. Heroku
+
 4.1 Visit to [Heroku](https://www.heroku.com)  
 4.2 Once an account is created, log in  
 4.3 On the top right, click "New" and select "Create new app"  
@@ -436,20 +457,20 @@ The database is hosted on [ElephantSQL](https://www.elephantsql.com/).
 4.6 Click on the newly created app  
 4.7 Select the "Settings" tab  
 4.8 Scroll past "App Information" and click on "Reveal Config Vars"  
-4.9 Enter the following config vars:  
-- `CLOUDINARY_URL`: *your saved Cloudinary URL*
-- `DATABASE_URL`: *your saved ElephantSQL database URL*
-- `PORT`: `8000`
-- `SECRET_KEY`: *your secret key*
+4.9 Enter the following config vars:
 
-**Hint:** You can generate a secret key at [miniwebtool](https://miniwebtool.com/django-secret-key-generator/)  
+-   `CLOUDINARY_URL`: _your saved Cloudinary URL_
+-   `DATABASE_URL`: _your saved ElephantSQL database URL_
+-   `PORT`: `8000`
+-   `SECRET_KEY`: _your secret key_
+
+**Hint:** You can generate a secret key at [miniwebtool](https://miniwebtool.com/django-secret-key-generator/)
 
 4.10 Scroll to the top of the page & select the "Deploy" tab  
 4.11 Select GitHub as the Deployment method  
 4.12 Search for & select the relevant repository  
 4.13 Enable Automatic deploys (optional)  
 4.14 Once the build is completed, click on the "View" link to view the app.
-
 
 ### Cloning a GitHub Repository
 
