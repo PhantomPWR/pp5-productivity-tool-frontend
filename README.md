@@ -194,7 +194,61 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 
 ### CRUD Functionality
 
--
+#### A user can create
+- an account
+- a profile
+- tasks
+- categories
+- comments
+
+#### A user can view (read)
+- profiles
+- tasks
+- categories
+- comments
+
+#### A user can edit (update)
+- own username
+- own password
+- own profile
+- own tasks
+- status of task assigned to them
+- categories
+- own comments
+
+#### A user can delete
+- own tasks
+- categories
+- own comments
+
+#### The app owner can create
+- Users
+- accounts
+- tasks
+- categories
+- comments
+
+#### The app owner can view (read)
+- profiles
+- tasks
+- categories
+- comments
+
+#### The app owner can edit (update)
+- any username
+- any password
+- any profile
+- any task
+- status of any task
+- categories
+- any comments
+
+#### The app owner can delete
+- any user
+- any profile
+- any task
+- categories
+- any comments
 
 ### Colours
 - I used limited colours to keep the user interface clean and focused
@@ -205,7 +259,6 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 - Green for completed tasks and success messages
 
 ### Fonts
-
 - Google Fonts - Montserrat
 - Fallback - Sans Serif, system-ui
 
@@ -255,7 +308,9 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 
 ### Django REST Framework
 
--
+The backend API consumed by the frontend application was built on the Django REST Framework.
+
+The README for the API can be [accessed here](https://github.com/PhantomPWR/pp5-productivity-tool-backend/blob/main/README.md)
 
 ## Features
 
