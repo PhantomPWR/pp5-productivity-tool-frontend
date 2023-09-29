@@ -108,7 +108,7 @@ Access the backend repository on **[Github](https://github.com/PhantomPWR/pp5-pr
 
 ### Target Audience
 
--
+The main audience for Tick Off are remote workers who need to collaborate with each other. Individuals who have to manage their own schedules, yet have to stay on top of the progress & deadlines associated with the project they're working on.
 
 ### User Requirements
 
@@ -181,6 +181,9 @@ I followed Agile principles during creation of this app. I used a GitHub project
 
 I created issue labels for:  
 **Must Have** - Non-negotiable and must be delivered  
+
+
+
 **Should Have** - Adds significant value, but isn't vital  
 **Could Have** - No significant impact, if left out  
 **Won't Have** - Not a priority for this iteration  
@@ -209,15 +212,33 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 
 ### Programming Languages
 
--
+- HTML
+- CSS
+- JavaScript
 
 ### Frameworks & Tools
 
--
+- Axios - Used for sending API requests from React to the backend API and avoid any CORS errors when sending cookies.
+- JWT For decoding JSON Web tokens. JWT was used for transmitting data securely verifying integrity.
+- React 17 - A JavaScript library for building user interfaces. Used because it allows for rapid building of interactive user interfaces.
+- React-Bootstrap 1.6.3 - A CSS framework. I used Bootstrap React library for consistent layout, styling and responsiveness of UI components.
+- React Infinite Scroll - Infinite scroll component. Used to automatically load additional content without the need for next/previous buttons.
+- React Router - A Javascript framework for routing. Used for navigating between page components and display content based on the URL in the user's browser.
+- Chrome Developer Tools - Used extensively for code debugging and rapid responsive testing & development.
+- Cloudinary - File storage platform. Used for storing all required static files.
+- Font Awesome - An Icon library. Used to enhance the identification of various links and data elements
+- Google Fonts - Font library. I used this library in order to access more versatile and elegant font choices than the system & browser defaults. System fonts were added as a fallback for backwards compatibility.
+- Git - Version control system. Used for version control and management of the code repository
+- GitHub - A cloud-based hosting service. Used as a remote repository for storing the application code.
+- Gitpod - A cloud development environment. I used GitPod as a virtual machine and workspace.
 
-### Libraries
 
--
+- Validation:
+  - WC3 Validator - An HTML Validator. Used for validating the app's HTML markup.
+  - Jigsaw W3 Validator - A CSS Validator. Used for validating the app's CSS code.
+  - ESLint - JavaScript Validator. I used ESLint to validate the app's JSX code.
+  - Lighthouse A website auditing tool. I used Lighthouse to gauge the app's performance, accessibility, best practice and SEO
+  - Wave - Accesibility auditor. Used to identify accessibility issues, e.g colour contrast, image alt tags, etc.
 
 ## Frontend
 
