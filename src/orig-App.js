@@ -2,12 +2,10 @@
 import { Route, Switch, useLocation } from 'react-router-dom';
 
 // Context hooks
-// import { useCurrentUser } from './contexts/CurrentUserContext';
-// temp useCurrentUser
-// const useCurrentUser = () => true;
+import { useCurrentUser } from './contexts/CurrentUserContext';
 
 // Axios defaults
-// import './api/axiosDefaults';
+import './api/axiosDefaults';
 
 // Reusable components
 import NavBar from './components/NavBar';
@@ -43,20 +41,13 @@ import UsernameForm from './pages/profiles/UsernameForm';
 import UserPasswordForm from './pages/profiles/UserPasswordForm';
 
 function App() {
-	// const currentUser = useCurrentUser();
-	// temp currentUser
-	const currentUser = true;
+	const currentUser = useCurrentUser();
 	const location = useLocation();
 
 	return (
 		<div className={styles.App}>
 			<NavBar />
-			{
-				<Container className={styles.Main}>
-					<h1>App</h1>
-				</Container>
-			}
-			{/* <Container className={styles.Main}>
+			<Container className={styles.Main}>
 				{!currentUser ? (
 					<Switch location={location}>
 						<Route
@@ -143,7 +134,7 @@ function App() {
 						<Route render={() => <PageNotFound />} />
 					</Switch>
 				)}
-			</Container> */}
+			</Container>
 
 			{currentUser && (
 				<>

@@ -3,85 +3,64 @@
 
 ## Table of Contents
 
--   [Table of Contents](#table-of-contents)
--   [About Tick Off](#about-tick-off)
--   [Project Goal](#project-goal)
--   [User Experience](#user-experience)
-    -   [Target Audience](#target-audience)
-    -   [User Requirements](#user-requirements)
-    -   [User Stories](#user-stories)
-        -   [User Account/Profile](#user-accountprofile)
-        -   [Task Management](#task-management)
-        -   [Discussions](#discussions)
-        -   [Category Management](#category-management)
-        -   [Navigation](#navigation)
-    -   [Owner Stories](#owner-stories)
--   [Technical Design](#technical-design)
-    -   [Agile Methodology](#agile-methodology)
-    -   [CRUD Functionality](#crud-functionality)
-    -   [Colours](#colours)
-    -   [Fonts](#fonts)
-    -   [Wireframes](#wireframes)
--   [Technologies](#technologies)
-    -   [Programming Languages](#programming-languages)
-    -   [Frameworks \& Tools](#frameworks--tools)
-    -   [Libraries](#libraries)
--   [Frontend](#frontend)
-    -   [React](#react)
--   [Backend API](#backend-api)
-    -   [Django REST Framework](#django-rest-framework)
--   [Features](#features)
-    -   [Registration](#registration)
-    -   [Authentication](#authentication)
-    -   [Sign In](#sign-in)
-    -   [Sign Out](#sign-out)
-    -   [Navigation Bar](#navigation-bar)
-    -   [Home Page](#home-page)
-    -   [Dashboard](#dashboard)
-    -   [Tasks List](#tasks-list)
-    -   [Task Search \& Filter](#task-search--filter)
-    -   [Add a Task](#add-a-task)
-    -   [Edit a Task](#edit-a-task)
-    -   [Delete a Task](#delete-a-task)
-    -   [Categories](#categories)
-    -   [Add a Category](#add-a-category)
-    -   [Edit a Category](#edit-a-category)
-    -   [Delete a Category](#delete-a-category)
-    -   [Task Comments](#task-comments)
-    -   [Create a Comment](#create-a-comment)
-    -   [Update a Comment](#update-a-comment)
-    -   [Delete a Comment](#delete-a-comment)
-    -   [Profile Page](#profile-page)
-    -   [Task Count](#task-count)
-    -   [Edit Profile](#edit-profile)
-    -   [Update Username](#update-username)
-    -   [Update Password](#update-password)
-    -   [User List](#user-list)
-    -   [Error Page](#error-page)
-    -   [User Action Feedback](#user-action-feedback)
-    -   [Future Improvements](#future-improvements)
--   [Validation](#validation)
-    -   [HTML Validation](#html-validation)
-    -   [CSS Validation](#css-validation)
-    -   [ESLint Javascript Validation](#eslint-javascript-validation)
-    -   [Chrome Dev Tools Lighthouse Validation](#chrome-dev-tools-lighthouse-validation)
-        -   [Mobile](#mobile)
-    -   [WAVE Accessibility Validation](#wave-accessibility-validation)
--   [Testing](#testing)
-    -   [Devices](#devices)
-    -   [Web Browsers](#web-browsers)
-    -   [Manual Tests](#manual-tests)
--   [Bugs](#bugs)
-    -   [Users are unable to set task due date](#users-are-unable-to-set-task-due-date)
-    -   [Due date reverts to current date, regardless of the date selected in the date picker](#due-date-reverts-to-current-date-regardless-of-the-date-selected-in-the-date-picker)
-    -   [When task status is set to COMPLETED, the display reads "invalid date" until page is reloaded](#when-task-status-is-set-to-completed-the-display-reads-invalid-date-until-page-is-reloaded)
-    -   [Profile task count always displays 10, until result 11+ are loaded via InfiniteScroll component](#profile-task-count-always-displays-10-until-result-11-are-loaded-via-infinitescroll-component)
--   [Deployment](#deployment)
-    -   [Heroku](#heroku)
-    -   [Cloning a GitHub Repository](#cloning-a-github-repository)
--   [Credits](#credits)
-    -   [Images](#images)
-    -   [README](#readme)
+- [Table of Contents](#table-of-contents)
+- [About Tick Off](#about-tick-off)
+- [Project Goal](#project-goal)
+- [User Experience](#user-experience)
+  - [Target Audience](#target-audience)
+  - [User Requirements](#user-requirements)
+  - [User Stories](#user-stories)
+    - [User Account/Profile](#user-accountprofile)
+    - [Task Management](#task-management)
+    - [Discussions](#discussions)
+    - [Category Management](#category-management)
+    - [Navigation](#navigation)
+  - [Owner Stories](#owner-stories)
+- [Technical Design](#technical-design)
+  - [Agile Methodology](#agile-methodology)
+    - [The Kanban board contains 4 columns:](#the-kanban-board-contains-4-columns)
+    - [**MoSCoW Prioritisation**](#moscow-prioritisation)
+  - [CRUD Functionality](#crud-functionality)
+    - [A user can create](#a-user-can-create)
+    - [A user can view (read)](#a-user-can-view-read)
+    - [A user can edit (update)](#a-user-can-edit-update)
+    - [A user can delete](#a-user-can-delete)
+    - [The app owner can create](#the-app-owner-can-create)
+    - [The app owner can view (read)](#the-app-owner-can-view-read)
+    - [The app owner can edit (update)](#the-app-owner-can-edit-update)
+    - [The app owner can delete](#the-app-owner-can-delete)
+  - [Colours](#colours)
+  - [Fonts](#fonts)
+  - [Wireframes](#wireframes)
+- [Technologies](#technologies)
+  - [Programming Languages](#programming-languages)
+  - [Frameworks \& Tools](#frameworks--tools)
+- [Frontend](#frontend)
+  - [React](#react)
+  - [Reusable components in Tick Off](#reusable-components-in-tick-off)
+- [Backend API](#backend-api)
+  - [Django REST Framework](#django-rest-framework)
+  - [Future Improvements](#future-improvements)
+- [Validation](#validation)
+- [Testing](#testing)
+  - [Devices](#devices)
+  - [Web Browsers](#web-browsers)
+  - [Manual Tests](#manual-tests)
+- [Bugs](#bugs)
+  - [Users are unable to set task due date](#users-are-unable-to-set-task-due-date)
+  - [Due date reverts to current date, regardless of the date selected in the date picker](#due-date-reverts-to-current-date-regardless-of-the-date-selected-in-the-date-picker)
+  - [When task status is set to COMPLETED, the display reads "invalid date" until page is reloaded](#when-task-status-is-set-to-completed-the-display-reads-invalid-date-until-page-is-reloaded)
+  - [Profile task count always displays 10, until result 11+ are loaded via InfiniteScroll component](#profile-task-count-always-displays-10-until-result-11-are-loaded-via-infinitescroll-component)
+- [Deployment to Heroku](#deployment-to-heroku)
+    - [1. requirements.txt](#1-requirementstxt)
+    - [2. Cloudinary](#2-cloudinary)
+    - [3. ElephantSQL](#3-elephantsql)
+    - [4. Heroku](#4-heroku)
+  - [Cloning a GitHub Repository](#cloning-a-github-repository)
+- [Credits](#credits)
+  - [Code](#code)
+  - [Images](#images)
+  - [README](#readme)
 
 ## About Tick Off
 
@@ -112,12 +91,12 @@ The main audience for Tick Off are remote workers who need to collaborate with e
 
 ### User Requirements
 
-- Interactivity amongst users
-- Links and functionality working as expected
-- Feedback on user actions
-- Clear, digestible content
-- Accessibility
-- Responsiveness for an enjoyable experience across devices
+-   Interactivity amongst users
+-   Links and functionality working as expected
+-   Feedback on user actions
+-   Clear, digestible content
+-   Accessibility
+-   Responsiveness for an enjoyable experience across devices
 
 ### User Stories
 
@@ -185,13 +164,11 @@ I followed Agile principles during creation of this app. I used a GitHub project
 #### **MoSCoW Prioritisation**
 
 I created issue labels for:  
-**Must Have** - Non-negotiable and must be delivered  
-
-
+**Must Have** - Non-negotiable and must be delivered
 
 **Should Have** - Adds significant value, but isn't vital  
 **Could Have** - No significant impact, if left out  
-**Won't Have** - Not a priority for this iteration  
+**Won't Have** - Not a priority for this iteration
 
 Following Agile principles allowed me to know exactly where I was in the process.
 
@@ -200,72 +177,82 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 ### CRUD Functionality
 
 #### A user can create
-- an account
-- a profile
-- tasks
-- categories
-- comments
+
+-   an account
+-   a profile
+-   tasks
+-   categories
+-   comments
 
 #### A user can view (read)
-- profiles
-- tasks
-- categories
-- comments
+
+-   profiles
+-   tasks
+-   categories
+-   comments
 
 #### A user can edit (update)
-- own username
-- own password
-- own profile
-- own tasks
-- status of task assigned to them
-- categories
-- own comments
+
+-   own username
+-   own password
+-   own profile
+-   own tasks
+-   status of task assigned to them
+-   categories
+-   own comments
 
 #### A user can delete
-- own tasks
-- categories
-- own comments
+
+-   own tasks
+-   categories
+-   own comments
 
 #### The app owner can create
-- Users
-- accounts
-- tasks
-- categories
-- comments
+
+-   Users
+-   accounts
+-   tasks
+-   categories
+-   comments
 
 #### The app owner can view (read)
-- profiles
-- tasks
-- categories
-- comments
+
+-   profiles
+-   tasks
+-   categories
+-   comments
 
 #### The app owner can edit (update)
-- any username
-- any password
-- any profile
-- any task
-- status of any task
-- categories
-- any comments
+
+-   any username
+-   any password
+-   any profile
+-   any task
+-   status of any task
+-   categories
+-   any comments
 
 #### The app owner can delete
-- any user
-- any profile
-- any task
-- categories
-- any comments
+
+-   any user
+-   any profile
+-   any task
+-   categories
+-   any comments
 
 ### Colours
-- I used limited colours to keep the user interface clean and focused
-- Various shades of slate for backgrounds
-- Dark orange navigation, accents and decoration
-- Red for overdue tasks and alerts
-- Bright orange for tasks due today
-- Green for completed tasks and success messages
+
+-   I used limited colours to keep the user interface clean and focused
+-   Various shades of slate for backgrounds
+-   Dark orange navigation, accents and decoration
+-   Red for overdue tasks and alerts
+-   Bright orange for tasks due today
+-   Green for completed tasks and success messages
 
 ### Fonts
-- Google Fonts - Montserrat
-- Fallback - Sans Serif, system-ui
+
+-   Google Fonts - Montserrat
+-   Fallback - Sans Serif, system-ui
 
 ### Wireframes
 
@@ -275,46 +262,48 @@ Here is the [**GitHub Project**](https://github.com/users/PhantomPWR/projects/5)
 
 ### Programming Languages
 
-- HTML
-- CSS
-- JavaScript
+-   HTML
+-   CSS
+-   JavaScript
 
 ### Frameworks & Tools
 
-- Axios - Used for sending API requests from React to the backend API and avoid any CORS errors when sending cookies.
-- JWT For decoding JSON Web tokens. JWT was used for transmitting data securely verifying integrity.
-- React 17 - A JavaScript library for building user interfaces. Used because it allows for rapid building of interactive user interfaces.
-- React-Bootstrap 1.6.3 - A CSS framework. I used Bootstrap React library for consistent layout, styling and responsiveness of UI components.
-- React Infinite Scroll - Infinite scroll component. Used to automatically load additional content without the need for next/previous buttons.
-- React Router - A Javascript framework for routing. Used for navigating between page components and display content based on the URL in the user's browser.
-- Chrome Developer Tools - Used extensively for code debugging and rapid responsive testing & development.
-- Cloudinary - File storage platform. Used for storing all required static files.
-- Font Awesome - An Icon library. Used to enhance the identification of various links and data elements
-- Google Fonts - Font library. I used this library in order to access more versatile and elegant font choices than the system & browser defaults. System fonts were added as a fallback for backwards compatibility.
-- Git - Version control system. Used for version control and management of the code repository
-- GitHub - A cloud-based hosting service. Used as a remote repository for storing the application code.
-- Gitpod - A cloud development environment. I used GitPod as a virtual machine and workspace.
+-   Axios - Used for sending API requests from React to the backend API and avoid any CORS errors when sending cookies.
+-   JWT For decoding JSON Web tokens. JWT was used for transmitting data securely verifying integrity.
+-   React 17 - A JavaScript library for building user interfaces. Used because it allows for rapid building of interactive user interfaces.
+-   React-Bootstrap 1.6.3 - A CSS framework. I used Bootstrap React library for consistent layout, styling and responsiveness of UI components.
+-   React Infinite Scroll - Infinite scroll component. Used to automatically load additional content without the need for next/previous buttons.
+-   React Router - A Javascript framework for routing. Used for navigating between page components and display content based on the URL in the user's browser.
+-   Chrome Developer Tools - Used extensively for code debugging and rapid responsive testing & development.
+-   Cloudinary - File storage platform. Used for storing all required static files.
+-   Font Awesome - An Icon library. Used to enhance the identification of various links and data elements
+-   Google Fonts - Font library. I used this library in order to access more versatile and elegant font choices than the system & browser defaults. System fonts were added as a fallback for backwards compatibility.
+-   Git - Version control system. Used for version control and management of the code repository
+-   GitHub - A cloud-based hosting service. Used as a remote repository for storing the application code.
+-   ~~Gitpod - A cloud development environment. I used GitPod as a virtual machine and workspace.~~
 
-
-- Validation:
-  - WC3 Validator - An HTML Validator. Used for validating the app's HTML markup.
-  - Jigsaw W3 Validator - A CSS Validator. Used for validating the app's CSS code.
-  - ESLint - JavaScript Validator. I used ESLint to validate the app's JSX code.
-  - Lighthouse A website auditing tool. I used Lighthouse to gauge the app's performance, accessibility, best practice and SEO
-  - Wave - Accesibility auditor. Used to identify accessibility issues, e.g colour contrast, image alt tags, etc.
+-   Validation:
+    -   WC3 Validator - An HTML Validator. Used for validating the app's HTML markup.
+    -   Jigsaw W3 Validator - A CSS Validator. Used for validating the app's CSS code.
+    -   ESLint - JavaScript Validator. I used ESLint to validate the app's JSX code.
+    -   Lighthouse A website auditing tool. I used Lighthouse to gauge the app's performance, accessibility, best practice and SEO
+    -   Wave - Accesibility auditor. Used to identify accessibility issues, e.g colour contrast, image alt tags, etc.
 
 ## Frontend
 
 ### React
+
 React was used because of:
-- Flexibility: The modular structure means code is easier to maintain, due to separation of concerns
-- Speed: Components are dynamically updated as needed, rather than reloading an entire page
-- Components can be reused anywhere it is needed in the app
-- React is widely used, and therefor well maintained
+
+-   Flexibility: The modular structure means code is easier to maintain, due to separation of concerns
+-   Speed: Components are dynamically updated as needed, rather than reloading an entire page
+-   Components can be reused anywhere it is needed in the app
+-   React is widely used, and therefor well maintained
 
 ### Reusable components in Tick Off
-- APIConnectionCheck.js - Used to check API connection for tasks, categories, profiles, etc. without having to add loads of console logs
-- Asset.js - 
+
+-   APIConnectionCheck.js - Used to check API connection for tasks, categories, profiles, etc. without having to add loads of console logs
+-   Asset.js -
 
 ## Backend API
 
@@ -324,67 +313,67 @@ The backend API consumed by the frontend application was built on the Django RES
 
 The README for the API can be [accessed here](https://github.com/PhantomPWR/pp5-productivity-tool-backend/blob/main/README.md)
 
-
 ### Future Improvements
 
-- Creating projects
-- Assign multiple users to a task
-- Calendar to display tasks due
+-   Creating projects
+-   Assign multiple users to a task
+-   Calendar to display tasks due
 
 ## Validation
 
-- HTML Validation
-- CSS Validation
-- ESLint Javascript Validation
-- Chrome Dev Tools Lighthouse Validation
-- Mobile
-- WAVE Accessibility Validation
-
+-   HTML Validation
+-   CSS Validation
+-   ESLint Javascript Validation
+-   Chrome Dev Tools Lighthouse Validation
+-   Mobile
+-   WAVE Accessibility Validation
 
 ## Testing
 
 ### Devices
-- Desktop
-- Tablet
-- Phone
+
+-   Desktop
+-   Tablet
+-   Phone
 
 ### Web Browsers
 
-- Google Chrome
-- Mozilla FireFox
-- Microsoft Edge
+-   Google Chrome
+-   Mozilla FireFox
+-   Microsoft Edge
 
 ### Manual Tests
+
 Components, pages & features were constantly tested during development, including:
 
-- Registration
-- Authentication
-- Sign In
-- Sign Out
-- Navigation Bar
-- Home Page
-- Dashboard
-- Tasks List
-- Task Search & Filter
-- Add a Task
-- Edit a Task
-- Delete a Task
-- Categories
-- Add a Category
-- Edit a Category
-- Delete a Category
-- Task Comments
-- Create a Comment
-- Update a Comment
-- Delete a Comment
-- Profile Page
-- Task Count
-- Edit Profile
-- Update Username
-- Update Password
-- User List
-- Error Page
-- User Action Feedback
+-   Registration
+-   Authentication
+-   Sign In
+-   Sign Out
+-   Navigation Bar
+-   Home Page
+-   Dashboard
+-   Tasks List
+-   Task Search & Filter
+-   Add a Task
+-   Edit a Task
+-   Delete a Task
+-   Categories
+-   Add a Category
+-   Edit a Category
+-   Delete a Category
+-   Task Comments
+-   Create a Comment
+-   Update a Comment
+-   Delete a Comment
+-   Profile Page
+-   Task Count
+-   Edit Profile
+-   Update Username
+-   Update Password
+-   User List
+-   Error Page
+-   User Action Feedback
 
 ## Bugs
 
@@ -485,16 +474,16 @@ Clone the repository as follows:
 
 ### Code
 
-- I used the Moments walkthrough project as a starting point for my codebase.
-- [Stack Overflow](https://stackoverflow.com/) for various solutions
+-   I used the Moments walkthrough project as a starting point for my codebase.
+-   [Stack Overflow](https://stackoverflow.com/) for various solutions
 
 ### Images
 
-- [Pexels](https://www.pexels.com/search/rombo/) for sample user avatars
-- [Pixabay](https://pixabay.com/users/chadonihi-634818/) for the 404 page background image
-- [Real Time Audio Website](https://www.realtimeaudio.ca/blog/what-is-phantom-power/) - For the phantom power avatar
+-   [Pexels](https://www.pexels.com/search/rombo/) for sample user avatars
+-   [Pixabay](https://pixabay.com/users/chadonihi-634818/) for the 404 page background image
+-   [Real Time Audio Website](https://www.realtimeaudio.ca/blog/what-is-phantom-power/) - For the phantom power avatar
 
 ### README
 
-- [Code Institue README Template](https://github.com/Code-Institute-Solutions/readme-template) - README structure example
-- [Jamie King](https://github.com/jkingportfolio/ci_pp5_tick_it_react/tree/main#readme) - README structure example
+-   [Code Institue README Template](https://github.com/Code-Institute-Solutions/readme-template) - README structure example
+-   [Jamie King](https://github.com/jkingportfolio/ci_pp5_tick_it_react/tree/main#readme) - README structure example
