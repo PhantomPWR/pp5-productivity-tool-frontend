@@ -1,11 +1,11 @@
 // React
 import React from 'react';
 
-import {useCurrentUser} from '../../contexts/CurrentUserContext';
+import { useCurrentUser } from '../../contexts/CurrentUserContext';
 
 // Reusable components
 import DashboardTaskList from './DashboardTaskList';
-import ProfileList from "../profiles/ProfileList";
+import ProfileList from '../profiles/ProfileList';
 
 // Bootstrap components
 import Container from 'react-bootstrap/Container';
@@ -15,40 +15,36 @@ import Col from 'react-bootstrap/Col';
 // Styles
 import styles from '../../styles/DashboardPage.module.css';
 
-
 function DashboardPage() {
-    // Set up state variables
-    const currentUser = useCurrentUser();
+	// Set up state variables
+	const currentUser = useCurrentUser();
 
-    const dashboardTitle = (
-        <h1 className={styles.DashboardTitle}>
-            {currentUser.username}'s Dashboard
-        </h1>
-    );
+	const dashboardTitle = (
+		<h1 className={styles.DashboardTitle}>
+			{currentUser.username}'s Dashboard
+		</h1>
+	);
 
-    
-    return (
-        <>
-            <Container fluid className={`dashboard px-0 {styles.Container}`}>
-                <Row>
-                {dashboardTitle}
-                </Row>
-            </Container>
-            <Container fluid className={`dashboard px-0 {styles.Container}`}>
-                <Row>
-                    <Col className='px-0'>
-                        <DashboardTaskList/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <ProfileList/>
-                    </Col>
-                </Row>
-
-            </Container>
-        </>
-    );
+	return (
+		<>
+			<Container fluid className={`dashboard px-0 {styles.Container}`}>
+				<Row>{dashboardTitle}</Row>
+			</Container>
+			<Container fluid className={`dashboard px-0 {styles.Container}`}>
+				<Row>
+					<Col className='px-0'>
+						<DashboardTaskList />
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						{/* <ProfileList/> */}
+						<h1>Profile List</h1>
+					</Col>
+				</Row>
+			</Container>
+		</>
+	);
 }
 
 export default DashboardPage;
