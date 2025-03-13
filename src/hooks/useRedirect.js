@@ -21,7 +21,7 @@ export const useRedirect = (userAuthStatus) => {
 			try {
 				await axios.post('/dj-rest-auth/token/refresh/');
 				console.log(
-					'axios.post(' / dj - rest - auth / token / refresh / ')'
+					`'axios.post(' / dj - rest - auth / token / refresh / ')`
 				);
 				// user IS logged in
 				if (userAuthStatus === 'loggedIn') {
