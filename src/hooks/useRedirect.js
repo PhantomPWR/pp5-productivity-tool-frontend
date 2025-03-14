@@ -20,11 +20,11 @@ export const useRedirect = (userAuthStatus) => {
 		const handleMount = async () => {
 			try {
 				console.log(
-					`BEFORE: 'axios.post(' / dj - rest - auth / token / refresh / ')`
+					`BEFORE: 'axios.post('/dj-rest-auth/token/refresh/')`
 				);
 				await axios.post('/dj-rest-auth/token/refresh/');
 				console.log(
-					`AFTER: 'axios.post(' / dj - rest - auth / token / refresh / ')`
+					`AFTER: 'axios.post('axios.post('/dj-rest-auth/token/refresh/')`
 				);
 				// user IS logged in
 				if (userAuthStatus === 'loggedIn') {
