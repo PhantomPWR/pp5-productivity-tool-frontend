@@ -22,8 +22,8 @@ export const useRedirect = (userAuthStatus) => {
 				console.log(
 					`BEFORE: 'axios.post('/dj-rest-auth/token/refresh/')`
 				);
-				// await axios.post('/dj-rest-auth/token/refresh/');
-				await axios.post('/api/token/refresh/');
+				await axios.post('/dj-rest-auth/token/refresh/');
+				// await axios.post('/api/token/refresh/');
 				console.log(
 					`AFTER: 'axios.post('axios.post('/dj-rest-auth/token/refresh/')`
 				);
